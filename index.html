@@ -4,274 +4,328 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Gift — Web3 Security Research</title>
+<meta name="description" content="Web3 security research log — smart contract review, fork-based PoCs, and AI-assisted audit workflows across EVM and Solana.">
+<meta property="og:title" content="Gift — Web3 Security Research">
+<meta property="og:description" content="Smart contract review, fork-based PoCs, and AI-assisted audit workflows across EVM and Solana.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Gift — Web3 Security Research">
+<meta name="twitter:description" content="Smart contract review, fork-based PoCs, and AI-assisted audit workflows across EVM and Solana.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%230b1326'/><text x='16' y='22' font-family='monospace' font-weight='700' font-size='18' fill='%2389ceff' text-anchor='middle'>G</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link crossorigin href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#0A0C0F;
-    --surface:#12151A;
-    --surface-2:#171B21;
-    --line:#23272E;
-    --text:#E8EAED;
-    --text-muted:#878E99;
-    --text-faint:#575D68;
-    --accent:#FF5C33;
-    --accent-dim:rgba(255,92,51,0.12);
-    --accent-line:rgba(255,92,51,0.35);
-    --amber:#E8A33D;
-    --amber-dim:rgba(232,163,61,0.12);
-    --mono:'IBM Plex Mono', ui-monospace, monospace;
-    --sans:'IBM Plex Sans', -apple-system, sans-serif;
+    --bg:#0b1326;
+    --surface:#131b2e;
+    --surface-2:#171f33;
+    --surface-3:#222a3d;
+    --line:#2d3449;
+    --outline:#3e4850;
+    --text:#dae2fd;
+    --text-muted:#bec8d2;
+    --text-faint:#88929b;
+    --primary:#89ceff;
+    --primary-strong:#0ea5e9;
+    --on-primary:#00344d;
+    --secondary:#4edea3;
+    --secondary-dim:rgba(78,222,163,0.12);
+    --tertiary:#ffb2b7;
+    --tertiary-dim:rgba(255,178,183,0.12);
+    --sans:'Inter', -apple-system, sans-serif;
+    --mono:'JetBrains Mono', ui-monospace, monospace;
+    --radius:0.25rem;
   }
   *{box-sizing:border-box; margin:0; padding:0;}
   html{scroll-behavior:smooth;}
   body{
-    background:var(--bg);
-    color:var(--text);
-    font-family:var(--sans);
-    line-height:1.5;
-    -webkit-font-smoothing:antialiased;
+    background:var(--bg); color:var(--text); font-family:var(--sans);
+    line-height:1.55; -webkit-font-smoothing:antialiased;
+    padding-bottom:0;
   }
-  body::before{
-    content:"";
-    position:fixed; inset:0;
-    background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.035) 1px, transparent 0);
-    background-size: 22px 22px;
-    pointer-events:none;
-    z-index:0;
-  }
-  a{color:inherit;}
-  a:focus-visible, button:focus-visible{
-    outline:2px solid var(--accent);
-    outline-offset:3px;
-  }
-  .wrap{max-width:920px; margin:0 auto; padding:0 24px; position:relative; z-index:1;}
+  a{color:inherit; text-decoration:none;}
+  a:focus-visible, button:focus-visible{outline:2px solid var(--primary); outline-offset:3px;}
+  .material-symbols-outlined{font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24; font-size:20px; line-height:1; vertical-align:middle;}
+  .wrap{max-width:960px; margin:0 auto; padding:0 20px;}
+  @media(min-width:768px){.wrap{padding:0 64px;}}
 
-  /* NAV */
+  /* TOP BAR */
   header{
+    position:sticky; top:0; z-index:50;
+    background:rgba(11,19,38,0.92); backdrop-filter:blur(8px);
     border-bottom:1px solid var(--line);
-    padding:20px 0;
   }
-  .nav-row{display:flex; justify-content:space-between; align-items:center; gap:16px; flex-wrap:wrap;}
-  .brand{
-    font-family:var(--mono); font-weight:600; font-size:14px;
-    letter-spacing:0.06em; color:var(--text);
+  .nav-row{display:flex; align-items:center; justify-content:space-between; height:64px;}
+  .brand{display:flex; align-items:center; gap:8px;}
+  .brand .material-symbols-outlined{color:var(--primary); font-size:22px;}
+  .brand-name{font-family:var(--mono); font-weight:600; font-size:15px; letter-spacing:-0.01em; color:var(--primary);}
+  .nav-links{display:none; gap:28px;}
+  .nav-links a{font-family:var(--mono); font-size:12px; letter-spacing:0.06em; text-transform:uppercase; color:var(--text-muted); transition:color .15s;}
+  .nav-links a:hover{color:var(--primary);}
+  @media(min-width:720px){.nav-links{display:flex;}}
+  .btn-contact{
+    font-family:var(--mono); font-size:12px; font-weight:600; letter-spacing:0.04em; text-transform:uppercase;
+    background:var(--primary); color:var(--on-primary); padding:9px 16px; border-radius:var(--radius);
+    transition:background .15s;
   }
-  .nav-tag{
-    font-family:var(--mono); font-size:11px; letter-spacing:0.12em;
-    color:var(--text-faint); text-transform:uppercase;
-  }
+  .btn-contact:hover{background:#a9dbff;}
 
   /* HERO */
-  .hero{padding:72px 0 56px; border-bottom:1px solid var(--line);}
-  .eyebrow{
-    font-family:var(--mono); font-size:12px; letter-spacing:0.14em;
-    color:var(--accent); text-transform:uppercase; margin-bottom:18px;
-    display:flex; align-items:center; gap:10px;
+  .hero{padding:48px 0 40px; display:flex; flex-direction:column; gap:24px;}
+  .pill{
+    display:inline-flex; align-items:center; gap:8px; align-self:flex-start;
+    background:var(--surface-3); border:1px solid var(--line); border-radius:9999px;
+    padding:6px 14px; font-family:var(--mono); font-size:11px; letter-spacing:0.1em; color:var(--text-muted); text-transform:uppercase;
   }
-  .eyebrow::before{
-    content:""; width:7px; height:7px; background:var(--accent);
-    display:inline-block; animation:blink 1.6s steps(2,jump-none) infinite;
+  .pill .dot{width:7px; height:7px; border-radius:50%; background:var(--primary); animation:pulse 1.8s ease-in-out infinite;}
+  @keyframes pulse{50%{opacity:0.3;}}
+  h1{font-family:var(--sans); font-weight:700; font-size:clamp(34px,6vw,52px); line-height:1.05; letter-spacing:-0.02em;}
+  h1 span{color:var(--primary);}
+  .lede{font-size:clamp(16px,2vw,18px); color:var(--text-muted); max-width:56ch;}
+  .hero-actions{display:flex; gap:12px; flex-wrap:wrap;}
+  .btn-primary{
+    font-family:var(--mono); font-size:13px; font-weight:700; letter-spacing:0.04em; text-transform:uppercase;
+    background:var(--primary); color:var(--on-primary); padding:14px 22px; border-radius:var(--radius);
+    transition:background .15s;
   }
-  @keyframes blink{50%{opacity:0.25;}}
-  h1{
-    font-family:var(--mono); font-weight:700;
-    font-size:clamp(40px, 8vw, 72px);
-    letter-spacing:-0.02em;
-    line-height:0.98;
-    margin-bottom:16px;
+  .btn-primary:hover{background:#a9dbff;}
+  .btn-ghost{
+    font-family:var(--mono); font-size:13px; font-weight:700; letter-spacing:0.04em; text-transform:uppercase;
+    background:transparent; color:var(--text); border:1px solid var(--outline); padding:14px 22px; border-radius:var(--radius);
+    transition:border-color .15s, color .15s;
   }
-  .role{
-    font-size:clamp(16px, 2.4vw, 19px);
-    color:var(--text-muted);
-    max-width:52ch;
-    margin-bottom:28px;
-  }
-  .status-badge{
-    display:inline-flex; align-items:center; gap:10px;
-    font-family:var(--mono); font-size:12px; letter-spacing:0.04em;
-    color:var(--amber);
-    background:var(--amber-dim);
-    border:1px solid rgba(232,163,61,0.4);
-    padding:8px 14px;
-    margin-bottom:36px;
-  }
-  .status-badge .dot{width:6px; height:6px; background:var(--amber); border-radius:50%;}
+  .btn-ghost:hover{border-color:var(--primary); color:var(--primary);}
 
-  .terminal{
-    background:var(--surface);
-    border:1px solid var(--line);
-    font-family:var(--mono); font-size:13px;
-    padding:18px 20px;
-    max-width:560px;
+  /* STATS */
+  .stats{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:8px;}
+  .stat{
+    background:var(--surface-2); border:1px solid var(--line); border-left:3px solid var(--primary);
+    border-radius:var(--radius); padding:16px 18px; display:flex; flex-direction:column; gap:4px;
   }
-  .terminal-head{
-    display:flex; gap:6px; margin-bottom:14px;
-  }
-  .terminal-head span{width:9px; height:9px; border-radius:50%; background:var(--line);}
-  .terminal-body{color:var(--text-muted); min-height:110px;}
-  .terminal-line{margin-bottom:6px; opacity:0; animation:fadeIn 0.4s forwards;}
-  .terminal-line .arrow{color:var(--accent); margin-right:8px;}
-  .cursor{
-    display:inline-block; width:7px; height:14px; background:var(--text-muted);
-    vertical-align:middle; animation:blink 0.9s steps(2,jump-none) infinite;
-  }
-  @keyframes fadeIn{to{opacity:1;}}
+  .stat.wide{grid-column:1 / -1;}
+  .stat .num{font-family:var(--sans); font-weight:700; font-size:26px;}
+  .stat .lbl{font-family:var(--mono); font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:var(--text-faint);}
+  .stat.secondary{border-left-color:var(--secondary);}
+  .stat.secondary .num{color:var(--secondary);}
+  .stat.primary .num{color:var(--primary);}
+  .stat.tertiary{border-left-color:var(--tertiary);}
+  .stat.tertiary .num{color:var(--tertiary);}
 
-  /* FOCUS AREAS */
-  .section{padding:56px 0; border-bottom:1px solid var(--line);}
-  .section-label{
-    font-family:var(--mono); font-size:12px; letter-spacing:0.14em;
-    color:var(--text-faint); text-transform:uppercase;
-    margin-bottom:22px;
+  /* SECTIONS */
+  .section{padding:56px 0; border-top:1px solid var(--line);}
+  .section-head{display:flex; align-items:center; gap:10px; margin-bottom:24px;}
+  .section-head .material-symbols-outlined{color:var(--primary); font-size:20px;}
+  .section-label{font-family:var(--mono); font-size:13px; letter-spacing:0.08em; text-transform:uppercase; color:var(--text-muted);}
+  .section p.lede-sm{color:var(--text-muted); max-width:64ch; font-size:15px; margin-bottom:8px;}
+
+  /* SERVICE / FOCUS CARDS */
+  .card-grid{display:grid; grid-template-columns:1fr; gap:14px;}
+  @media(min-width:640px){.card-grid{grid-template-columns:1fr 1fr;}}
+  .service-card{
+    background:var(--surface-2); border:1px solid var(--line); border-radius:0.5rem; padding:20px;
+    transition:border-color .15s, transform .15s;
   }
-  .tag-row{display:flex; flex-wrap:wrap; gap:10px;}
+  .service-card:hover{border-color:var(--primary); transform:translateY(-2px);}
+  .service-card .material-symbols-outlined{color:var(--primary); font-size:24px; margin-bottom:10px; display:block;}
+  .service-card h3{font-size:16px; font-weight:600; margin-bottom:6px;}
+  .service-card p{font-size:13.5px; color:var(--text-muted);}
+
+  .tag-row{display:flex; flex-wrap:wrap; gap:8px;}
   .tag{
-    font-family:var(--mono); font-size:13px;
-    border:1px solid var(--line);
-    padding:9px 14px;
-    color:var(--text-muted);
-    transition:border-color 0.15s, color 0.15s;
+    font-family:var(--mono); font-size:12.5px; color:var(--text-muted);
+    border:1px solid var(--line); border-radius:var(--radius); padding:8px 12px;
+    transition:border-color .15s, color .15s;
   }
-  .tag:hover{border-color:var(--accent-line); color:var(--text);}
+  .tag:hover{border-color:var(--primary); color:var(--text);}
 
-  /* FINDINGS */
+  /* AUDIT / FINDING CARDS */
   .finding{
-    border:1px solid var(--line);
-    background:var(--surface);
-    padding:26px 26px 24px;
-    margin-bottom:16px;
+    background:var(--surface-2); border:1px solid var(--line); border-left:3px solid var(--secondary);
+    border-radius:0.5rem; padding:22px 22px 20px; margin-bottom:14px;
+    transition:border-color .15s, transform .15s;
   }
-  .finding-top{
-    display:flex; justify-content:space-between; align-items:flex-start;
-    gap:16px; margin-bottom:14px; flex-wrap:wrap;
+  .finding.active{border-left-color:var(--primary);}
+  .finding:hover{transform:translateY(-2px);}
+  .finding-top{display:flex; justify-content:space-between; align-items:flex-start; gap:14px; flex-wrap:wrap; margin-bottom:12px;}
+  .finding-id{font-family:var(--mono); font-size:12.5px; color:var(--primary); letter-spacing:0.04em;}
+  .chip{
+    font-family:var(--mono); font-size:10.5px; letter-spacing:0.08em; text-transform:uppercase;
+    padding:4px 9px; border-radius:var(--radius); font-weight:600;
   }
-  .finding-id{
-    font-family:var(--mono); font-size:13px; color:var(--accent); letter-spacing:0.04em;
-  }
-  .finding-status{
-    font-family:var(--mono); font-size:11px; letter-spacing:0.1em;
-    text-transform:uppercase; color:var(--text-faint);
-    border:1px solid var(--line); padding:4px 9px;
-  }
-  .finding h3{
-    font-family:var(--sans); font-weight:600; font-size:19px;
-    margin-bottom:10px;
-  }
-  .finding p{
-    color:var(--text-muted); font-size:14.5px; max-width:64ch; margin-bottom:16px;
-  }
-  .finding-links{display:flex; gap:18px; flex-wrap:wrap;}
+  .chip.public{background:var(--secondary-dim); color:var(--secondary);}
+  .chip.active-c{background:rgba(137,206,255,0.12); color:var(--primary);}
+  .finding h3{font-size:18px; font-weight:600; margin-bottom:8px;}
+  .finding p{font-size:14px; color:var(--text-muted); max-width:64ch; margin-bottom:14px;}
+  .finding-links{display:flex; gap:16px; flex-wrap:wrap;}
   .finding-links a{
-    font-family:var(--mono); font-size:12.5px;
-    color:var(--text); border-bottom:1px solid var(--accent-line);
-    padding-bottom:1px;
+    font-family:var(--mono); font-size:12px; color:var(--text); border-bottom:1px solid var(--outline); padding-bottom:1px;
   }
-  .finding-links a:hover{border-color:var(--accent);}
+  .finding-links a:hover{border-color:var(--primary); color:var(--primary);}
 
-  /* METHOD */
-  .method-grid{
-    display:grid; grid-template-columns:repeat(auto-fit, minmax(180px,1fr));
-    gap:20px;
+  /* METHODOLOGY TIMELINE */
+  .timeline{position:relative; padding-left:28px;}
+  .timeline::before{content:""; position:absolute; left:5px; top:6px; bottom:6px; width:1px; background:var(--line);}
+  .phase{position:relative; padding-bottom:28px;}
+  .phase:last-child{padding-bottom:0;}
+  .phase::before{
+    content:""; position:absolute; left:-28px; top:4px; width:11px; height:11px; border-radius:50%;
+    background:var(--bg); border:2px solid var(--primary);
   }
-  .method-item{border-left:2px solid var(--line); padding-left:16px;}
-  .method-item h4{
-    font-family:var(--mono); font-size:13px; color:var(--text); margin-bottom:6px;
-    letter-spacing:0.02em;
+  .phase-label{font-family:var(--mono); font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:var(--primary); margin-bottom:4px;}
+  .phase h4{font-size:16px; font-weight:600; margin-bottom:6px;}
+  .phase p{font-size:14px; color:var(--text-muted); max-width:60ch;}
+
+  /* STACK */
+  .stack-block{margin-top:36px;}
+
+  /* CTA CARD */
+  .cta-card{
+    background:var(--surface-2); border:1px solid var(--line); border-radius:0.75rem;
+    padding:40px 28px; text-align:center; display:flex; flex-direction:column; align-items:center; gap:14px;
   }
-  .method-item p{font-size:13.5px; color:var(--text-muted);}
+  .cta-card .material-symbols-outlined{color:var(--primary); font-size:32px;}
+  .cta-card h3{font-size:22px; font-weight:700;}
+  .cta-card p{color:var(--text-muted); font-size:14.5px; max-width:44ch;}
+  .cta-actions{display:flex; gap:12px; flex-wrap:wrap; justify-content:center; margin-top:6px;}
 
   /* FOOTER */
-  footer{padding:48px 0 64px;}
-  .footer-line{
-    font-size:15px; color:var(--text-muted); max-width:52ch; margin-bottom:22px;
-  }
-  .footer-links{display:flex; gap:22px; flex-wrap:wrap;}
-  .footer-links a{
-    font-family:var(--mono); font-size:13px; color:var(--text);
-    border-bottom:1px solid var(--accent-line); padding-bottom:2px;
-  }
-  .footer-links a:hover{border-color:var(--accent);}
-  .footer-handle{
-    font-family:var(--mono); font-size:13px; color:var(--text-muted);
-  }
-  .social-row{display:flex; gap:14px; flex-wrap:wrap; align-items:center;}
+  footer{padding:40px 0 100px; border-top:1px solid var(--line);}
+  .social-row{display:flex; gap:12px; flex-wrap:wrap; margin-bottom:20px;}
   .social-icon{
-    display:flex; align-items:center; justify-content:center;
-    width:42px; height:42px;
-    border:1px solid var(--line);
-    color:var(--text-muted);
-    transition:border-color 0.15s, color 0.15s, transform 0.15s;
+    display:flex; align-items:center; justify-content:center; width:40px; height:40px;
+    border:1px solid var(--line); border-radius:var(--radius); color:var(--text-muted);
+    transition:border-color .15s, color .15s, transform .15s;
   }
-  .social-icon svg{width:18px; height:18px;}
-  .social-icon:hover{
-    border-color:var(--accent-line);
-    color:var(--accent);
-    transform:translateY(-2px);
+  .social-icon svg{width:17px; height:17px;}
+  .social-icon:hover{border-color:var(--primary); color:var(--primary); transform:translateY(-2px);}
+  .footer-note{font-family:var(--mono); font-size:11px; color:var(--text-faint);}
+  .footer-note a{color:var(--text-faint); border-bottom:1px solid var(--line);}
+
+  /* BOTTOM MOBILE NAV */
+  .bottom-nav{
+    position:fixed; bottom:0; left:0; right:0; z-index:50;
+    background:rgba(19,27,46,0.96); backdrop-filter:blur(8px);
+    border-top:1px solid var(--line);
+    display:flex; justify-content:space-around; padding:8px 0 10px;
   }
-  .social-icon.handle{
-    font-family:var(--mono); font-size:11px; color:var(--text-muted);
-    cursor:default;
+  @media(min-width:720px){.bottom-nav{display:none;} body{padding-bottom:0;}}
+  @media(max-width:719px){body{padding-bottom:70px;}}
+  .bottom-nav a{
+    display:flex; flex-direction:column; align-items:center; gap:2px;
+    font-family:var(--mono); font-size:10px; color:var(--text-faint); text-transform:uppercase; letter-spacing:0.02em;
+    padding:4px 10px;
   }
-  .social-icon.handle:hover{transform:none; color:var(--text-muted); border-color:var(--line);}
-  .footer-note{
-    margin-top:36px; font-family:var(--mono); font-size:11px; color:var(--text-faint);
-  }
+  .bottom-nav a.active-tab, .bottom-nav a:hover{color:var(--primary);}
+
+  /* SCROLL REVEAL */
+  .reveal{opacity:0; transform:translateY(14px); transition:opacity .6s ease, transform .6s ease;}
+  .reveal.in-view{opacity:1; transform:translateY(0);}
 
   @media (prefers-reduced-motion: reduce){
-    .eyebrow::before, .cursor{animation:none;}
-    .terminal-line{opacity:1; animation:none;}
-  }
-
-  @media (max-width:600px){
-    .hero{padding:52px 0 40px;}
-    .section{padding:40px 0;}
+    .pill .dot{animation:none;}
+    .reveal{opacity:1; transform:none; transition:none;}
   }
 </style>
 </head>
 <body>
 
-<header>
+<header id="top">
   <div class="wrap nav-row">
-    <div class="brand">GIFT</div>
-    <div class="nav-tag">Security Research Log</div>
+    <div class="brand">
+      <span class="material-symbols-outlined">shield_lock</span>
+      <span class="brand-name">GIFT</span>
+    </div>
+    <nav class="nav-links">
+      <a href="#about">About</a>
+      <a href="#focus">Focus</a>
+      <a href="#findings">Projects</a>
+      <a href="#contests">Contests</a>
+      <a href="#method">Method</a>
+    </nav>
+    <a class="btn-contact" href="#contact">Contact</a>
   </div>
 </header>
 
-<section class="hero">
-  <div class="wrap">
-    <div class="eyebrow">Web3 Security Research</div>
-    <h1>Gift</h1>
-    <p class="role">Smart contract review, fork-based PoCs, and AI-assisted audit workflows across EVM and Solana.</p>
-    <div class="status-badge"><span class="dot"></span>STATUS: BUILDING IN PUBLIC</div>
-    <div class="terminal">
-      <div class="terminal-head"><span></span><span></span><span></span></div>
-      <div class="terminal-body" id="termBody"></div>
-    </div>
-  </div>
-</section>
+<main class="wrap">
 
-<section class="section" id="focus">
-  <div class="wrap">
-    <div class="section-label">Focus Areas</div>
-    <div class="tag-row">
-      <span class="tag">Access control</span>
-      <span class="tag">Migration &amp; liquidity logic</span>
-      <span class="tag">Oracle assumptions</span>
-      <span class="tag">Refund &amp; accounting paths</span>
-      <span class="tag">Uniswap V3 launch mechanics</span>
+  <section class="hero">
+    <div class="pill"><span class="dot"></span>SYSTEM_STATUS: BUILDING_IN_PUBLIC</div>
+    <h1>Independent Web3<br><span>Security Research</span></h1>
+    <p class="lede">Smart contract review, fork-based PoCs, and AI-assisted audit workflows across EVM and Solana — documented and verifiable, not claimed.</p>
+    <div class="hero-actions">
+      <a class="btn-primary" href="#findings">View Projects</a>
+      <a class="btn-ghost" href="#contact">Contact</a>
     </div>
-  </div>
-</section>
+    <div class="stats">
+      <div class="stat secondary">
+        <span class="num">2</span>
+        <span class="lbl">Public Projects</span>
+      </div>
+      <div class="stat primary">
+        <span class="num">2</span>
+        <span class="lbl">Contest Submissions</span>
+      </div>
+      <div class="stat wide tertiary">
+        <span class="num">0</span>
+        <span class="lbl">Paid Audit Engagements — Building In Public</span>
+      </div>
+    </div>
+  </section>
 
-<section class="section" id="findings">
-  <div class="wrap">
-    <div class="section-label">Projects on Record</div>
+  <section class="section reveal" id="about">
+    <div class="section-head">
+      <span class="material-symbols-outlined">badge</span>
+      <span class="section-label">About</span>
+    </div>
+    <p class="lede-sm">Independent Web3 security researcher focused on smart contract review across EVM and Solana. Work is built in public — mapping deployed contracts from explorers, reproducing behavior on forked state, and compiling developer-ready reports rather than relying on paid audit credentials to establish trust.</p>
+  </section>
+
+  <section class="section reveal" id="focus">
+    <div class="section-head">
+      <span class="material-symbols-outlined">radar</span>
+      <span class="section-label">Focus Areas</span>
+    </div>
+    <div class="card-grid">
+      <div class="service-card">
+        <span class="material-symbols-outlined">lock</span>
+        <h3>Access Control</h3>
+        <p>Reviewing role, permission, and ownership logic for privilege-escalation and unauthorized-action risk.</p>
+      </div>
+      <div class="service-card">
+        <span class="material-symbols-outlined">swap_horiz</span>
+        <h3>Migration &amp; Liquidity Logic</h3>
+        <p>Tracing state transitions during migrations and liquidity movement for integrity gaps.</p>
+      </div>
+      <div class="service-card">
+        <span class="material-symbols-outlined">sensors</span>
+        <h3>Oracle Assumptions</h3>
+        <p>Checking the price-feed and data-source assumptions a contract quietly depends on.</p>
+      </div>
+      <div class="service-card">
+        <span class="material-symbols-outlined">receipt_long</span>
+        <h3>Refund &amp; Accounting Paths</h3>
+        <p>Following refund, accrual, and balance-accounting logic for mismatches and edge cases.</p>
+      </div>
+      <div class="service-card" style="grid-column:1/-1;">
+        <span class="material-symbols-outlined">rocket_launch</span>
+        <h3>Uniswap V3 Launch Mechanics</h3>
+        <p>Reviewing pool initialization and launch sequencing specific to Uniswap V3 deployments.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section reveal" id="findings">
+    <div class="section-head">
+      <span class="material-symbols-outlined">folder_open</span>
+      <span class="section-label">Projects on Record</span>
+    </div>
 
     <div class="finding">
       <div class="finding-top">
         <span class="finding-id">F-01</span>
-        <span class="finding-status">Public · Bounty Submitted</span>
+        <span class="chip public">Public · Bounty Submitted</span>
       </div>
       <h3>Solana Transaction Support Skill</h3>
       <p>A skill built to support Solana transaction handling, submitted as a bounty PR against the SolanaBR skill-bounty program.</p>
@@ -281,10 +335,10 @@
       </div>
     </div>
 
-    <div class="finding">
+    <div class="finding active">
       <div class="finding-top">
         <span class="finding-id">F-02</span>
-        <span class="finding-status">Active Development</span>
+        <span class="chip active-c">Active Development</span>
       </div>
       <h3>ErrorLens</h3>
       <p>An AI-assisted audit and report compiler for EVM and Solana projects. Covers dApp bug testing, wallet and transaction-flow review, API assumptions, and smart contract or program integration issues — producing developer-ready reports with severity, impact, reproduction steps, evidence, remediation, and a verification plan.</p>
@@ -292,18 +346,18 @@
         <a href="https://github.com/Kohap/Kohap-errorlens" target="_blank" rel="noopener">Repository ↗</a>
       </div>
     </div>
+  </section>
 
-  </div>
-</section>
+  <section class="section reveal" id="contests">
+    <div class="section-head">
+      <span class="material-symbols-outlined">military_tech</span>
+      <span class="section-label">Audit Contest Participation</span>
+    </div>
 
-<section class="section" id="contests">
-  <div class="wrap">
-    <div class="section-label">Audit Contest Participation</div>
-
-    <div class="finding">
+    <div class="finding active">
       <div class="finding-top">
         <span class="finding-id">C-01</span>
-        <span class="finding-status">Sherlock · 2026-07</span>
+        <span class="chip active-c">Sherlock · 2026-07</span>
       </div>
       <h3>Metric</h3>
       <p>Issues submitted during the Metric audit contest on Sherlock.</p>
@@ -312,10 +366,10 @@
       </div>
     </div>
 
-    <div class="finding">
+    <div class="finding active">
       <div class="finding-top">
         <span class="finding-id">C-02</span>
-        <span class="finding-status">Sherlock · 2026-07</span>
+        <span class="chip active-c">Sherlock · 2026-07</span>
       </div>
       <h3>Tare</h3>
       <p>Issues submitted during the Tare audit contest on Sherlock.</p>
@@ -323,37 +377,68 @@
         <a href="https://github.com/sherlock-audit/2026-07-tare-kohap/issues" target="_blank" rel="noopener">Submitted Issues ↗</a>
       </div>
     </div>
+  </section>
 
-  </div>
-</section>
-
-<section class="section" id="method">
-  <div class="wrap">
-    <div class="section-label">Method</div>
-    <div class="method-grid">
-      <div class="method-item">
-        <h4>Fork-only validation</h4>
-        <p>Contracts are reviewed and reproduced on forked state before any conclusion is written down.</p>
-      </div>
-      <div class="method-item">
-        <h4>Foundry</h4>
-        <p>Test harnesses and PoCs are built and run locally against forked mainnet state.</p>
-      </div>
-      <div class="method-item">
-        <h4>open-kritt</h4>
-        <p>AI-assisted review pass used alongside manual reading, not in place of it.</p>
-      </div>
-      <div class="method-item">
-        <h4>Explorer mapping</h4>
+  <section class="section reveal" id="method">
+    <div class="section-head">
+      <span class="material-symbols-outlined">account_tree</span>
+      <span class="section-label">Methodology</span>
+    </div>
+    <div class="timeline">
+      <div class="phase">
+        <div class="phase-label">Phase 01</div>
+        <h4>Explorer Mapping</h4>
         <p>Deployed contracts are mapped from block explorers to trace real, live migration and liquidity paths.</p>
       </div>
+      <div class="phase">
+        <div class="phase-label">Phase 02</div>
+        <h4>Fork-Only Validation</h4>
+        <p>Contracts are reproduced on forked state using Foundry before any conclusion is written down.</p>
+      </div>
+      <div class="phase">
+        <div class="phase-label">Phase 03</div>
+        <h4>AI-Assisted Review</h4>
+        <p>open-kritt runs alongside manual reading, not in place of it.</p>
+      </div>
+      <div class="phase">
+        <div class="phase-label">Phase 04</div>
+        <h4>Report Compilation</h4>
+        <p>Findings are compiled into developer-ready reports via ErrorLens — severity, impact, reproduction steps, evidence, and remediation.</p>
+      </div>
     </div>
-  </div>
-</section>
+
+    <div class="stack-block">
+      <div class="section-head">
+        <span class="material-symbols-outlined">terminal</span>
+        <span class="section-label">Stack</span>
+      </div>
+      <div class="tag-row">
+        <span class="tag">Solidity</span>
+        <span class="tag">Rust (Solana programs)</span>
+        <span class="tag">Foundry</span>
+        <span class="tag">open-kritt</span>
+        <span class="tag">Block explorers</span>
+        <span class="tag">Git / GitHub</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="section reveal" id="contact">
+    <div class="cta-card">
+      <span class="material-symbols-outlined">handshake</span>
+      <h3>Open to Collaboration</h3>
+      <p>Fork-based PoC collaboration and audit contest work. Every project and submission above is verifiable in public repositories.</p>
+      <div class="cta-actions">
+        <a class="btn-primary" href="mailto:kohape0@gmail.com">Email</a>
+        <a class="btn-ghost" href="https://t.me/git0x" target="_blank" rel="noopener">Telegram</a>
+      </div>
+    </div>
+  </section>
+
+</main>
 
 <footer>
   <div class="wrap">
-    <p class="footer-line">Open to fork-based PoC collaboration and early review requests. No paid audit or contest history yet — every project above is verifiable in public repositories.</p>
     <div class="social-row">
       <a class="social-icon" href="mailto:kohape0@gmail.com" aria-label="Email">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="4" width="20" height="16" rx="1"/><path d="M2 6l10 7 10-7"/></svg>
@@ -368,40 +453,31 @@
         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.94 4.36 18.6 20.2c-.25 1.12-.9 1.4-1.83.87l-5.06-3.73-2.44 2.35c-.27.27-.5.5-1.02.5l.36-5.16 9.39-8.49c.41-.36-.09-.56-.63-.2L6.1 12.9l-5.02-1.57c-1.09-.34-1.11-1.09.23-1.61L20.6 3.14c.91-.34 1.7.2 1.34 1.22z"/></svg>
       </a>
     </div>
-    <p class="footer-note">LAST UPDATED · 2026</p>
+    <p class="footer-note">LAST UPDATED · 2026 · <a href="#top">Back to top ↑</a></p>
   </div>
 </footer>
 
-<script>
-  const lines = [
-    "checking access control...",
-    "mapping deployed contracts from explorer...",
-    "running fork simulation (foundry)...",
-    "reviewing oracle assumptions...",
-    "tracing refund / accounting paths..."
-  ];
-  const body = document.getElementById('termBody');
-  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+<nav class="bottom-nav">
+  <a href="#top" class="active-tab"><span class="material-symbols-outlined">home</span>Home</a>
+  <a href="#about"><span class="material-symbols-outlined">badge</span>About</a>
+  <a href="#findings"><span class="material-symbols-outlined">work</span>Work</a>
+  <a href="#contact"><span class="material-symbols-outlined">mail</span>Contact</a>
+</nav>
 
-  if (reduceMotion) {
-    body.innerHTML = lines.map(l => `<div class="terminal-line"><span class="arrow">›</span>${l}</div>`).join('');
+<script>
+  const revealEls = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    revealEls.forEach(el => io.observe(el));
   } else {
-    let i = 0;
-    function addLine(){
-      if(i >= lines.length){
-        const c = document.createElement('span');
-        c.className = 'cursor';
-        body.appendChild(c);
-        return;
-      }
-      const div = document.createElement('div');
-      div.className = 'terminal-line';
-      div.innerHTML = `<span class="arrow">›</span>${lines[i]}`;
-      body.appendChild(div);
-      i++;
-      setTimeout(addLine, 650);
-    }
-    addLine();
+    revealEls.forEach(el => el.classList.add('in-view'));
   }
 </script>
 

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>404 — Gift</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%230b1326'/><text x='16' y='22' font-family='monospace' font-weight='700' font-size='18' fill='%2389ceff' text-anchor='middle'>G</text></svg>">
+<style>
+  :root{--bg:#0b1326; --surface:#171f33; --line:#2d3449; --text:#dae2fd; --text-muted:#bec8d2; --primary:#89ceff;}
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{
+    background:var(--bg); color:var(--text); font-family:'Inter', -apple-system, sans-serif;
+    min-height:100vh; display:flex; align-items:center; justify-content:center; padding:24px;
+  }
+  .box{max-width:480px;}
+  .code{font-family:'JetBrains Mono', monospace; font-weight:700; font-size:clamp(48px,10vw,88px); color:var(--primary); line-height:1; margin-bottom:16px;}
+  .label{font-family:'JetBrains Mono', monospace; font-size:12px; letter-spacing:0.14em; text-transform:uppercase; color:var(--text-muted); margin-bottom:20px;}
+  p{color:var(--text-muted); font-size:15px; margin-bottom:28px; max-width:44ch;}
+  a{
+    font-family:'JetBrains Mono', monospace; font-size:13px; font-weight:600; color:var(--text);
+    border:1px solid var(--line); border-radius:0.25rem; padding:10px 16px; display:inline-block;
+    transition:border-color 0.15s, color 0.15s;
+  }
+  a:hover{border-color:var(--primary); color:var(--primary);}
+  a:focus-visible{outline:2px solid var(--primary); outline-offset:3px;}
+</style>
+</head>
+<body>
+  <div class="box">
+    <div class="code">404</div>
+    <div class="label">Endpoint not found</div>
+    <p>Nothing is deployed at this path. The rest of the research log is on the root page.</p>
+    <a href="./">← Back to root</a>
+  </div>
+</body>
+</html>
