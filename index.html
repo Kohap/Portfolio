@@ -334,7 +334,7 @@
         </div>
         <div class="signal entrance t5" id="signal" role="img" aria-label="Active security review signal">
           <div class="signal-top"><span>Review status</span><b>ACTIVE</b></div>
-          <div class="rings"><span class="ring"></span><span class="ring"></span><span class="ring"></span><span class="sweep"></span><strong class="rings-num"><span id="tick-num">02</span><small id="tick-label">HIGH · traced</small></strong></div>
+          <div class="rings"><span class="ring"></span><span class="ring"></span><span class="ring"></span><span class="sweep"></span><strong class="rings-num"><small id="tick-label">SCANNING</small></strong></div>
           <div class="tty" aria-hidden="true"><span class="tty-prompt">$</span> <span id="tty-text"></span><span class="tty-caret"></span></div>
           <div class="signal-bottom"><span>Threat model</span><span>Control flow</span><span>Testing</span></div>
         </div>
@@ -611,22 +611,9 @@
       so.observe(signal);
     }
 
-    /* Severity ticker */
-    var tickNum = document.getElementById('tick-num');
     var tickLabel = document.getElementById('tick-label');
-    if (tickNum && tickLabel && !reduceMotion) {
-      var ticks = [
-        { n: '02', l: 'HIGH · traced' },
-        { n: '01', l: 'CRITICAL · 0 open' },
-        { n: '03', l: 'MEDIUM · noted' },
-        { n: '00', l: 'SCANNING' }
-      ];
-      var t = 1;
-      setInterval(function () {
-        t = (t + 1) % ticks.length;
-        tickNum.textContent = ticks[t].n;
-        tickLabel.textContent = ticks[t].l;
-      }, 2600);
+    if (tickLabel) {
+      tickLabel.textContent = 'SCANNING';
     }
 
     /* Terminal typing effect */
