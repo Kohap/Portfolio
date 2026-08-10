@@ -42,6 +42,8 @@
     @keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
 
     .hero .entrance,.nav{opacity:0;animation:rise .7s var(--ease) forwards}
+    .nav{animation:navIn .7s var(--ease) forwards}
+    @keyframes navIn{from{opacity:0}to{opacity:1}}
     .entrance.t1{animation-delay:var(--d1)}.entrance.t2{animation-delay:var(--d2)}.entrance.t3{animation-delay:var(--d3)}.entrance.t4{animation-delay:var(--d4)}.entrance.t5{animation-delay:var(--d5)}.entrance.t6{animation-delay:var(--d6)}.entrance.t7{animation-delay:var(--d7)}
     @keyframes rise{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
     a{color:inherit;text-decoration:none}
@@ -54,6 +56,10 @@
 
     /* NAV */
     .nav{position:sticky;top:0;z-index:60;height:76px;background:rgba(13,18,15,.86);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);display:flex;align-items:center}
+    @media(hover:hover) and (pointer:fine){
+      .nav{transform:translateY(calc(-100% + 16px));transition:transform .35s var(--ease)}
+      .nav.expanded,.nav:focus-within{transform:translateY(0)}
+    }
     .nav .shell{display:flex;align-items:center;justify-content:space-between;gap:24px}
     .brand{font:700 20px/1 var(--display);letter-spacing:0}
     .brand i{color:var(--lime);font-style:normal}
@@ -312,6 +318,7 @@
       .reveal{opacity:1;transform:none;transition:none}
       .intro{display:none}
       .hero .entrance,.nav{opacity:1;animation:none}
+      .nav{transform:none}
       .tty .tty-caret{animation:none}
       .button,.button.primary,.button.quiet{transition:none}
     }

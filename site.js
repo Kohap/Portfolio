@@ -64,6 +64,19 @@ var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
       if (href === navPath) a.classList.add('is-active');
     });
 
+    /* Peek nav — reveal when the pointer nears the top */
+    var navEl = document.querySelector('.nav');
+    if (navEl && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+      var zone = 64;
+      var openNav = function () { navEl.classList.add('expanded'); };
+      var closeNav = function () { navEl.classList.remove('expanded'); };
+      document.addEventListener('pointermove', function (e) {
+        if (e.clientY <= zone) { openNav(); return; }
+        if (e.clientY > zone + 40 && !navEl.matches(':hover')) closeNav();
+      });
+      navEl.addEventListener('mouseenter', openNav);
+    }
+
     /* Mobile menu */
     var menuToggle = document.querySelector('.menu-toggle');
     var mobileMenu = document.querySelector('.mobile-menu');
