@@ -35,6 +35,25 @@ typography:
     fontSize: "11px"
     letterSpacing: "0.14em"
     textTransform: "uppercase"
+  scale:
+    micro: "8px"
+    micro-9: "9px"
+    label: "10px"
+    label-strong: "11px"
+    caption: "12px"
+    chip: "13px"
+    body-s: "13.5px"
+    body-sm: "14px"
+    body-m: "14.5px"
+    body: "15px"
+    body-l: "16px"
+    lede: "18px"
+    note: "17px"
+    title: "19px"
+    title-l: "20px"
+    title-xl: "22px"
+    work: "26px"
+    finding-note: "12.5px"
 rounded:
   sm: "2px"
   pill: "99px"
@@ -127,12 +146,15 @@ A near-monochrome dark field with a single high-voltage accent. Text hierarchy i
 **Character:** A characterful grotesque display paired with an open, quiet body face; the mono voice supplies the technical/diagnostic personality in labels, prompts, and meters. The display carries the craft, the body carries the reading, the mono carries the machine.
 
 ### Hierarchy
-- **Display** (700/600, clamp(46px→84px) hero item, 1.04): h1 and intro brand; tight tracking (-.02em).
-- **Headline** (600, clamp(30px→46px), 1.08): section h2 headings.
-- **Title** (600, 19–26px, 1.3): work items, case outputs, records.
-- **Body** (400, 16px, 1.6): paragraphs and lede; lede up to 18px; measure kept near 65ch.
-- **Label** (700, 11px, 0.14em, uppercase): kickers, section labels, eyebrow, meta, footers — JetBrains Mono.
-- **Micro Meter** (500/700, 8–11px, 0.08–0.14em, uppercase): signal panel status, ticker labels, TTY prompt.
+- **Display** (700/600, clamp(46px→84px) hero item, 1.04–1.02): h1, intro brand, reach h2; tight tracking (-.02em). Section headers: 600, clamp(30px→46px), 1.08.
+- **Headline** (600, clamp(26px→38px), 1.15): case intro h3.
+- **Title** (600, 19–26px, 1.3–1.4): work items, record names, case outputs, capability/research/method/ready h3.
+- **Body** (400, 16px, 1.6): paragraphs and lede; lede up to 18px; availability note 17px; measure kept near 65ch.
+- **Subtitle/Meta text** (400, 13.5–15px, 1.5): record item descriptions, capability paragraphs, work/research/ready copy.
+- **Label** (700, 11px, 0.14em, uppercase): kickers, section labels, eyebrows, contact label — JetBrains Mono.
+- **Micro Label** (700, 10px, 0.12em, uppercase): work labels, research meta, signal status, footers — JetBrains Mono.
+- **Micro Meter** (500/700, 8–9px, 0.08–0.14em, uppercase): signal panel status bar, ticker labels, TTY prompt.
+- **Tool/Mono chips** (500, 12–13px, 0.06em): tags, contest record, tool row, copy controls.
 
 ### Named Rules
 **The Measure Rule.** Paragraphs never exceed ~65ch; long-form stays single-column and readable, matching the audit-report feel.
