@@ -65,7 +65,23 @@
     .contact-top{display:flex;align-items:center;gap:8px;font:700 13px/1 var(--sans)}
     .contact-top b{color:var(--lime);font-weight:700;transition:transform .18s var(--ease)}
     .contact-top:hover b{transform:translateY(2px)}
-    @media(max-width:640px){.navlinks{display:none}}
+
+    /* MOBILE MENU */
+    .menu-toggle{display:none;background:none;border:0;padding:10px 4px;cursor:pointer;color:var(--text)}
+    .menu-toggle span{display:block;width:20px;height:2px;margin:4px 0;background:currentColor;transition:transform .2s var(--ease),opacity .2s var(--ease)}
+    .menu-toggle.open span:nth-child(1){transform:translateY(6px) rotate(45deg)}
+    .menu-toggle.open span:nth-child(2){opacity:0}
+    .menu-toggle.open span:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
+    .mobile-menu{display:none}
+    @media(max-width:640px){
+      .navlinks{display:none}
+      .menu-toggle{display:block}
+      .mobile-menu{position:absolute;top:76px;left:0;right:0;background:var(--bg);border-bottom:1px solid var(--line);box-shadow:0 14px 34px rgba(0,0,0,.38);padding:6px 24px 14px}
+      .mobile-menu.open{display:block;animation:rise .25s var(--ease)}
+      .mobile-menu a{display:block;padding:15px 0;border-bottom:1px solid var(--line);font:500 15px/1 var(--sans);color:var(--text-2);transition:color .18s var(--ease)}
+      .mobile-menu a:hover{color:var(--lime)}
+      .mobile-menu a:last-child{border-bottom:0}
+    }
     @media(max-width:480px){.contact-top span{display:none}}
 
     /* PAGE HERO */
@@ -95,7 +111,7 @@
     .button.quiet:hover{border-color:var(--lime);color:var(--lime)}
 
     /* SIGNAL */
-    .signal{min-height:330px;padding:20px;background:var(--surface);border:1px solid var(--line);display:flex;flex-direction:column;justify-content:space-between}
+    .signal{min-height:330px;padding:20px;background:var(--surface);border:1px solid var(--line);display:flex;flex-direction:column;justify-content:space-between;overflow:hidden}
     .signal-top,.signal-bottom{display:flex;justify-content:space-between;align-items:center;gap:10px;color:var(--text-3);font:700 9px/1 var(--mono);letter-spacing:.12em}
     .signal-top b{color:var(--lime)}
     .signal-bottom{color:var(--text-3);font-size:8px;justify-content:flex-start;gap:14px}
