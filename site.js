@@ -11,6 +11,12 @@ var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     }
 
     var revealEls = document.querySelectorAll('.reveal');
+    function staggerChildren(el) {
+      el.querySelectorAll('.stagger > *').forEach(function (child, i) {
+        child.style.transitionDelay = Math.min(i * 0.06, 0.36) + 's';
+      });
+    }
+    revealEls.forEach(staggerChildren);
     if ('IntersectionObserver' in window) {
       var ro = new IntersectionObserver(function (entries) {
         entries.forEach(function (entry) {

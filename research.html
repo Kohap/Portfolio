@@ -46,9 +46,10 @@
 
   <main>
     <section class="page-hero shell">
-      <p class="kicker entrance t1">Research &amp; findings</p>
-      <h1 class="entrance t2">Evidence that stays useful.</h1>
-      <p class="lede entrance t3">Contest records, responsible disclosures, and the report format behind the work. Private findings stay private — publishing is gated by disclosure terms.</p>
+      <nav class="cross entrance t1" aria-label="Breadcrumb"><a href="index.html">← Back to portfolio</a><span>/</span><span>Research</span></nav>
+      <p class="kicker entrance t2">Research &amp; findings</p>
+      <h1 class="entrance t3">Evidence that stays useful.</h1>
+      <p class="lede entrance t4">Contest records, responsible disclosures, and the report format behind the work. Private findings stay private — publishing is gated by disclosure terms.</p>
     </section>
 
     <section class="section shell reveal" id="records">
@@ -56,36 +57,44 @@
         <p class="kicker">On record</p>
         <h2>Contest submissions &amp; disclosures.</h2>
       </div>
-      <div class="research-grid">
-        <article class="research-item">
-          <div class="work-index">01</div>
-          <div>
-            <p class="research-meta">Contest record</p>
-            <h3>Contest submissions</h3>
-            <p>Audit-contest findings, validated and submitted. Supporting repositories stay private, so the record is summarized here without platform or date details.</p>
-          </div>
-          <span class="contest-record">Contest record</span>
-        </article>
-        <article class="research-item">
-          <div class="work-index">02</div>
-          <div>
-            <p class="research-meta">Responsible disclosure</p>
-            <h3>Sheriff Exchange — protocol configuration review</h3>
-            <p>Findings from a protocol configuration review, shared privately with the team. Details are withheld until disclosure terms permit.</p>
-          </div>
-          <a class="arrow" href="index.html#contact">Contact <b>↘</b></a>
-        </article>
-        <article class="research-item">
-          <div class="work-index">03</div>
-          <div>
-            <p class="research-meta">Responsible disclosure</p>
-            <h3>Private findings stay private</h3>
-            <p>Four private disclosures are recorded without publishing exploit details. Evidence is shared only when disclosure terms permit it.</p>
-          </div>
-          <a class="arrow" href="index.html#contact">Contact <b>↘</b></a>
-        </article>
+      <div class="research-group">
+        <p class="group-head">Contest record</p>
+        <div class="research-grid stagger">
+          <article class="research-item">
+            <div class="work-index">01</div>
+            <div>
+              <p class="research-meta">Contest record</p>
+              <h3>Contest submissions</h3>
+              <p>Audit-contest findings, validated and submitted. Supporting repositories stay private, so the record is summarized here without platform or date details.</p>
+            </div>
+            <span class="contest-record">Contest record</span>
+          </article>
+        </div>
       </div>
-      <p class="disclosure-note">Authorized testing only. I do not publish active exploit paths, private reports, or sensitive protocol details before a responsible-disclosure process is complete.</p>
+      <div class="research-group">
+        <p class="group-head">Responsible disclosures</p>
+        <div class="research-grid stagger">
+          <article class="research-item">
+            <div class="work-index">01</div>
+            <div>
+              <p class="research-meta">Responsible disclosure</p>
+              <h3>Sheriff Exchange — protocol configuration review</h3>
+              <p>Findings from a protocol configuration review, shared privately with the team. Details are withheld until disclosure terms permit.</p>
+            </div>
+            <a class="arrow" href="index.html#contact">Contact <b>↘</b></a>
+          </article>
+          <article class="research-item">
+            <div class="work-index">02</div>
+            <div>
+              <p class="research-meta">Responsible disclosure</p>
+              <h3>Private findings stay private</h3>
+              <p>Four private disclosures are recorded without publishing exploit details. Evidence is shared only when disclosure terms permit it.</p>
+            </div>
+            <a class="arrow" href="index.html#contact">Contact <b>↘</b></a>
+          </article>
+        </div>
+      </div>
+      <p class="disclosure-note">Authorized testing only. I do not publish active exploit paths, private reports, or sensitive protocol details before a responsible-disclosure process is complete. Where a severity is shown, it reflects what was validated — not the worst case that can be imagined — and nothing goes public until disclosure terms permit it.</p>
     </section>
 
     <section class="section section-alt shell reveal" aria-labelledby="finding-title">
@@ -128,7 +137,7 @@
         <p class="kicker">Have a finding to verify?</p>
         <h2>Bring the context, I&apos;ll bring the evidence.</h2>
       </div>
-      <div class="ready-grid">
+      <div class="ready-grid stagger">
         <article class="ready-item"><small>01</small><h3>Scope</h3><p>Share the repository, program list, and the exact systems or flows under review.</p></article>
         <article class="ready-item"><small>02</small><h3>Risk context</h3><p>Point to trusted roles, asset movement, integrations, and assumptions that cannot fail.</p></article>
         <article class="ready-item"><small>03</small><h3>Report</h3><p>Get severity, impact, reproduction, remediation, and verification in one usable format.</p></article>
