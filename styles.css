@@ -80,7 +80,7 @@
       .navlinks{display:none}
       .menu-toggle{display:block}
       .nav{position:sticky;top:0;z-index:60}
-      .mobile-menu{position:absolute;top:76px;left:0;right:0;background:rgba(13,18,15,.97);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);box-shadow:0 22px 44px rgba(0,0,0,.45);padding:10px 24px 22px;opacity:0;transform:translateY(-14px);transition:opacity .28s var(--ease),transform .32s var(--ease),visibility 0s linear .32s}
+      .mobile-menu{display:block;position:absolute;top:76px;left:0;right:0;background:rgba(13,18,15,.97);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);box-shadow:0 22px 44px rgba(0,0,0,.45);padding:10px 24px 22px;opacity:0;transform:translateY(-14px);transition:opacity .28s var(--ease),transform .32s var(--ease),visibility 0s linear .32s}
       .mobile-menu.open{opacity:1;transform:translateY(0);transition:opacity .28s var(--ease),transform .32s var(--ease);visibility:visible}
       .mobile-menu a{display:block;padding:16px 0;border-bottom:1px solid var(--line);font:600 16px/1.2 var(--sans);color:var(--text);opacity:0;transform:translateY(10px);transition:opacity .3s var(--ease),transform .3s var(--ease),color .18s var(--ease)}
       .mobile-menu.open a{opacity:1;transform:translateY(0)}
