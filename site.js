@@ -66,7 +66,7 @@ var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
     /* Peek nav — reveal when the pointer nears the top */
     var navEl = document.querySelector('.nav');
-    if (navEl && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    if (navEl && window.matchMedia('(hover: hover) and (pointer: fine) and (min-width: 641px)').matches) {
       var zone = 64;
       var openNav = function () { navEl.classList.add('expanded'); };
       var closeNav = function () { navEl.classList.remove('expanded'); };
