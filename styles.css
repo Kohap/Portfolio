@@ -56,15 +56,6 @@
 
     /* NAV */
     .nav{position:sticky;top:0;z-index:60;height:76px;background:rgba(13,18,15,.86);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);display:flex;align-items:center}
-    @media(hover:hover) and (pointer:fine) and (min-width:641px){
-      .nav{position:fixed;animation:none;transform:translateY(-100%);opacity:0;transition:transform .6s cubic-bezier(.16,1,.3,1),opacity .3s ease;pointer-events:none}
-      .nav.expanded,.nav:focus-within{transform:translateY(0);opacity:1;pointer-events:auto}
-      .nav .shell > *{opacity:0;transform:translateY(10px);transition:opacity .4s ease,transform .4s cubic-bezier(.16,1,.3,1)}
-      .nav.expanded .shell > *{opacity:1;transform:none}
-      .nav.expanded .shell .brand{transition-delay:.06s}
-      .nav.expanded .shell .navlinks{transition-delay:.1s}
-      .nav.expanded .shell .contact-top{transition-delay:.16s}
-    }
     .nav .shell{display:flex;align-items:center;justify-content:space-between;gap:24px}
     .brand{font:700 20px/1 var(--display);letter-spacing:0}
     .brand i{color:var(--lime);font-style:normal}
@@ -346,8 +337,6 @@
       .reveal{opacity:1;transform:none;transition:none}
       .intro{display:none}
       .hero .entrance,.nav{opacity:1;animation:none}
-      .nav{transform:none;position:sticky;pointer-events:auto}
-      .nav .shell > *{opacity:1;transform:none;transition:none}
       .mobile-menu,.mobile-menu.open,.mobile-menu.open a{opacity:1;transform:none;transition:none;visibility:visible}
       .mobile-menu a{opacity:1;transform:none;transition:none}
       .tty .tty-caret{animation:none}

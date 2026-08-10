@@ -57,25 +57,15 @@ var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
       ttyText.textContent = 'forge test --fork latest';
     }
 
-    /* Active nav link */
-    var navPath = location.pathname.split('/').pop() || 'index.html';
-    document.querySelectorAll('.navlinks a').forEach(function (a) {
-      var href = a.getAttribute('href').split('#')[0] || 'index.html';
-      if (href === navPath) a.classList.add('is-active');
+    /* Active nav link — only on click */
+    document.querySelectorAll('.navlinks a, .mobile-menu a').forEach(function (a) {
+      a.addEventListener('click', function () {
+        document.querySelectorAll('.navlinks a, .mobile-menu a').forEach(function (x) { x.classList.remove('is-active'); });
+        a.classList.add('is-active');
+      });
     });
 
-    /* Peek nav — reveal when the pointer nears the top */
-    var navEl = document.querySelector('.nav');
-    if (navEl && window.matchMedia('(hover: hover) and (pointer: fine) and (min-width: 641px)').matches) {
-      var zone = 64;
-      var openNav = function () { navEl.classList.add('expanded'); };
-      var closeNav = function () { navEl.classList.remove('expanded'); };
-      document.addEventListener('pointermove', function (e) {
-        if (e.clientY <= zone) { openNav(); return; }
-        if (e.clientY > zone + 40 && !navEl.matches(':hover')) closeNav();
-      });
-      navEl.addEventListener('mouseenter', openNav);
-    }
+    /* Peek nav removed — nav stays visible */
 
     /* Mobile menu */
     var menuToggle = document.querySelector('.menu-toggle');
