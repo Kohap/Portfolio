@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Research &amp; Findings | Gift</title>
+  <meta name="description" content="Audit-contest submissions, responsible disclosures, and the developer-ready report format behind the work.">
+  <meta property="og:title" content="Research &amp; Findings | Gift">
+  <meta property="og:description" content="Evidence that stays useful.">
+  <meta property="og:image" content="https://kohap.github.io/Portfolio/og.jpg">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://kohap.github.io/Portfolio/research.html">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Research &amp; Findings | Gift">
+  <meta name="twitter:description" content="Evidence that stays useful.">
+  <meta name="twitter:image" content="https://kohap.github.io/Portfolio/og.jpg">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23101613'/%3E%3Ctext x='16' y='23' text-anchor='middle' font-family='Georgia,serif' font-size='20' fill='%23c5f246'%3EG%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link crossorigin href="https://fonts.gstatic.com" rel="preconnect">
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;600;700&family=Schibsted+Grotesk:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+  <div class="intro" aria-hidden="true"><div class="intro-inner"><span class="intro-brand">GIFT<i>.</i></span><span class="intro-scan"></span></div></div>
+  <nav class="nav" aria-label="Primary navigation">
+    <div class="shell">
+      <a class="brand" href="index.html">GIFT<i>.</i></a>
+      <div class="navlinks">
+        <a href="index.html#capabilities">Capabilities</a>
+        <a href="index.html#work">Work</a>
+        <a href="research.html">Research</a>
+        <a href="about.html">About</a>
+      </div>
+      <a class="contact-top" href="index.html#contact">Get in touch <b>↓</b></a>
+    </div>
+  </nav>
+
+  <main>
+    <section class="page-hero shell">
+      <p class="kicker entrance t1">Research &amp; findings</p>
+      <h1 class="entrance t2">Evidence that stays useful.</h1>
+      <p class="lede entrance t3">Contest records, responsible disclosures, and the report format behind the work. Private findings stay private — publishing is gated by disclosure terms.</p>
+    </section>
+
+    <section class="section shell reveal" id="records">
+      <div class="heading">
+        <p class="kicker">On record</p>
+        <h2>Contest submissions &amp; disclosures.</h2>
+      </div>
+      <div class="research-grid">
+        <article class="research-item">
+          <div class="work-index">01</div>
+          <div>
+            <p class="research-meta">Contest record</p>
+            <h3>Contest submissions</h3>
+            <p>Audit-contest findings, validated and submitted. Supporting repositories stay private, so the record is summarized here without platform or date details.</p>
+          </div>
+          <span class="contest-record">Contest record</span>
+        </article>
+        <article class="research-item">
+          <div class="work-index">02</div>
+          <div>
+            <p class="research-meta">Responsible disclosure</p>
+            <h3>Sheriff Exchange — protocol configuration review</h3>
+            <p>Findings from a protocol configuration review, shared privately with the team. Details are withheld until disclosure terms permit.</p>
+          </div>
+          <a class="arrow" href="index.html#contact">Contact <b>↘</b></a>
+        </article>
+        <article class="research-item">
+          <div class="work-index">03</div>
+          <div>
+            <p class="research-meta">Responsible disclosure</p>
+            <h3>Private findings stay private</h3>
+            <p>Four private disclosures are recorded without publishing exploit details. Evidence is shared only when disclosure terms permit it.</p>
+          </div>
+          <a class="arrow" href="index.html#contact">Contact <b>↘</b></a>
+        </article>
+      </div>
+      <p class="disclosure-note">Authorized testing only. I do not publish active exploit paths, private reports, or sensitive protocol details before a responsible-disclosure process is complete.</p>
+    </section>
+
+    <section class="section section-alt shell reveal" aria-labelledby="finding-title">
+      <div class="heading">
+        <p class="kicker">Sample finding</p>
+        <h2 id="finding-title">A finding that a developer can act on.</h2>
+      </div>
+      <div class="finding-frame">
+        <div class="finding-top"><span>Redacted / illustrative format</span><b id="excerpt-tag">Report excerpt 01</b></div>
+        <div class="finding-body">
+          <div>
+            <h3>Clear enough to fix.<br>Careful enough to trust.</h3>
+            <p class="finding-hint">Interactive sample — pick a severity and copy the report. This is the ErrorLens output format.</p>
+          </div>
+          <div>
+            <div class="sev-row" role="group" aria-label="Choose severity">
+              <button class="sev" type="button" data-sev="low">Low</button>
+              <button class="sev" type="button" data-sev="med">Medium</button>
+              <button class="sev is-active" type="button" data-sev="high" aria-pressed="true">High</button>
+              <button class="sev" type="button" data-sev="crit">Critical</button>
+            </div>
+            <dl>
+              <div><dt>Severity</dt><dd id="dl-sev">HIGH — material risk to funds or protocol invariants under realistic conditions, validated by a fork-based PoC.</dd></div>
+              <div><dt>Evidence</dt><dd>Reproduction steps, test output, and the affected trust boundary.</dd></div>
+              <div><dt>Remediation</dt><dd>A concrete fix path with the assumptions it must preserve.</dd></div>
+              <div><dt>Verification</dt><dd>Retest notes that confirm the proposed change closes the risk.</dd></div>
+            </dl>
+            <div class="report-actions">
+              <button class="copy-report" type="button" data-sev="high">Copy report</button>
+              <span class="report-done" id="report-done" aria-live="polite"></span>
+            </div>
+          </div>
+        </div>
+        <p class="finding-note">This is a reporting-format sample, not a published client finding. Protocol details and exploit paths remain private until disclosure terms permit publication.</p>
+      </div>
+    </section>
+
+    <section class="section shell reveal" id="start">
+      <div class="heading">
+        <p class="kicker">Have a finding to verify?</p>
+        <h2>Bring the context, I&apos;ll bring the evidence.</h2>
+      </div>
+      <div class="ready-grid">
+        <article class="ready-item"><small>01</small><h3>Scope</h3><p>Share the repository, program list, and the exact systems or flows under review.</p></article>
+        <article class="ready-item"><small>02</small><h3>Risk context</h3><p>Point to trusted roles, asset movement, integrations, and assumptions that cannot fail.</p></article>
+        <article class="ready-item"><small>03</small><h3>Report</h3><p>Get severity, impact, reproduction, remediation, and verification in one usable format.</p></article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="shell foot">
+    <a class="brand" href="index.html">GIFT<i>.</i></a>
+    <span>© 2026 Gift · Built with ❤️</span>
+    <div>
+      <a href="https://kohap-errorlens.vercel.app/#home" target="_blank" rel="noreferrer">ErrorLens</a>
+      <a href="https://github.com/Kohap" target="_blank" rel="noreferrer">GitHub</a>
+    </div>
+  </footer>
+
+  <script src="site.js"></script>
+</body>
+</html>
