@@ -1,652 +1,580 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Gift · Web3 Security Researcher</title>
-<meta name="description" content="Independent Web3 security research across EVM and Solana: smart contract review, fork-based PoCs, and AI-assisted audit workflows.">
-<meta property="og:title" content="Gift · Web3 Security Researcher">
-<meta property="og:description" content="Security that holds up under pressure. EVM & Solana audit workflows.">
-<meta property="og:image" content="https://kohap.github.io/Portfolio/og.png">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://kohap.github.io/Portfolio/">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Gift · Web3 Security Researcher">
-<meta name="twitter:description" content="Security that holds up under pressure.">
-<meta name="twitter:image" content="https://kohap.github.io/Portfolio/og.png">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%230b1326'/><text x='16' y='22' font-family='monospace' font-weight='700' font-size='18' fill='%2389ceff' text-anchor='middle'>G</text></svg>">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link crossorigin href="https://fonts.gstatic.com" rel="preconnect">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --bg:#0b1326;
-    --surface:#131b2e;
-    --surface-2:#171f33;
-    --surface-3:#222a3d;
-    --line:#2d3449;
-    --outline:#3e4850;
-    --text:#dae2fd;
-    --text-muted:#bec8d2;
-    --text-faint:#88929b;
-    --primary:#89ceff;
-    --primary-strong:#0ea5e9;
-    --on-primary:#00344d;
-    --secondary:#4edea3;
-    --secondary-dim:rgba(78,222,163,0.12);
-    --tertiary:#ffb2b7;
-    --tertiary-dim:rgba(255,178,183,0.12);
-    --sans:'Inter', -apple-system, sans-serif;
-    --mono:'JetBrains Mono', ui-monospace, monospace;
-    --radius:0.375rem;
-    --transition:all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-  *{box-sizing:border-box; margin:0; padding:0;}
-  html{scroll-behavior:smooth;}
-  body{
-    background:var(--bg); color:var(--text); font-family:var(--sans);
-    line-height:1.6; -webkit-font-smoothing:antialiased;
-    overflow-x:hidden;
-  }
-  a{color:inherit; text-decoration:none;}
-  a:focus-visible, button:focus-visible{outline:2px solid var(--primary); outline-offset:3px;}
-  .material-symbols-outlined{font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24; font-size:20px; line-height:1; vertical-align:middle;}
-  .wrap{max-width:1040px; margin:0 auto; padding:0 24px;}
-  @media(min-width:768px){.wrap{padding:0 48px;}}
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Gift | Web3 Security Researcher</title>
+  <meta name="description" content="Independent Web3 security research across EVM and Solana: smart contract review, fork-based PoCs, and AI-assisted audit workflows.">
+  <meta property="og:title" content="Gift | Web3 Security Researcher">
+  <meta property="og:description" content="Security that holds up under pressure.">
+  <meta property="og:image" content="https://kohap.github.io/Portfolio/og.png">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://kohap.github.io/Portfolio/">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Gift | Web3 Security Researcher">
+  <meta name="twitter:description" content="Security that holds up under pressure.">
+  <meta name="twitter:image" content="https://kohap.github.io/Portfolio/og.png">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23101613'/%3E%3Ctext x='16' y='22' text-anchor='middle' font-family='Arial' font-size='18' font-weight='800' fill='%23c5f246'%3EG%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link crossorigin href="https://fonts.gstatic.com" rel="preconnect">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#0d120f;
+      --surface:#121813;
+      --surface-2:#161d18;
+      --line:#262e29;
+      --line-2:#343e37;
+      --text:#edf0ea;
+      --text-2:#a8b2aa;
+      --text-3:#78837b;
+      --lime:#c5f246;
+      --lime-2:#d6f867;
+      --lime-dim:rgba(197,242,70,.1);
+      --lime-ink:#0e120c;
+      --paper:#f4f2ec;
+      --ink:#101613;
+      --ink-2:#6b6a62;
+      --sans:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+      --display:'Space Grotesk',var(--sans);
+      --mono:'JetBrains Mono',ui-monospace,monospace;
+      --ease:cubic-bezier(.22,.61,.36,1);
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:var(--bg);color:var(--text);font:16px/1.6 var(--sans);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+    .grain{position:fixed;inset:0;z-index:9998;pointer-events:none;opacity:.32;mix-blend-mode:overlay;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)'/%3E%3C/svg%3E")}
+    .grain::after{content:'';position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent 0 2px,rgba(255,255,255,.018) 2px 3px)}
+    @media print{.grain{display:none}}
 
-  /* HEADER & NAV */
-  header{
-    position:sticky; top:0; z-index:100;
-    background:rgba(11,19,38,0.88); backdrop-filter:blur(12px);
-    border-bottom:1px solid var(--line);
-    transition: var(--transition);
-  }
-  .nav-row{display:flex; align-items:center; justify-content:space-between; height:72px;}
-  .brand{display:flex; align-items:center; gap:10px; transition:transform 0.2s ease;}
-  .brand:hover{transform:scale(1.02);}
-  .brand .material-symbols-outlined{color:var(--primary); font-size:24px;}
-  .brand-name{font-family:var(--mono); font-weight:700; font-size:16px; letter-spacing:0.02em; color:var(--primary);}
-  .nav-links{display:none; gap:32px;}
-  .nav-links a{
-    font-family:var(--mono); font-size:12px; letter-spacing:0.08em; text-transform:uppercase; 
-    color:var(--text-muted); transition:color 0.2s ease; position:relative; padding:4px 0;
-  }
-  .nav-links a::after{
-    content:''; position:absolute; bottom:0; left:0; width:0; height:2px; background:var(--primary);
-    transition:width 0.25s ease;
-  }
-  .nav-links a:hover{color:var(--primary);}
-  .nav-links a:hover::after{width:100%;}
-  @media(min-width:768px){.nav-links{display:flex;}}
-  .btn-contact{
-    font-family:var(--mono); font-size:12px; font-weight:600; letter-spacing:0.06em; text-transform:uppercase;
-    background:var(--primary); color:var(--on-primary); padding:10px 18px; border-radius:var(--radius);
-    transition: var(--transition); box-shadow:0 0 20px rgba(137,206,255,0.15);
-  }
-  .btn-contact:hover{background:#a9dbff; transform:translateY(-1px); box-shadow:0 0 25px rgba(137,206,255,0.3);}
+    /* INTRO / ENTRANCE */
+    .intro{position:fixed;inset:0;z-index:9999;background:var(--bg);display:grid;place-items:center;transition:opacity .5s var(--ease)}
+    .intro.done{opacity:0;pointer-events:none}
+    .intro-inner{display:flex;flex-direction:column;align-items:center;gap:20px}
+    .intro-brand{font:700 clamp(46px,9vw,84px)/1 var(--display);letter-spacing:-.02em;color:var(--text)}
+    .intro-brand i{color:var(--lime);font-style:normal;animation:blink 1s step-end infinite}
+    .intro-scan{width:min(180px,50vw);height:2px;background:var(--lime);box-shadow:0 0 14px rgba(197,242,70,.55);transform-origin:left;animation:scan .8s var(--ease) forwards}
+    @keyframes scan{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+    @keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
 
-  /* HERO SECTION */
-  .hero{padding:72px 0 56px; display:flex; flex-direction:column; gap:32px; position:relative;}
-  .hero::before{
-    content:''; position:absolute; top:-40px; right:-100px; width:450px; height:450px;
-    background:radial-gradient(circle, rgba(137,206,255,0.06) 0%, rgba(78,222,163,0.02) 50%, transparent 70%);
-    pointer-events:none; border-radius:50%; z-index:0;
-  }
-  .pill{
-    display:inline-flex; align-items:center; gap:10px; align-self:flex-start;
-    background:var(--surface-3); border:1px solid var(--line); border-radius:9999px;
-    padding:6px 16px; font-family:var(--mono); font-size:11.5px; letter-spacing:0.1em; color:var(--text-muted); text-transform:uppercase;
-    box-shadow:inset 0 1px 0 rgba(255,255,255,0.05); z-index:1;
-  }
-  .pill .dot{width:8px; height:8px; border-radius:50%; background:var(--secondary); box-shadow:0 0 10px var(--secondary); animation:pulse 2s ease-in-out infinite;}
-  @keyframes pulse{0%, 100%{opacity:1; transform:scale(1);} 50%{opacity:0.4; transform:scale(0.85);}}
-  
-  .hero-content{display:grid; grid-template-columns:1fr; gap:40px; align-items:center; z-index:1;}
-  @media(min-width:900px){.hero-content{grid-template-columns:1.3fr 0.9fr;}}
+    .hero .entrance,.nav{opacity:0;animation:rise .7s var(--ease) forwards}
+    @keyframes rise{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+    a{color:inherit;text-decoration:none}
+    p,ul,ol,h1,h2,h3,h4,dl,dd{margin:0}
+    a:focus-visible,button:focus-visible{outline:2px solid var(--lime);outline-offset:3px}
+    [id]{scroll-margin-top:96px}
+    .shell{width:min(1120px,calc(100% - 40px));margin-inline:auto}
+    @media(min-width:720px){.shell{width:min(1120px,calc(100% - 96px))}}
+    .mono-label{font:700 11px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase}
 
-  h1{font-family:var(--sans); font-weight:700; font-size:clamp(38px, 5.5vw, 64px); line-height:1.08; letter-spacing:-0.03em;}
-  h1 span{background:linear-gradient(135deg, var(--primary) 0%, #c5f246 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent;}
-  .lede{font-size:clamp(16px, 1.8vw, 19px); color:var(--text-muted); max-width:54ch; line-height:1.65;}
-  .hero-actions{display:flex; gap:14px; flex-wrap:wrap; margin-top:8px;}
-  
-  .btn-primary{
-    font-family:var(--mono); font-size:13px; font-weight:700; letter-spacing:0.04em; text-transform:uppercase;
-    background:var(--primary); color:var(--on-primary); padding:14px 24px; border-radius:var(--radius);
-    transition: var(--transition); display:inline-flex; align-items:center; gap:8px;
-  }
-  .btn-primary:hover{background:#a9dbff; transform:translateY(-2px); box-shadow:0 8px 25px rgba(137,206,255,0.25);}
-  .btn-ghost{
-    font-family:var(--mono); font-size:13px; font-weight:700; letter-spacing:0.04em; text-transform:uppercase;
-    background:transparent; color:var(--text); border:1px solid var(--outline); padding:14px 24px; border-radius:var(--radius);
-    transition: var(--transition); display:inline-flex; align-items:center; gap:8px;
-  }
-  .btn-ghost:hover{border-color:var(--primary); color:var(--primary); transform:translateY(-2px); background:rgba(137,206,255,0.04);}
+    /* NAV */
+    .nav{position:sticky;top:0;z-index:60;height:76px;background:rgba(13,18,15,.86);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);display:flex;align-items:center}
+    .nav .shell{display:flex;align-items:center;justify-content:space-between;gap:24px}
+    .brand{font:700 20px/1 var(--display);letter-spacing:0}
+    .brand i{color:var(--lime);font-style:normal}
+    .navlinks{display:flex;gap:28px}
+    .navlinks a{font:500 13px/1 var(--sans);color:var(--text-2);transition:color .18s var(--ease)}
+    .contact-top{display:flex;align-items:center;gap:8px;font:700 13px/1 var(--sans)}
+    .contact-top b{color:var(--lime);font-weight:700;transition:transform .18s var(--ease)}
+    .contact-top:hover b{transform:translateY(2px)}
+    @media(max-width:640px){.navlinks{display:none}}
+    @media(max-width:480px){.contact-top span{display:none}}
 
-  /* HERO TERMINAL PREVIEW */
-  .hero-terminal{
-    background:var(--surface); border:1px solid var(--line); border-radius:0.75rem;
-    overflow:hidden; box-shadow:0 20px 40px rgba(0,0,0,0.4); transform:translateY(0);
-    transition:transform 0.3s ease, border-color 0.3s ease;
-  }
-  .hero-terminal:hover{border-color:var(--outline); transform:translateY(-4px);}
-  .terminal-bar{
-    background:var(--surface-2); padding:12px 16px; display:flex; align-items:center; justify-content:space-between;
-    border-bottom:1px solid var(--line); font-family:var(--mono); font-size:11px; color:var(--text-faint);
-  }
-  .terminal-dots{display:flex; gap:6px;}
-  .terminal-dots span{width:10px; height:10px; border-radius:50%; background:var(--line);}
-  .terminal-dots span:nth-child(1){background:#ff5f56;}
-  .terminal-dots span:nth-child(2){background:#ffbd2e;}
-  .terminal-dots span:nth-child(3){background:#27c93f;}
-  .terminal-body{padding:20px; font-family:var(--mono); font-size:12.5px; line-height:1.7; color:var(--text-muted);}
-  .terminal-body .cmd{color:var(--primary); font-weight:600;}
-  .terminal-body .success{color:var(--secondary);}
-  .terminal-body .hl{color:#fff;}
-  .cursor{display:inline-block; width:8px; height:15px; background:var(--primary); vertical-align:middle; animation:blink 1s step-end infinite;}
-  @keyframes blink{0%, 100%{opacity:1;} 50%{opacity:0;}}
+    /* HERO */
+    .hero{padding:96px 0 0}
+    .eyebrow{display:flex;align-items:center;gap:10px;color:var(--text-3);font:700 11px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase}
+    .eyebrow b{width:8px;height:8px;border-radius:99px;background:var(--lime);animation:dot 2.4s ease-in-out infinite}
+    @keyframes dot{0%,100%{opacity:1}50%{opacity:.35}}
+    .hero-grid{display:grid;grid-template-columns:1fr;gap:56px;align-items:center;margin-top:32px}
+    @media(min-width:980px){.hero-grid{grid-template-columns:1.15fr .85fr;gap:72px}}
+    h1{max-width:760px;margin-top:24px;font:700 clamp(46px,7vw,84px)/.98 var(--display);letter-spacing:-.025em}
+    .lede{max-width:560px;margin-top:26px;color:var(--text-2);font-size:18px;line-height:1.6}
+    .actions{display:flex;flex-wrap:wrap;align-items:center;gap:26px;margin-top:34px}
+    .button{display:inline-flex;align-items:center;gap:12px;font:700 14px/1 var(--sans);padding:16px 22px;border-radius:2px}
+    .button.primary{background:var(--lime);color:var(--lime-ink);transition:background .18s var(--ease),transform .18s var(--ease)}
+    .button.primary b{font-weight:700;color:var(--lime-ink)}
+    .button.primary:hover{background:var(--lime-2);transform:translateY(-1px)}
+    .button.quiet{color:var(--text);border:1px solid var(--line-2);transition:border-color .18s var(--ease),color .18s var(--ease)}
+    .button.quiet b{color:var(--lime);font-weight:700}
+    .button.quiet:hover{border-color:var(--lime);color:var(--lime)}
 
-  /* STATS GRID */
-  .stats{display:grid; grid-template-columns:repeat(1, 1fr); gap:16px; margin-top:12px; z-index:1;}
-  @media(min-width:640px){.stats{grid-template-columns:repeat(3, 1fr);}}
-  .stat{
-    background:var(--surface); border:1px solid var(--line); border-left:3px solid var(--primary);
-    border-radius:var(--radius); padding:20px; display:flex; flex-direction:column; gap:6px;
-    transition: var(--transition); position:relative; overflow:hidden;
-  }
-  .stat::after{
-    content:''; position:absolute; top:0; right:0; width:100px; height:100px;
-    background:radial-gradient(circle, rgba(137,206,255,0.04) 0%, transparent 70%); pointer-events:none;
-  }
-  .stat:hover{border-color:var(--primary); transform:translateY(-3px); box-shadow:0 10px 30px rgba(0,0,0,0.3);}
-  .stat.secondary{border-left-color:var(--secondary);}
-  .stat.tertiary{border-left-color:var(--tertiary);}
-  .stat .num{font-family:var(--sans); font-weight:700; font-size:32px; letter-spacing:-0.02em;}
-  .stat.secondary .num{color:var(--secondary);}
-  .stat.primary .num{color:var(--primary);}
-  .stat.tertiary .num{color:var(--tertiary);}
-  .stat .lbl{font-family:var(--mono); font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:var(--text-faint);}
+    /* SIGNAL */
+    .signal{min-height:330px;padding:20px;background:var(--surface);border:1px solid var(--line);display:flex;flex-direction:column;justify-content:space-between}
+    .signal-top,.signal-bottom{display:flex;justify-content:space-between;align-items:center;gap:10px;color:var(--text-3);font:700 9px/1 var(--mono);letter-spacing:.12em}
+    .signal-top b{color:var(--lime)}
+    .signal-bottom{color:var(--text-3);font-size:8px;justify-content:flex-start;gap:14px}
+    .rings{position:relative;width:100%;aspect-ratio:1/1;margin:18px 0;display:grid;place-items:center}
+    .rings .ring{position:absolute;border:1px solid rgba(197,242,70,.22);border-radius:50%}
+    .rings .ring:nth-child(1){inset:0}
+    .rings .ring:nth-child(2){inset:16%}
+    .rings .ring:nth-child(3){inset:34%;border-color:rgba(197,242,70,.5)}
+    .rings .sweep{position:absolute;inset:0;border-radius:50%;background:conic-gradient(from 0deg,rgba(197,242,70,0),rgba(197,242,70,.3) 80deg,rgba(197,242,70,0) 150deg);opacity:.5;animation:sweep 7s linear infinite;pointer-events:none}
+    .rings.paused .sweep{animation-play-state:paused}
+    @keyframes sweep{to{transform:rotate(1turn)}}
+    .rings-num{position:relative;z-index:1;font:700 clamp(40px,5vw,58px)/1 var(--display);color:var(--text)}
+    .rings-num small{display:block;margin-top:8px;color:var(--text-3);font:700 9px/1 var(--mono);letter-spacing:.14em;text-align:center}
+    .hero-foot{display:flex;flex-wrap:wrap;gap:8px 32px;padding:22px 0;margin-top:56px;border-top:1px solid var(--line);color:var(--text-3);font:700 10px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase}
 
-  /* SECTIONS */
-  .section{padding:64px 0; border-top:1px solid var(--line); position:relative;}
-  .section-head{display:flex; align-items:center; gap:12px; margin-bottom:28px;}
-  .section-head .material-symbols-outlined{color:var(--primary); font-size:22px;}
-  .section-label{font-family:var(--mono); font-size:13px; letter-spacing:0.1em; text-transform:uppercase; color:var(--text-muted); font-weight:600;}
-  .section p.lede-sm{color:var(--text-muted); max-width:68ch; font-size:16px; line-height:1.7;}
+    /* RECORD STRIP */
+    .record{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:34px 0}
+    .record-label{color:var(--text-3);font:700 10px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase}
+    .record-row{display:grid;grid-template-columns:1fr;margin-top:20px}
+    @media(min-width:760px){.record-row{grid-template-columns:repeat(3,1fr)}}
+    .record-item{padding:18px 0;border-top:1px solid var(--line)}
+    @media(min-width:760px){.record-item{padding:6px 24px 6px 0;border-top:0}.record-item+.record-item{border-left:1px solid var(--line);padding-left:24px}}
+    .record-item .name{display:block;font:600 19px/1 var(--display);letter-spacing:-.01em;color:var(--text)}
+    .record-item .what{display:block;margin-top:8px;color:var(--text-2);font-size:13.5px;line-height:1.5}
+    .record-item .arrow{display:inline-flex;align-items:center;gap:6px;margin-top:12px;color:var(--lime);font:700 11px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase}
+    .record-item .arrow b{font-weight:700;transition:transform .18s var(--ease)}
+    @media(hover:hover){.record-item .arrow:hover b{transform:translate(2px,-2px)}}
 
-  /* SERVICE / FOCUS CARDS */
-  .card-grid{display:grid; grid-template-columns:1fr; gap:16px;}
-  @media(min-width:640px){.card-grid{grid-template-columns:repeat(2, 1fr);}}
-  @media(min-width:960px){.card-grid{grid-template-columns:repeat(3, 1fr);}}
-  .service-card{
-    background:var(--surface); border:1px solid var(--line); border-radius:0.5rem; padding:24px;
-    transition: var(--transition); position:relative; overflow:hidden; display:flex; flex-direction:column; justify-content:space-between;
-  }
-  .service-card::before{
-    content:''; position:absolute; top:0; left:0; width:100%; height:2px; background:linear-gradient(90deg, transparent, var(--primary), transparent);
-    opacity:0; transition:opacity 0.3s ease;
-  }
-  .service-card:hover{border-color:var(--primary); transform:translateY(-4px); box-shadow:0 12px 35px rgba(0,0,0,0.35);}
-  .service-card:hover::before{opacity:1;}
-  .service-card .material-symbols-outlined{color:var(--primary); font-size:28px; margin-bottom:16px; display:block;}
-  .service-card h3{font-size:17px; font-weight:600; margin-bottom:8px; letter-spacing:-0.01em;}
-  .service-card p{font-size:14px; color:var(--text-muted); line-height:1.6;}
+    /* STATS */
+    .stats{display:grid;grid-template-columns:1fr;border:1px solid var(--line)}
+    @media(min-width:720px){.stats{grid-template-columns:repeat(3,1fr)}}
+    .stat{display:block;padding:22px 24px;background:var(--bg);border-right:1px solid var(--line);transition:background .18s var(--ease)}
+    .stat:last-child{border-right:0}
+    @media(max-width:719px){.stat{border-right:0;border-bottom:1px solid var(--line)}.stat:last-child{border-bottom:0}}
+    @media(hover:hover){.stat:hover{background:var(--surface)}}
+    .stat strong{display:block;font:700 34px/1 var(--display);letter-spacing:-.02em;font-feature-settings:'tnum' 1}
+    .stat span{display:block;margin-top:10px;color:var(--text-3);font:700 10px/1.5 var(--mono);letter-spacing:.1em;text-transform:uppercase}
+    .stat em{display:block;margin-top:12px;color:var(--lime);font:700 10px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;font-style:normal}
 
-  .tag-row{display:flex; flex-wrap:wrap; gap:10px; margin-top:16px;}
-  .tag{
-    font-family:var(--mono); font-size:12.5px; color:var(--text-muted);
-    background:var(--surface-2); border:1px solid var(--line); border-radius:var(--radius); padding:8px 14px;
-    transition: var(--transition); display:inline-flex; align-items:center; gap:6px;
-  }
-  .tag:hover{border-color:var(--primary); color:var(--primary); transform:translateY(-2px); background:var(--surface-3);}
+    /* SECTION SHELL */
+    .section{padding:96px 0;border-top:1px solid var(--line)}
+    .heading{display:flex;flex-direction:column;gap:14px}
+    .kicker{color:var(--lime);font:700 11px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase}
+    .section h2{max-width:720px;font:600 clamp(30px,4.4vw,46px)/1.05 var(--display);letter-spacing:-.02em}
+    .section .sub{max-width:640px;margin-top:6px;color:var(--text-2);font-size:16px}
 
-  /* FINDING / PROJECT CARDS */
-  .finding{
-    background:var(--surface); border:1px solid var(--line); border-left:3px solid var(--secondary);
-    border-radius:0.5rem; padding:26px; margin-bottom:16px;
-    transition: var(--transition); position:relative;
-  }
-  .finding.active{border-left-color:var(--primary);}
-  .finding:hover{transform:translateY(-3px); border-color:var(--outline); box-shadow:0 12px 35px rgba(0,0,0,0.3);}
-  .finding-top{display:flex; justify-content:space-between; align-items:flex-start; gap:16px; flex-wrap:wrap; margin-bottom:14px;}
-  .finding-id{font-family:var(--mono); font-size:13px; color:var(--primary); font-weight:600; letter-spacing:0.04em;}
-  .chip{
-    font-family:var(--mono); font-size:11px; letter-spacing:0.08em; text-transform:uppercase;
-    padding:5px 10px; border-radius:var(--radius); font-weight:600;
-  }
-  .chip.public{background:var(--secondary-dim); color:var(--secondary);}
-  .chip.active-c{background:rgba(137,206,255,0.12); color:var(--primary);}
-  .finding h3{font-size:20px; font-weight:600; margin-bottom:10px; letter-spacing:-0.01em;}
-  .finding p{font-size:14.5px; color:var(--text-muted); max-width:70ch; margin-bottom:18px; line-height:1.65;}
-  .finding-links{display:flex; gap:20px; flex-wrap:wrap;}
-  .finding-links a{
-    font-family:var(--mono); font-size:12.5px; color:var(--text); border-bottom:1px solid var(--outline); padding-bottom:2px;
-    transition: var(--transition); display:inline-flex; align-items:center; gap:4px;
-  }
-  .finding-links a:hover{border-color:var(--primary); color:var(--primary); transform:translateX(2px);}
+    /* STATEMENT */
+    .statement{border-top:1px solid var(--line)}
+    .statement-grid{display:grid;grid-template-columns:1fr;gap:18px;padding:72px 0;align-items:baseline}
+    @media(min-width:820px){.statement-grid{grid-template-columns:220px 1fr;gap:56px}}
+    .statement-text{max-width:720px;font:500 clamp(20px,2.6vw,28px)/1.4 var(--display);letter-spacing:-.01em}
 
-  /* METHODOLOGY TIMELINE */
-  .timeline{position:relative; padding-left:32px; margin-top:28px;}
-  .timeline::before{content:""; position:absolute; left:7px; top:8px; bottom:8px; width:2px; background:var(--line);}
-  .phase{position:relative; padding-bottom:32px;}
-  .phase:last-child{padding-bottom:0;}
-  .phase::before{
-    content:""; position:absolute; left:-32px; top:4px; width:14px; height:14px; border-radius:50%;
-    background:var(--bg); border:3px solid var(--primary); box-shadow:0 0 10px rgba(137,206,255,0.4);
-    transition:transform 0.2s ease;
-  }
-  .phase:hover::before{transform:scale(1.2);}
-  .phase-label{font-family:var(--mono); font-size:11.5px; letter-spacing:0.1em; text-transform:uppercase; color:var(--primary); margin-bottom:6px; font-weight:600;}
-  .phase h4{font-size:17px; font-weight:600; margin-bottom:8px;}
-  .phase p{font-size:14.5px; color:var(--text-muted); max-width:64ch; line-height:1.65;}
+    /* CAPABILITIES LIST */
+    .capabilities{margin-top:48px;border-top:1px solid var(--line)}
+    .capability{display:grid;grid-template-columns:44px 1fr auto;gap:16px;align-items:baseline;padding:22px 4px;border-bottom:1px solid var(--line);transition:background .18s var(--ease),padding .18s var(--ease)}
+    .capability small{color:var(--text-3);font:500 12px/1 var(--mono);font-feature-settings:'tnum' 1}
+    .capability h3{font:600 19px/1.3 var(--display);letter-spacing:-.01em}
+    .capability p{max-width:520px;color:var(--text-2);font-size:14px}
+    .capability b{color:var(--text-3);font-weight:500;transition:color .18s var(--ease),transform .18s var(--ease)}
+    @media(max-width:680px){.capability{grid-template-columns:34px 1fr;padding:20px 0}.capability b{display:none}}
+    @media(hover:hover){.capability:hover{background:var(--surface)}.capability:hover small,.capability:hover b{color:var(--lime)}.capability:hover b{transform:translateX(3px)}}
 
-  .stack-block{margin-top:40px;}
+    /* WORK */
+    .work-heading{display:flex;flex-direction:column;gap:20px;justify-content:space-between}
+    @media(min-width:880px){.work-heading{flex-direction:row;align-items:flex-end}}
+    .work-list{margin-top:48px;border-top:1px solid var(--line)}
+    .work-item{display:grid;grid-template-columns:1fr;gap:18px;padding:30px 4px;border-bottom:1px solid var(--line)}
+    @media(min-width:900px){.work-item{grid-template-columns:52px 1fr auto;gap:28px;align-items:start}}
+    .work-index{color:var(--lime);font:700 14px/1 var(--mono);font-feature-settings:'tnum' 1}
+    .work-label{color:var(--text-3);font:700 10px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;margin-bottom:10px}
+    .work-main h3{font:600 26px/1.2 var(--display);letter-spacing:-.015em}
+    .work-main p{max-width:620px;margin-top:12px;color:var(--text-2);font-size:15px}
+    .tags{display:flex;flex-wrap:wrap;gap:8px}
+    .tags span{padding:6px 10px;border:1px solid var(--line-2);color:var(--text-2);font:500 11px/1 var(--mono);letter-spacing:.06em}
+    .arrow{display:inline-flex;align-items:center;gap:8px;white-space:nowrap;color:var(--lime);font:700 13px/1 var(--mono);letter-spacing:.04em}
+    .arrow b{font-weight:700;transition:transform .18s var(--ease)}
+    .arrow:hover b{transform:translate(2px,-2px)}
+    .work-foot{grid-column:1/-1;align-self:end;justify-self:start}
+    @media(min-width:900px){.work-item .tags{grid-column:2}.work-item .arrow{grid-column:3}}
 
-  /* CTA CARD */
-  .cta-card{
-    background:linear-gradient(135deg, var(--surface) 0%, var(--surface-2) 100%);
-    border:1px solid var(--line); border-radius:0.875rem;
-    padding:48px 32px; text-align:center; display:flex; flex-direction:column; align-items:center; gap:16px;
-    position:relative; overflow:hidden; box-shadow:0 20px 50px rgba(0,0,0,0.4);
-  }
-  .cta-card::before{
-    content:''; position:absolute; top:-50%; left:-50%; width:200%; height:200%;
-    background:radial-gradient(circle, rgba(137,206,255,0.04) 0%, transparent 60%); pointer-events:none;
-  }
-  .cta-card .material-symbols-outlined{color:var(--primary); font-size:38px; margin-bottom:4px;}
-  .cta-card h3{font-size:26px; font-weight:700; letter-spacing:-0.02em;}
-  .cta-card p{color:var(--text-muted); font-size:15px; max-width:48ch; line-height:1.65;}
-  .cta-actions{display:flex; gap:14px; flex-wrap:wrap; justify-content:center; margin-top:8px;}
+    /* CASE STUDY */
+    .case-frame{margin-top:48px;border:1px solid var(--line);background:var(--surface)}
+    .case-top{display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;padding:16px 22px;border-bottom:1px solid var(--line)}
+    .case-intro{display:grid;grid-template-columns:1fr;gap:14px;padding:34px 22px 22px;border-bottom:1px solid var(--line)}
+    .case-intro h3{max-width:640px;font:600 clamp(26px,3.4vw,38px)/1.08 var(--display);letter-spacing:-.02em}
+    .case-intro p{max-width:580px;margin-top:12px;color:var(--text-2);font-size:15px}
+    .case-outputs{display:grid;grid-template-columns:1fr}
+    @media(min-width:760px){.case-outputs{grid-template-columns:repeat(2,1fr)}}
+    @media(min-width:1080px){.case-outputs{grid-template-columns:repeat(4,1fr)}}
+    .case-output{padding:24px 22px;border-top:1px solid var(--line)}
+    @media(min-width:760px){.case-output:nth-child(-n+2){border-top:0}}
+    @media(min-width:1080px){.case-output{border-top:0;border-left:1px solid var(--line)}.case-output:first-child{border-left:0}}
+    .case-output small{color:var(--lime);font:700 10px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase}
+    .case-output h4{margin-top:18px;font:600 19px/1.25 var(--display)}
+    .case-output p{margin-top:8px;color:var(--text-2);font-size:13.5px}
 
-  /* FOOTER */
-  footer{padding:48px 0 100px; border-top:1px solid var(--line); background:rgba(11,19,38,0.5);}
-  .footer-inner{display:flex; flex-direction:column; gap:24px;}
-  @media(min-width:768px){.footer-inner{flex-direction:row; justify-content:space-between; align-items:center;}}
-  .social-row{display:flex; gap:12px; flex-wrap:wrap;}
-  .social-icon{
-    display:flex; align-items:center; justify-content:center; width:42px; height:42px;
-    background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); color:var(--text-muted);
-    transition: var(--transition);
-  }
-  .social-icon svg{width:18px; height:18px;}
-  .social-icon:hover{border-color:var(--primary); color:var(--primary); transform:translateY(-3px); box-shadow:0 8px 20px rgba(0,0,0,0.3);}
-  .footer-note{font-family:var(--mono); font-size:11.5px; color:var(--text-faint); letter-spacing:0.04em;}
-  .footer-note a{color:var(--text-faint); border-bottom:1px solid var(--line); transition:color 0.2s;}
-  .footer-note a:hover{color:var(--primary); border-color:var(--primary);}
+    /* RESEARCH */
+    .research-grid{margin-top:48px;border-top:1px solid var(--line)}
+    .research-item{display:grid;grid-template-columns:1fr;gap:16px;padding:28px 4px;border-bottom:1px solid var(--line)}
+    @media(min-width:820px){.research-item{grid-template-columns:52px 1fr auto;gap:28px;align-items:start}}
+    .research-meta{color:var(--text-3);font:700 10px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;margin-bottom:10px}
+    .research-item h3{font:600 22px/1.25 var(--display);letter-spacing:-.01em}
+    .research-item p{max-width:620px;margin-top:10px;color:var(--text-2);font-size:14.5px}
+    .contest-record{display:inline-flex;align-items:center;padding:8px 12px;border:1px solid var(--line-2);color:var(--text-2);font:500 12px/1 var(--mono)}
+    .disclosure-note{max-width:640px;margin-top:20px;color:var(--text-3);font-size:13.5px}
 
-  /* BOTTOM MOBILE NAV */
-  .bottom-nav{
-    position:fixed; bottom:0; left:0; right:0; z-index:100;
-    background:rgba(19,27,46,0.95); backdrop-filter:blur(12px);
-    border-top:1px solid var(--line);
-    display:flex; justify-content:space-around; padding:10px 0 12px;
-    box-shadow:0 -10px 30px rgba(0,0,0,0.5);
-  }
-  @media(min-width:768px){.bottom-nav{display:none;} body{padding-bottom:0;}}
-  @media(max-width:767px){body{padding-bottom:75px;}}
-  .bottom-nav a{
-    display:flex; flex-direction:column; align-items:center; gap:3px;
-    font-family:var(--mono); font-size:10px; color:var(--text-faint); text-transform:uppercase; letter-spacing:0.04em;
-    padding:4px 12px; transition:color 0.2s;
-  }
-  .bottom-nav a.active-tab, .bottom-nav a:hover{color:var(--primary);}
+    /* SAMPLE FINDING — paper evidence block */
+    .finding-frame{margin-top:48px;background:var(--paper);color:var(--ink)}
+    .finding-top{display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;padding:16px 24px;border-bottom:1px solid #dcd9cf;color:var(--ink-2);font:700 10px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase}
+    .finding-top b{color:#77a800;font-weight:700}
+    .finding-body{display:grid;grid-template-columns:1fr;gap:40px;padding:40px 24px}
+    @media(min-width:900px){.finding-body{grid-template-columns:1fr 1.1fr;gap:56px;padding:48px 24px 40px}}
+    .finding-body h3{font:700 clamp(30px,3.6vw,44px)/1.04 var(--display);letter-spacing:-.02em}
+    .finding-body dl{margin:0;border-top:1px solid #dcd9cf}
+    .finding-body dl div{display:grid;grid-template-columns:118px 1fr;gap:20px;padding:15px 0;border-bottom:1px solid #dcd9cf}
+    .finding-body dt{color:#5f6b5f;font:700 10px/1.6 var(--mono);letter-spacing:.1em;text-transform:uppercase}
+    .finding-body dd{color:var(--ink);font-size:14px}
+    .finding-note{margin:0;padding:0 24px 24px;color:var(--ink-2);font-size:12.5px}
 
-  /* SCROLL REVEAL ANIMATIONS */
-  .reveal{opacity:0; transform:translateY(24px); transition:opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);}
-  .reveal.in-view{opacity:1; transform:translateY(0);}
+    /* METHOD */
+    .method-grid{display:grid;grid-template-columns:1fr;margin-top:48px;border-top:1px solid var(--line)}
+    @media(min-width:720px){.method-grid{grid-template-columns:repeat(2,1fr)}}
+    .method-grid article{padding:26px;border-bottom:1px solid var(--line);transition:background .18s var(--ease)}
+    @media(min-width:720px){.method-grid article:nth-child(odd){border-right:1px solid var(--line)}.method-grid article:nth-child(n+3){border-bottom:0}}
+    @media(max-width:719px){.method-grid article:last-child{border-bottom:0}}
+    @media(hover:hover){.method-grid article:hover{background:var(--surface)}}
+    .method-grid small{color:var(--lime);font:700 11px/1 var(--mono);font-feature-settings:'tnum' 1}
+    .method-grid h3{margin-top:16px;font:600 20px/1.25 var(--display)}
+    .method-grid p{margin-top:10px;color:var(--text-2);font-size:14.5px}
 
-  @media (prefers-reduced-motion: reduce){
-    .pill .dot{animation:none;}
-    .reveal{opacity:1; transform:none; transition:none;}
-    .hero-terminal, .service-card, .finding, .stat{transition:none !important; transform:none !important;}
-  }
-</style>
+    /* START A REVIEW */
+    .ready-grid{display:grid;grid-template-columns:1fr;margin-top:48px;border-top:1px solid var(--line)}
+    @media(min-width:820px){.ready-grid{grid-template-columns:repeat(3,1fr)}}
+    .ready-item{padding:26px;border-bottom:1px solid var(--line)}
+    @media(min-width:820px){.ready-item{border-right:1px solid var(--line)}.ready-item:last-child{border-right:0}.ready-item{border-bottom:0}}
+    .ready-item small{color:var(--text-3);font:700 11px/1 var(--mono);font-feature-settings:'tnum' 1}
+    .ready-item h3{margin-top:16px;font:600 20px/1.25 var(--display)}
+    .ready-item p{margin-top:10px;color:var(--text-2);font-size:14.5px}
+
+    /* TOOLS */
+    .tools{border-top:1px solid var(--line);padding:64px 0}
+    .tool-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
+    .tool-row span{padding:10px 14px;border:1px solid var(--line-2);color:var(--text-2);font:500 13px/1 var(--mono);transition:border-color .18s var(--ease),color .18s var(--ease)}
+    @media(hover:hover){.tool-row span:hover{border-color:var(--lime);color:var(--lime)}}
+
+    /* REACH / CONTACT */
+    .reach{border-top:1px solid var(--line);padding:112px 0 96px}
+    .reach h2{max-width:820px;font:600 clamp(34px,5vw,58px)/1.02 var(--display);letter-spacing:-.02em}
+    .availability{max-width:600px;margin-top:22px;color:var(--text-2);font-size:17px}
+    .email-row{display:flex;flex-wrap:wrap;align-items:center;gap:18px;margin-top:40px;padding-top:28px;border-top:1px solid var(--line)}
+    .email-link{font:700 clamp(22px,3.4vw,34px)/1 var(--display);letter-spacing:-.02em;border-bottom:2px solid var(--lime);padding-bottom:4px}
+    .copy-email{padding:12px 18px;background:transparent;border:1px solid var(--line-2);color:var(--text-2);font:700 12px/1 var(--mono);letter-spacing:.06em;cursor:pointer;transition:border-color .18s var(--ease),color .18s var(--ease)}
+    .copy-email:hover{border-color:var(--lime);color:var(--lime)}
+    .contact-label{margin-top:40px;color:var(--text-3);font:700 11px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase}
+    .socials{display:flex;gap:12px;margin-top:16px}
+    .social{display:grid;place-items:center;width:46px;height:46px;border:1px solid var(--line-2);color:var(--text-2);transition:border-color .18s var(--ease),color .18s var(--ease)}
+    .social svg{width:18px;height:18px}
+    @media(hover:hover){.social:hover{border-color:var(--lime);color:var(--lime)}}
+    .social-directory{display:flex;flex-wrap:wrap;gap:10px 24px;margin-top:26px}
+    .social-directory a{border-bottom:1px solid rgba(237,240,234,.4);font-size:13px;font-weight:500;transition:color .18s var(--ease),border-color .18s var(--ease)}
+    @media(hover:hover){.social-directory a:hover{color:var(--lime);border-color:var(--lime)}}
+
+    /* FOOT */
+    .foot{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px;padding:36px 0 56px;border-top:1px solid var(--line);color:var(--text-3);font:500 12px/1 var(--mono)}
+    .foot .brand{font:700 18px/1 var(--display);color:var(--text)}
+    .foot .brand i{color:var(--lime);font-style:normal}
+    .foot div{display:flex;gap:22px}
+    .foot a{transition:color .18s var(--ease)}
+    @media(hover:hover){.foot a:hover{color:var(--lime)}}
+
+    /* REVEAL */
+    .reveal{opacity:0;transform:translateY(18px);transition:opacity .6s var(--ease),transform .6s var(--ease)}
+    .reveal.in-view{opacity:1;transform:none}
+    @media (prefers-reduced-motion:reduce){
+      html{scroll-behavior:auto}
+      .eyebrow b{animation:none}
+      .rings .sweep{animation:none;opacity:.25}
+      .reveal{opacity:1;transform:none;transition:none}
+      .intro{display:none}
+      .hero .entrance,.nav{opacity:1;animation:none}
+      .button,.button.primary,.button.quiet{transition:none}
+    }
+  </style>
 </head>
 <body>
-
-<header id="top">
-  <div class="wrap nav-row">
-    <a class="brand" href="#top">
-      <span class="material-symbols-outlined">shield_lock</span>
-      <span class="brand-name">GIFT</span>
-    </a>
-    <nav class="nav-links">
-      <a href="#about">About</a>
-      <a href="#focus">Focus</a>
-      <a href="#findings">Projects</a>
-      <a href="#contests">Contests</a>
-      <a href="#method">Method</a>
-    </nav>
-    <a class="btn-contact" href="#contact">Get in Touch</a>
-  </div>
-</header>
-
-<main class="wrap">
-
-  <section class="hero">
-    <div class="pill"><span class="dot"></span>SYSTEM_STATUS: ACTIVE &amp; VERIFIABLE</div>
-    <div class="hero-content">
-      <div>
-        <h1>Independent Web3<br><span>Security Research</span></h1>
-        <p class="lede">Smart contract review, fork-based PoCs, and AI-assisted audit workflows across EVM and Solana. Documented and verifiable in public repositories, not claimed.</p>
-        <div class="hero-actions">
-          <a class="btn-primary" href="#findings">View Projects <span class="material-symbols-outlined" style="font-size:18px;">arrow_forward</span></a>
-          <a class="btn-ghost" href="#contact">Contact Researcher</a>
-        </div>
+  <div class="grain" aria-hidden="true"></div>
+  <div class="intro" aria-hidden="true"><div class="intro-inner"><span class="intro-brand">GIFT<i>.</i></span><span class="intro-scan"></span></div></div>
+  <nav class="nav" aria-label="Primary navigation">
+    <div class="shell">
+      <a class="brand" href="#top">GIFT<i>.</i></a>
+      <div class="navlinks">
+        <a href="#work">Work</a>
+        <a href="#capabilities">Capabilities</a>
+        <a href="#research">Research</a>
+        <a href="#method">Method</a>
       </div>
-      <div class="hero-terminal">
-        <div class="terminal-bar">
-          <div class="terminal-dots"><span></span><span></span><span></span></div>
-          <span>security_audit.rs · zsh</span>
-          <span>EVM/SVM</span>
-        </div>
-        <div class="terminal-body">
-          <p><span class="cmd">$</span> found-audit --target evm --fork-state mainnet</p>
-          <p style="color:var(--text);">[+] Mapping block explorer surfaces...</p>
-          <p style="color:var(--text);">[+] Running fork-only validation tests...</p>
-          <p class="success">[✓] 0 critical vulnerabilities unmitigated</p>
-          <p><span class="cmd">$</span> errorlens compile --ready <span class="cursor"></span></p>
-        </div>
-      </div>
+      <a class="contact-top" href="#contact">Get in touch <b>↓</b></a>
     </div>
-    <div class="stats">
-      <div class="stat secondary">
-        <span class="num" data-target="3">0</span>
-        <span class="lbl">Public Projects</span>
-      </div>
-      <div class="stat primary">
-        <span class="num" data-target="2">0</span>
-        <span class="lbl">Contest Submissions</span>
-      </div>
-      <div class="stat tertiary">
-        <span class="num" data-target="3">0</span>
-        <span class="lbl">Private Disclosures Submitted</span>
-      </div>
-    </div>
-  </section>
+  </nav>
 
-  <section class="section reveal" id="about">
-    <div class="section-head">
-      <span class="material-symbols-outlined">badge</span>
-      <span class="section-label">About</span>
-    </div>
-    <p class="lede-sm">Independent Web3 security researcher focused on smart contract review across EVM and Solana. Work is built in public: mapping deployed contracts from explorers, reproducing behavior on forked state, and compiling developer-ready reports rather than relying on paid audit credentials to establish trust.</p>
-  </section>
-
-  <section class="section reveal" id="focus">
-    <div class="section-head">
-      <span class="material-symbols-outlined">radar</span>
-      <span class="section-label">Focus Areas</span>
-    </div>
-    <div class="card-grid">
-      <div class="service-card">
+  <main id="top">
+    <section class="hero shell">
+      <p class="eyebrow entrance" style="animation-delay:.55s"><b></b>Independent Web3 security researcher</p>
+      <div class="hero-grid">
         <div>
-          <span class="material-symbols-outlined">lock</span>
-          <h3>Access Control</h3>
-          <p>Reviewing role, permission, and ownership logic for privilege-escalation and unauthorized-action risk.</p>
+          <h1 class="entrance" style="animation-delay:.65s">Security that holds up under pressure.</h1>
+          <p class="lede entrance" style="animation-delay:.78s">I build and test Web3 security workflows across EVM and Solana. The aim is simple: turn meaningful risk into evidence developers can act on.</p>
+          <div class="actions entrance" style="animation-delay:.9s">
+            <a class="button primary" href="#work">View audit work <b>↓</b></a>
+            <a class="button quiet" href="https://github.com/Kohap" target="_blank" rel="noreferrer">Open GitHub <b>↗</b></a>
+          </div>
+        </div>
+        <div class="signal entrance" id="signal" style="animation-delay:.72s" role="img" aria-label="Active security review signal">
+          <div class="signal-top"><span>Review status</span><b>ACTIVE</b></div>
+          <div class="rings"><span class="ring"></span><span class="ring"></span><span class="ring"></span><span class="sweep"></span><strong class="rings-num">01<small>In review</small></strong></div>
+          <div class="signal-bottom"><span>Threat model</span><span>Control flow</span><span>Testing</span></div>
         </div>
       </div>
-      <div class="service-card">
-        <div>
-          <span class="material-symbols-outlined">swap_horiz</span>
-          <h3>Migration &amp; Liquidity Logic</h3>
-          <p>Tracing state transitions during migrations and liquidity movement for integrity gaps.</p>
+      <div class="hero-foot entrance" style="animation-delay:1.02s"><span>Available for audit contests &amp; collaboration</span><span>Based remotely · Working globally</span></div>
+    </section>
+
+    <section class="stats shell entrance" style="animation-delay:1.12s" aria-label="Security experience on record">
+      <a class="stat" href="#work"><strong>3</strong><span>Public projects</span><em>View projects ↓</em></a>
+      <a class="stat" href="#research"><strong>2</strong><span>Contest submissions</span><em>View record ↓</em></a>
+      <a class="stat" href="#contact"><strong>3</strong><span>Private disclosures submitted</span><em>Disclosure policy ↓</em></a>
+    </section>
+
+    <section class="record shell reveal" aria-label="Contest and platform record">
+      <p class="record-label">Contest &amp; platform record</p>
+      <div class="record-row">
+        <div class="record-item">
+          <b class="name">Sherlock</b>
+          <span class="what">Contest submissions · Metric &amp; Tare, Jul 2026</span>
+          <a class="arrow" href="#research">View record <b>↗</b></a>
+        </div>
+        <div class="record-item">
+          <b class="name">SolanaBR</b>
+          <span class="what">Skill bounty · submitted PR #35</span>
+          <a class="arrow" href="https://github.com/solanabr/skill-bounty/pull/35" target="_blank" rel="noreferrer">Bounty PR <b>↗</b></a>
+        </div>
+        <div class="record-item">
+          <b class="name">GitHub</b>
+          <span class="what">Work on record · 3 public projects</span>
+          <a class="arrow" href="https://github.com/Kohap" target="_blank" rel="noreferrer">Open GitHub <b>↗</b></a>
         </div>
       </div>
-      <div class="service-card">
-        <div>
-          <span class="material-symbols-outlined">sensors</span>
-          <h3>Oracle Assumptions</h3>
-          <p>Checking the price-feed and data-source assumptions a contract quietly depends on.</p>
+    </section>
+
+    <section class="statement">
+      <div class="shell statement-grid">
+        <p class="kicker">What I do</p>
+        <p class="statement-text">Good security work makes a system easier to trust: test the risky paths, preserve the evidence, and write remediation that a developer can use.</p>
+      </div>
+    </section>
+
+    <section class="section shell reveal" id="capabilities">
+      <div class="heading"><p class="kicker">Capabilities</p><h2>Built for the places where protocols break.</h2></div>
+      <div class="capabilities">
+        <div class="capability"><small>01</small><div><h3>EVM &amp; Solana security</h3><p>Contract and program review across both runtimes, with the same evidence discipline.</p></div><b>↗</b></div>
+        <div class="capability"><small>02</small><div><h3>Web3 surface testing</h3><p>dApp, API, and integration surfaces checked for the assumptions that break in production.</p></div><b>↗</b></div>
+        <div class="capability"><small>03</small><div><h3>Wallet-flow review</h3><p>Transaction, signing, and approval flows traced for user-facing risk.</p></div><b>↗</b></div>
+        <div class="capability"><small>04</small><div><h3>Threat modeling</h3><p>Trust boundaries, roles, and invariants mapped before code is read for bugs.</p></div><b>↗</b></div>
+        <div class="capability"><small>05</small><div><h3>Vulnerability research</h3><p>Credible findings validated with fork-only proof-of-concept work.</p></div><b>↗</b></div>
+        <div class="capability"><small>06</small><div><h3>Developer-ready reporting</h3><p>Severity, impact, reproduction, remediation — structured for the team that has to fix it.</p></div><b>↗</b></div>
+      </div>
+    </section>
+
+    <section class="section shell reveal" id="work">
+      <div class="heading work-heading">
+        <div><p class="kicker">Selected work</p><h2>Security work with context.</h2></div>
+        <p class="sub">Public tools and research that show how I approach Web3 risk across interfaces, transaction flows, contracts, and developer reporting.</p>
+      </div>
+      <div class="work-list">
+        <article class="work-item">
+          <div class="work-index">01</div>
+          <div class="work-main">
+            <p class="work-label">Open-source project</p>
+            <h3>ErrorLens</h3>
+            <p>An AI-assisted audit and report compiler for EVM and Solana projects, turning security observations into clear developer-ready findings.</p>
+          </div>
+          <div class="tags"><span>EVM</span><span>Solana</span><span>Reporting</span></div>
+          <a class="arrow work-foot" href="https://github.com/Kohap/Kohap-errorlens" target="_blank" rel="noreferrer">View project <b>↗</b></a>
+        </article>
+        <article class="work-item">
+          <div class="work-index">02</div>
+          <div class="work-main">
+            <p class="work-label">Security monitoring demo</p>
+            <h3>AgentPay Guardian</h3>
+            <p>A security-focused product demo exploring audit trails, transaction monitoring, verification controls, and operational visibility.</p>
+          </div>
+          <div class="tags"><span>Monitoring</span><span>Audit trail</span><span>UX</span></div>
+          <a class="arrow work-foot" href="https://www.vecguard.xyz/" target="_blank" rel="noreferrer">View project <b>↗</b></a>
+        </article>
+        <article class="work-item">
+          <div class="work-index">03</div>
+          <div class="work-main">
+            <p class="work-label">Research workflow</p>
+            <h3>Web3 Audit Toolkit</h3>
+            <p>A growing research workflow for reviewing dApp surfaces, wallet and transaction flows, API assumptions, contracts, and Solana programs.</p>
+          </div>
+          <div class="tags"><span>dApps</span><span>Wallets</span><span>Testing</span></div>
+          <a class="arrow work-foot" href="https://github.com/Kohap/bug-ai-auditor-viktor-merged" target="_blank" rel="noreferrer">View toolkit <b>↗</b></a>
+        </article>
+      </div>
+    </section>
+
+    <section class="section shell reveal" id="errorlens">
+      <div class="heading"><p class="kicker">Case study snapshot</p><h2>ErrorLens, from observation to action.</h2></div>
+      <div class="case-frame">
+        <div class="case-top">
+          <span class="mono-label" style="color:var(--text-3)">Open-source audit workflow</span>
+          <a class="arrow" href="https://github.com/Kohap/Kohap-errorlens" target="_blank" rel="noreferrer">Open ErrorLens <b>↗</b></a>
+        </div>
+        <div class="case-intro">
+          <h3>Keep the security detail. Lose the report-writing drag.</h3>
+          <p>ErrorLens turns EVM and Solana security observations into a structured, developer-ready finding format.</p>
+        </div>
+        <div class="case-outputs">
+          <article class="case-output"><small>01 / Capture</small><h4>Scope the observation</h4><p>Record the affected surface and the security assumption under review.</p></article>
+          <article class="case-output"><small>02 / Validate</small><h4>Rate the risk</h4><p>Frame severity, impact, and reproduction around evidence that can be checked.</p></article>
+          <article class="case-output"><small>03 / Report</small><h4>Make remediation usable</h4><p>Pair the finding with a clear fix path and the behavior it must preserve.</p></article>
+          <article class="case-output"><small>04 / Verify</small><h4>Close the loop</h4><p>Keep retest notes alongside the original evidence for a complete record.</p></article>
         </div>
       </div>
-      <div class="service-card">
-        <div>
-          <span class="material-symbols-outlined">receipt_long</span>
-          <h3>Refund &amp; Accounting Paths</h3>
-          <p>Following refund, accrual, and balance-accounting logic for mismatches and edge cases.</p>
+    </section>
+
+    <section class="section shell reveal" id="research">
+      <div class="heading"><p class="kicker">Research &amp; findings</p><h2>Evidence that stays useful.</h2></div>
+      <div class="research-grid">
+        <article class="research-item">
+          <div class="work-index">01</div>
+          <div>
+            <p class="research-meta">Public project</p>
+            <h3>ErrorLens audit workflow</h3>
+            <p>Developer-ready audit reporting for EVM and Solana observations: severity, impact, reproduction steps, evidence, remediation, and verification.</p>
+          </div>
+          <a class="arrow" href="https://github.com/Kohap/Kohap-errorlens" target="_blank" rel="noreferrer">Repository <b>↗</b></a>
+        </article>
+        <article class="research-item">
+          <div class="work-index">02</div>
+          <div>
+            <p class="research-meta">Contest record</p>
+            <h3>Two contest submissions</h3>
+            <p>Metric and Tare on Sherlock, July 2026. Supporting repositories are private, so the record is listed here without external links.</p>
+          </div>
+          <span class="contest-record">Metric · Tare</span>
+        </article>
+        <article class="research-item">
+          <div class="work-index">03</div>
+          <div>
+            <p class="research-meta">Responsible disclosure</p>
+            <h3>Private findings stay private</h3>
+            <p>Three private disclosures are recorded without publishing exploit details. Evidence is shared only when disclosure terms permit it.</p>
+          </div>
+          <a class="arrow" href="#contact">Contact <b>↘</b></a>
+        </article>
+      </div>
+      <p class="disclosure-note">Authorized testing only. I do not publish active exploit paths, private reports, or sensitive protocol details before a responsible-disclosure process is complete.</p>
+    </section>
+
+    <section class="section shell reveal" aria-labelledby="finding-title">
+      <div class="heading"><p class="kicker">Sample finding</p><h2 id="finding-title">A finding that a developer can act on.</h2></div>
+      <div class="finding-frame">
+        <div class="finding-top"><span>Redacted / illustrative format</span><b>Report excerpt 01</b></div>
+        <div class="finding-body">
+          <h3>Clear enough to fix.<br>Careful enough to trust.</h3>
+          <dl>
+            <div><dt>Severity</dt><dd>Risk-rated after validation and impact review.</dd></div>
+            <div><dt>Evidence</dt><dd>Reproduction steps, test output, and the affected trust boundary.</dd></div>
+            <div><dt>Remediation</dt><dd>A concrete fix path with the assumptions it must preserve.</dd></div>
+            <div><dt>Verification</dt><dd>Retest notes that confirm the proposed change closes the risk.</dd></div>
+          </dl>
         </div>
+        <p class="finding-note">This is a reporting-format sample, not a published client finding. Protocol details and exploit paths remain private until disclosure terms permit publication.</p>
       </div>
-      <div class="service-card" style="grid-column:1/-1;">
-        <div>
-          <span class="material-symbols-outlined">rocket_launch</span>
-          <h3>Uniswap V3 Launch Mechanics</h3>
-          <p>Reviewing pool initialization and launch sequencing specific to Uniswap V3 deployments.</p>
-        </div>
+    </section>
+
+    <section class="section shell reveal" id="method">
+      <div class="heading"><p class="kicker">Approach</p><h2>Methodical by design.<br>Adversarial by nature.</h2></div>
+      <div class="method-grid">
+        <article><small>01</small><h3>Understand the system</h3><p>Map roles, assets, trust boundaries, and intended invariants before reading for bugs.</p></article>
+        <article><small>02</small><h3>Review the attack surface</h3><p>Trace high-risk flows manually, then use targeted tooling to validate assumptions.</p></article>
+        <article><small>03</small><h3>Test and challenge</h3><p>Write proofs of concept for credible findings and test edge cases that matter to users.</p></article>
+        <article><small>04</small><h3>Report with clarity</h3><p>Turn technical evidence into practical remediation guidance with severity and impact explained.</p></article>
       </div>
+    </section>
+
+    <section class="section shell reveal" id="start">
+      <div class="heading"><p class="kicker">Start a review</p><h2>Bring the context that makes testing count.</h2></div>
+      <div class="ready-grid">
+        <article class="ready-item"><small>01</small><h3>Scope</h3><p>Share the repository, program list, and the exact systems or flows that need attention.</p></article>
+        <article class="ready-item"><small>02</small><h3>Risk context</h3><p>Point to trusted roles, asset movement, integrations, and assumptions that cannot fail.</p></article>
+        <article class="ready-item"><small>03</small><h3>Environment</h3><p>Provide authorized local or fork-based testing details. Production testing is never assumed.</p></article>
+      </div>
+    </section>
+
+    <section class="tools shell reveal">
+      <p class="kicker">Toolbox</p>
+      <div class="tool-row"><span>Solidity</span><span>Foundry</span><span>Slither</span><span>Hardhat</span><span>Ethers.js</span><span>Solana</span></div>
+    </section>
+
+    <section class="reach shell reveal" id="contact">
+      <p class="kicker">Have a protocol to secure?</p>
+      <h2>Let&apos;s find the risk<br>before it finds you.</h2>
+      <p class="availability">Available for audit contests, authorized fork-based PoC collaboration, research support, and developer-ready report compilation.</p>
+      <div class="email-row">
+        <a class="email-link" href="mailto:kohape0@gmail.com">kohape0@gmail.com</a>
+        <button class="copy-email" type="button" data-email="kohape0@gmail.com">Copy email</button>
+      </div>
+      <p class="contact-label">Elsewhere</p>
+      <div class="socials" aria-label="Contact Gift">
+        <a class="social" href="mailto:kohape0@gmail.com" aria-label="Email Gift" title="Email"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="1"/><path d="m2 6 10 7L22 6"/></svg></a>
+        <a class="social" href="https://x.com/Giftox2" target="_blank" rel="noreferrer" aria-label="Open Gift on X" title="X / Twitter"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.24 2H21.5l-7.51 8.59L23 22h-6.83l-5.35-6.99L4.7 22H1.44l8.03-9.19L1 2h6.99l4.84 6.4L18.24 2zm-1.2 18h1.81L7.05 3.89H5.12L17.04 20z"/></svg></a>
+        <a class="social" href="https://t.me/git0x" target="_blank" rel="noreferrer" aria-label="Open Gift on Telegram" title="Telegram"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m21.94 4.36-3.34 15.84c-.25 1.12-.9 1.4-1.83.87l-5.06-3.73-2.44 2.35c-.27.27-.5.5-1.02.5l.36-5.16 9.39-8.49c.41-.36-.09-.56-.63-.2L6.1 12.9l-5.02-1.57c-1.09-.34-1.11-1.09.23-1.61L20.6 3.14c.91-.34 1.7.2 1.34 1.22z"/></svg></a>
+      </div>
+      <div class="social-directory" aria-label="Gift social profiles">
+        <a href="https://github.com/Kohap" target="_blank" rel="noreferrer">GitHub / Kohap</a>
+        <a href="https://x.com/Giftox2" target="_blank" rel="noreferrer">X / Giftox2</a>
+        <a href="https://t.me/git0x" target="_blank" rel="noreferrer">Telegram / git0x</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="shell foot">
+    <a class="brand" href="#top">GIFT<i>.</i></a>
+    <span>© 2026 Gift · Built with ❤️</span>
+    <div>
+      <a href="https://github.com/Kohap/Kohap-errorlens" target="_blank" rel="noreferrer">ErrorLens</a>
+      <a href="https://github.com/Kohap" target="_blank" rel="noreferrer">GitHub</a>
     </div>
-  </section>
+  </footer>
 
-  <section class="section reveal" id="findings">
-    <div class="section-head">
-      <span class="material-symbols-outlined">folder_open</span>
-      <span class="section-label">Projects on Record</span>
-    </div>
-
-    <div class="finding">
-      <div class="finding-top">
-        <span class="finding-id">F-01</span>
-        <span class="chip public">Public · Bounty Submitted</span>
-      </div>
-      <h3>Solana Transaction Support Skill</h3>
-      <p>A skill built to support Solana transaction handling, submitted as a bounty PR against the SolanaBR skill-bounty program.</p>
-      <div class="finding-links">
-        <a href="https://github.com/Kohap/solana-transaction-support-skill" target="_blank" rel="noopener">Repository <span class="material-symbols-outlined" style="font-size:14px;">arrow_outward</span></a>
-        <a href="https://github.com/solanabr/skill-bounty/pull/35" target="_blank" rel="noopener">Bounty PR #35 <span class="material-symbols-outlined" style="font-size:14px;">arrow_outward</span></a>
-      </div>
-    </div>
-
-    <div class="finding active">
-      <div class="finding-top">
-        <span class="finding-id">F-02</span>
-        <span class="chip active-c">Active Development</span>
-      </div>
-      <h3>ErrorLens</h3>
-      <p>An AI-assisted audit and report compiler for EVM and Solana projects. Covers dApp bug testing, wallet and transaction-flow review, API assumptions, and smart contract or program integration issues, producing developer-ready reports with severity, impact, reproduction steps, evidence, remediation, and a verification plan.</p>
-      <div class="finding-links">
-        <a href="https://github.com/Kohap/Kohap-errorlens" target="_blank" rel="noopener">Repository <span class="material-symbols-outlined" style="font-size:14px;">arrow_outward</span></a>
-      </div>
-    </div>
-
-    <div class="finding">
-      <div class="finding-top">
-        <span class="finding-id">F-03</span>
-        <span class="chip public">Public</span>
-      </div>
-      <h3>Bug AI Auditor</h3>
-      <p>A structured skill package for authorized Web3 and bug-bounty audit work: EVM/Solana smart-contract review, fork-only PoC discipline, Sherlock-style issue drafting, and an attack-first false-positive kill pass before anything is submitted.</p>
-      <div class="finding-links">
-        <a href="https://github.com/Kohap/bug-ai-auditor-viktor-merged" target="_blank" rel="noopener">Repository <span class="material-symbols-outlined" style="font-size:14px;">arrow_outward</span></a>
-      </div>
-    </div>
-  </section>
-
-  <section class="section reveal" id="contests">
-    <div class="section-head">
-      <span class="material-symbols-outlined">military_tech</span>
-      <span class="section-label">Audit Contest Participation</span>
-    </div>
-
-    <div class="finding active">
-      <div class="finding-top">
-        <span class="finding-id">C-01</span>
-        <span class="chip active-c">Sherlock · 2026-07</span>
-      </div>
-      <h3>Metric</h3>
-      <p>Issues submitted during the Metric audit contest on Sherlock.</p>
-      <div class="finding-links">
-        <a href="https://github.com/sherlock-audit/2026-07-metric-kohap/issues?q=is%3Aissue+state%3Aopen+author%3A%40me" target="_blank" rel="noopener">Submitted Issues <span class="material-symbols-outlined" style="font-size:14px;">arrow_outward</span></a>
-      </div>
-    </div>
-
-    <div class="finding active">
-      <div class="finding-top">
-        <span class="finding-id">C-02</span>
-        <span class="chip active-c">Sherlock · 2026-07</span>
-      </div>
-      <h3>Tare</h3>
-      <p>Issues submitted during the Tare audit contest on Sherlock.</p>
-      <div class="finding-links">
-        <a href="https://github.com/sherlock-audit/2026-07-tare-kohap/issues" target="_blank" rel="noopener">Submitted Issues <span class="material-symbols-outlined" style="font-size:14px;">arrow_outward</span></a>
-      </div>
-    </div>
-  </section>
-
-  <section class="section reveal" id="method">
-    <div class="section-head">
-      <span class="material-symbols-outlined">account_tree</span>
-      <span class="section-label">Methodology</span>
-    </div>
-    <div class="timeline">
-      <div class="phase">
-        <div class="phase-label">Phase 01</div>
-        <h4>Explorer Mapping</h4>
-        <p>Deployed contracts are mapped from block explorers to trace real, live migration and liquidity paths.</p>
-      </div>
-      <div class="phase">
-        <div class="phase-label">Phase 02</div>
-        <h4>Fork-Only Validation</h4>
-        <p>Contracts are reproduced on forked state using Foundry before any conclusion is written down.</p>
-      </div>
-      <div class="phase">
-        <div class="phase-label">Phase 03</div>
-        <h4>AI-Assisted Review</h4>
-        <p>Specialized audit workflows run alongside manual reading, not in place of it.</p>
-      </div>
-      <div class="phase">
-        <div class="phase-label">Phase 04</div>
-        <h4>Report Compilation</h4>
-        <p>Findings are compiled into developer-ready reports via ErrorLens: severity, impact, reproduction steps, evidence, and remediation.</p>
-      </div>
-    </div>
-
-    <div class="stack-block">
-      <div class="section-head" style="margin-bottom:16px;">
-        <span class="material-symbols-outlined">terminal</span>
-        <span class="section-label">Stack</span>
-      </div>
-      <div class="tag-row">
-        <span class="tag">Solidity</span>
-        <span class="tag">Rust (Solana programs)</span>
-        <span class="tag">Foundry</span>
-        <span class="tag">AI audit workflows</span>
-        <span class="tag">Block explorers</span>
-        <span class="tag">Git / GitHub</span>
-      </div>
-    </div>
-  </section>
-
-  <section class="section reveal" id="contact">
-    <div class="cta-card">
-      <span class="material-symbols-outlined">handshake</span>
-      <h3>Open to Collaboration</h3>
-      <p>Fork-based PoC collaboration and audit contest work. Every project and submission above is verifiable in public repositories.</p>
-      <div class="cta-actions">
-        <a class="btn-primary" href="mailto:kohape0@gmail.com"><span class="material-symbols-outlined" style="font-size:18px;">mail</span> Email Researcher</a>
-        <a class="btn-ghost" href="https://t.me/git0x" target="_blank" rel="noopener"><span class="material-symbols-outlined" style="font-size:18px;">chat</span> Telegram</a>
-      </div>
-    </div>
-  </section>
-
-</main>
-
-<footer>
-  <div class="wrap footer-inner">
-    <div class="social-row">
-      <a class="social-icon" href="mailto:kohape0@gmail.com" aria-label="Email">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="4" width="20" height="16" rx="1"/><path d="M2 6l10 7 10-7"/></svg>
-      </a>
-      <a class="social-icon" href="https://x.com/Giftox2" target="_blank" rel="noopener" aria-label="X (Twitter)">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2H21.5l-7.51 8.59L23 22h-6.828l-5.35-6.99L4.7 22H1.44l8.034-9.19L1 2h6.994l4.84 6.395L18.244 2zm-1.197 18h1.802L7.05 3.89H5.117L17.047 20z"/></svg>
-      </a>
-      <a class="social-icon" href="https://github.com/Kohap" target="_blank" rel="noopener" aria-label="GitHub">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.73.5.5 5.73.5 12c0 5.1 3.29 9.42 7.86 10.95.57.1.79-.25.79-.55v-2.1c-3.2.7-3.87-1.4-3.87-1.4-.53-1.32-1.28-1.68-1.28-1.68-1.05-.7.08-.69.08-.69 1.16.08 1.77 1.18 1.77 1.18 1.03 1.75 2.7 1.25 3.36.95.1-.74.4-1.25.73-1.53-2.55-.29-5.24-1.27-5.24-5.66 0-1.25.45-2.27 1.18-3.07-.12-.29-.51-1.46.11-3.04 0 0 .96-.31 3.15 1.17a10.9 10.9 0 0 1 5.74 0c2.18-1.48 3.14-1.17 3.14-1.17.63 1.58.24 2.75.12 3.04.73.8 1.17 1.82 1.17 3.07 0 4.4-2.7 5.37-5.27 5.65.42.36.78 1.08.78 2.17v3.22c0 .3.21.66.8.55A11.5 11.5 0 0 0 23.5 12c0-6.27-5.23-11.5-11.5-11.5z"/></svg>
-      </a>
-      <a class="social-icon" href="https://t.me/git0x" target="_blank" rel="noopener" aria-label="Telegram">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.94 4.36 18.6 20.2c-.25 1.12-.9 1.4-1.83.87l-5.06-3.73-2.44 2.35c-.27.27-.5.5-1.02.5l.36-5.16 9.39-8.49c.41-.36-.09-.56-.63-.2L6.1 12.9l-5.02-1.57c-1.09-.34-1.11-1.09.23-1.61L20.6 3.14c.91-.34 1.7.2 1.34 1.22z"/></svg>
-      </a>
-    </div>
-    <p class="footer-note">LAST UPDATED · 2026 · <a href="#top">Back to top ↑</a></p>
-  </div>
-</footer>
-
-<nav class="bottom-nav">
-  <a href="#top" class="active-tab"><span class="material-symbols-outlined">home</span>Home</a>
-  <a href="#about"><span class="material-symbols-outlined">badge</span>About</a>
-  <a href="#findings"><span class="material-symbols-outlined">work</span>Projects</a>
-  <a href="#contact"><span class="material-symbols-outlined">mail</span>Contact</a>
-</nav>
-
-<script>
-  // Scroll Reveal Observer
-  const revealEls = document.querySelectorAll('.reveal');
-  if ('IntersectionObserver' in window) {
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('in-view');
-          io.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.1 });
-    revealEls.forEach(el => io.observe(el));
-  } else {
-    revealEls.forEach(el => el.classList.add('in-view'));
-  }
-
-  // Animated Stats Counter
-  const statEls = document.querySelectorAll('.num[data-target]');
-  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  function countUp(el) {
-    const target = parseInt(el.dataset.target, 10);
-    if (reduceMotion || !target) { el.textContent = target; return; }
-    const duration = 1000;
-    const start = performance.now();
-    function tick(now) {
-      const progress = Math.min((now - start) / duration, 1);
-      const eased = 1 - Math.pow(1 - progress, 3);
-      el.textContent = Math.round(eased * target);
-      if (progress < 1) requestAnimationFrame(tick);
-      else el.textContent = target;
-    }
-    requestAnimationFrame(tick);
-  }
-
-  if ('IntersectionObserver' in window && statEls.length) {
-    const statIo = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          countUp(entry.target);
-          statIo.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.3 });
-    statEls.forEach(el => statIo.observe(el));
-  } else {
-    statEls.forceEach ? statEls.forEach(el => { el.textContent = el.dataset.target; }) : null;
-  }
-
-  // Active Bottom Nav Tab on Scroll
-  const sections = document.querySelectorAll('section[id], header[id]');
-  const navTabs = document.querySelectorAll('.bottom-nav a');
-  window.addEventListener('scroll', () => {
-    let scrollY = window.scrollY;
-    sections.forEach(sec => {
-      const top = sec.offsetTop - 100;
-      const height = sec.offsetHeight;
-      const id = sec.getAttribute('id');
-      if (scrollY >= top && scrollY < top + height) {
-        navTabs.forEach(tab => {
-          tab.classList.remove('active-tab');
-          if (tab.getAttribute('href') === '#' + id) {
-            tab.classList.add('active-tab');
-          }
-        });
+  <script>
+    var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var intro = document.querySelector('.intro');
+    if (intro) {
+      if (reduceMotion) {
+        intro.remove();
+      } else {
+        setTimeout(function () { intro.classList.add('done'); }, 720);
+        setTimeout(function () { intro.remove(); }, 1320);
       }
-    });
-  }, { passive: true });
-</script>
+    }
 
+    var revealEls = document.querySelectorAll('.reveal');
+    if ('IntersectionObserver' in window) {
+      var ro = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) { entry.target.classList.add('in-view'); ro.unobserve(entry.target); }
+        });
+      }, { threshold: 0.12 });
+      revealEls.forEach(function (el) { ro.observe(el); });
+    } else {
+      revealEls.forEach(function (el) { el.classList.add('in-view'); });
+    }
+
+    var signal = document.getElementById('signal');
+    if (signal && 'IntersectionObserver' in window) {
+      var so = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          signal.classList.toggle('paused', !entry.isIntersecting);
+        });
+      }, { threshold: 0.05 });
+      so.observe(signal);
+    }
+
+    document.querySelector('.copy-email').addEventListener('click', function () {
+      var btn = this;
+      navigator.clipboard.writeText(btn.dataset.email).then(function () {
+        btn.textContent = 'Copied';
+        setTimeout(function () { btn.textContent = 'Copy email'; }, 1600);
+      }).catch(function () {
+        btn.textContent = 'Email above';
+      });
+    });
+  </script>
 </body>
 </html>
