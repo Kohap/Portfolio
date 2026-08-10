@@ -5,34 +5,47 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>404 — Gift</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%230b1326'/><text x='16' y='22' font-family='monospace' font-weight='700' font-size='18' fill='%2389ceff' text-anchor='middle'>G</text></svg>">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;600;700&family=Schibsted+Grotesk:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23101613'/%3E%3Ctext x='16' y='23' text-anchor='middle' font-family='Georgia,serif' font-size='20' fill='%23c5f246'%3EG%3C/text%3E%3C/svg%3E">
 <style>
-  :root{--bg:#0b1326; --surface:#171f33; --line:#2d3449; --text:#dae2fd; --text-muted:#bec8d2; --primary:#89ceff;}
-  *{box-sizing:border-box; margin:0; padding:0;}
+  :root{
+    --bg:#0d120f; --line:#262e29; --line-2:#343e37; --text:#edf0ea;
+    --text-2:#a8b2aa; --text-3:#78837b; --lime:#c5f246; --lime-ink:#0e120c;
+    --sans:'Schibsted Grotesk',-apple-system,BlinkMacSystemFont,sans-serif;
+    --display:'Bricolage Grotesque',var(--sans);
+    --mono:'JetBrains Mono',ui-monospace,monospace;
+  }
+  *{box-sizing:border-box;margin:0}
+  ::selection{background:var(--lime);color:var(--lime-ink)}
   body{
-    background:var(--bg); color:var(--text); font-family:'Inter', -apple-system, sans-serif;
+    background:var(--bg); color:var(--text); font:16px/1.6 var(--sans);
     min-height:100vh; display:flex; align-items:center; justify-content:center; padding:24px;
+    -webkit-font-smoothing:antialiased;
   }
-  .box{max-width:480px;}
-  .code{font-family:'JetBrains Mono', monospace; font-weight:700; font-size:clamp(48px,10vw,88px); color:var(--primary); line-height:1; margin-bottom:16px;}
-  .label{font-family:'JetBrains Mono', monospace; font-size:12px; letter-spacing:0.14em; text-transform:uppercase; color:var(--text-muted); margin-bottom:20px;}
-  p{color:var(--text-muted); font-size:15px; margin-bottom:28px; max-width:44ch;}
+  .box{max-width:480px}
+  .brand{font:700 20px/1 var(--display);letter-spacing:0}
+  .brand i{color:var(--lime);font-style:normal}
+  .code{font:700 clamp(48px,10vw,88px)/1 var(--display);color:var(--lime);margin:64px 0 16px;letter-spacing:-.02em}
+  .label{font:700 11px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--text-3);margin-bottom:20px}
+  p{color:var(--text-2);font-size:15px;margin-bottom:28px;max-width:44ch}
   a{
-    font-family:'JetBrains Mono', monospace; font-size:13px; font-weight:600; color:var(--text);
-    border:1px solid var(--line); border-radius:0.25rem; padding:10px 16px; display:inline-block;
-    transition:border-color 0.15s, color 0.15s;
+    font:700 12px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--text);
+    border:1px solid var(--line-2); padding:12px 18px; display:inline-block;
+    transition:border-color .18s,color .18s;
   }
-  a:hover{border-color:var(--primary); color:var(--primary);}
-  a:focus-visible{outline:2px solid var(--primary); outline-offset:3px;}
+  a:hover{border-color:var(--lime);color:var(--lime)}
+  a:focus-visible{outline:2px solid var(--lime);outline-offset:3px}
+  @media (prefers-reduced-motion:reduce){a{transition:none}}
 </style>
 </head>
 <body>
-  <div class="box">
+  <main class="box">
+    <p class="brand">GIFT<i>.</i></p>
     <div class="code">404</div>
     <div class="label">Endpoint not found</div>
     <p>Nothing is deployed at this path. The rest of the research log is on the root page.</p>
     <a href="./">← Back to root</a>
-  </div>
+  </main>
 </body>
 </html>
