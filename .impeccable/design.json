@@ -1,0 +1,123 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-10T00:00:00.000Z",
+  "title": "Design System: GIFT — Web3 Security Portfolio",
+  "extensions": {
+    "colorMeta": {
+      "lime": { "role": "primary", "displayName": "Signal Lime", "canonical": "#c5f246", "tonalRamp": ["#3d4c16", "#52661d", "#688124", "#7f9d2b", "#98ba33", "#c5f246", "#d6f867"] },
+      "lime-ink": { "role": "neutral", "displayName": "Ink on Lime", "canonical": "#0e120c", "tonalRamp": ["#0a0d09", "#0e120c", "#1a2016", "#272f21", "#35402c"] },
+      "bg": { "role": "neutral", "displayName": "Panel Black", "canonical": "#0d120f", "tonalRamp": ["#050807", "#0a0e0b", "#0d120f", "#131a16", "#1b241e"] },
+      "surface": { "role": "neutral", "displayName": "Inset Surface", "canonical": "#121813", "tonalRamp": ["#0a0f0c", "#101511", "#121813", "#1a211b", "#242d25"] },
+      "line": { "role": "neutral", "displayName": "Rule Line", "canonical": "#262e29", "tonalRamp": ["#141815", "#1a201b", "#262e29", "#303a33", "#3c4740"] },
+      "text": { "role": "neutral", "displayName": "Ghost Text", "canonical": "#edf0ea", "tonalRamp": ["#8a9188", "#a7aea4", "#c4c9c0", "#d9ddd4", "#edf0ea"] },
+      "paper": { "role": "neutral", "displayName": "Paper", "canonical": "#f4f2ec", "tonalRamp": ["#c9c4b8", "#d8d4c9", "#e6e3da", "#f0eee7", "#f4f2ec"] }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "Hero and headline voice — Bricolage Grotesque, tight tracking." },
+      "body": { "displayName": "Body", "purpose": "Reading copy — Schibsted Grotesk at 16px/1.6." },
+      "label": { "displayName": "Label (Mono)", "purpose": "Structure, meters, meta — JetBrains Mono, uppercase." }
+    },
+    "motion": [
+      { "name": "ease-out", "value": "cubic-bezier(.22,.61,.36,1)", "purpose": "All state transitions; exponential ease-out, never bounce." },
+      { "name": "duration-quick", "value": "180ms", "purpose": "Hover/focus color and transform shifts." },
+      { "name": "sweep", "value": "7s linear infinite", "purpose": "Status ring conic sweep on the signal panel." }
+    ],
+    "breakpoints": [
+      { "name": "sm", "value": "720px" },
+      { "name": "md", "value": "820px" },
+      { "name": "lg", "value": "980px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The single action per screen — lime fill with ink text.",
+      "html": "<button class=\"ds-btn-primary\">View audit work <b>\u2193</b></button>",
+      "css": ".ds-btn-primary { display:inline-flex; align-items:center; gap:12px; background:#c5f246; color:#0e120c; font:700 14px 'JetBrains Mono',monospace; padding:16px 22px; border-radius:2px; border:none; cursor:pointer; transition:background .18s cubic-bezier(.22,.61,.36,1),transform .18s cubic-bezier(.22,.61,.36,1); } .ds-btn-primary b { font-weight:700; color:#0e120c; } .ds-btn-primary:hover { background:#d6f867; transform:translateY(-1px); } .ds-btn-primary:focus-visible { outline:2px solid #c5f246; outline-offset:3px; }"
+    },
+    {
+      "name": "Quiet Button",
+      "kind": "button",
+      "refersTo": "button-quiet",
+      "description": "Secondary links (GitHub, projects) — outlined, lime border on hover.",
+      "html": "<button class=\"ds-btn-quiet\">Open GitHub <b>\u2197</b></button>",
+      "css": ".ds-btn-quiet { display:inline-flex; align-items:center; gap:12px; background:transparent; color:#edf0ea; font:700 14px 'JetBrains Mono',monospace; padding:16px 22px; border-radius:2px; border:1px solid #343e37; cursor:pointer; transition:border-color .18s cubic-bezier(.22,.61,.36,1),color .18s cubic-bezier(.22,.61,.36,1); } .ds-btn-quiet b { color:#c5f246; } .ds-btn-quiet:hover { border-color:#c5f246; color:#c5f246; } .ds-btn-quiet:focus-visible { outline:2px solid #c5f246; outline-offset:3px; }"
+    },
+    {
+      "name": "Tag / Chip",
+      "kind": "chip",
+      "refersTo": "tag",
+      "description": "Technology and context tags on work items; mono 11px.",
+      "html": "<span class=\"ds-tag\">EVM</span><span class=\"ds-tag\">Solana</span>",
+      "css": ".ds-tag { display:inline-block; padding:6px 10px; border:1px solid #343e37; color:#a8b2aa; font:500 11px 'JetBrains Mono',monospace; letter-spacing:.06em; border-radius:2px; margin-right:8px; } .ds-tag:hover { border-color:#c5f246; color:#c5f246; }"
+    },
+    {
+      "name": "Severity Chip",
+      "kind": "chip",
+      "refersTo": null,
+      "description": "Interactive severity filter in the sample-finding block; active flips to ink/lime.",
+      "html": "<div class=\"ds-sevrow\"><button class=\"ds-sev\">Low</button><button class=\"ds-sev is-active\">High</button></div>",
+      "css": ".ds-sevrow { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:20px; } .ds-sev { padding:9px 14px; background:transparent; border:1px solid #d7d3c7; color:#101613; font:700 11px 'JetBrains Mono',monospace; letter-spacing:.08em; text-transform:uppercase; border-radius:2px; cursor:pointer; transition:background .18s cubic-bezier(.22,.61,.36,1),border-color .18s cubic-bezier(.22,.61,.36,1),color .18s cubic-bezier(.22,.61,.36,1); } .ds-sev:hover { border-color:#77a800; } .ds-sev.is-active { background:#101613; border-color:#101613; color:#c5f246; }"
+    },
+    {
+      "name": "Copy Report Button",
+      "kind": "button",
+      "refersTo": "copy-button",
+      "description": "Dark-on-paper copy control in the report artifact; echoes success as a mono label.",
+      "html": "<button class=\"ds-copy\">Copy report</button>",
+      "css": ".ds-copy { padding:12px 16px; background:#101613; border:1px solid #101613; color:#c5f246; font:700 11px 'JetBrains Mono',monospace; letter-spacing:.08em; text-transform:uppercase; border-radius:2px; cursor:pointer; transition:background .18s cubic-bezier(.22,.61,.36,1),opacity .18s cubic-bezier(.22,.61,.36,1); } .ds-copy:hover { background:#1c241f; } .ds-copy:focus-visible { outline:2px solid #c5f246; outline-offset:3px; }"
+    },
+    {
+      "name": "Nav Bar",
+      "kind": "nav",
+      "refersTo": null,
+      "description": "Sticky blurred top bar: display brand mark with lime period, mono links.",
+      "html": "<nav class=\"ds-nav\"><a class=\"ds-brand\">GIFT<i>.</i></a><div class=\"ds-links\"><a>Work</a><a>Capabilities</a><a>Research</a><a>Method</a></div></nav>",
+      "css": ".ds-nav { position:sticky; top:0; height:76px; background:rgba(13,18,15,.86); backdrop-filter:blur(10px); border-bottom:1px solid #262e29; display:flex; align-items:center; justify-content:space-between; padding:0 48px; } .ds-brand { font:700 20px 'Bricolage Grotesque',sans-serif; color:#edf0ea; text-decoration:none; } .ds-brand i { color:#c5f246; font-style:normal; } .ds-links { display:flex; gap:28px; } .ds-links a { font:500 13px 'Schibsted Grotesk',sans-serif; color:#a8b2aa; text-decoration:none; transition:color .18s; } .ds-links a:hover { color:#edf0ea; }"
+    },
+    {
+      "name": "Arrows",
+      "kind": "custom",
+      "refersTo": null,
+      "description": "Universal mono arrow link; the glyph shifts 2px on hover. Reused across every row.",
+      "html": "<a class=\"ds-arrow\">View record <b>\u2197</b></a>",
+      "css": ".ds-arrow { display:inline-flex; align-items:center; gap:8px; white-space:nowrap; color:#c5f246; font:700 13px 'JetBrains Mono',monospace; letter-spacing:.04em; text-decoration:none; } .ds-arrow b { transition:transform .18s cubic-bezier(.22,.61,.36,1); } .ds-arrow:hover b { transform:translate(2px,-2px); }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Threat Sweep",
+    "overview": "A security terminal rendered as a portfolio: a dark green-black instrument panel where every element behaves like a diagnostic — scan lines sweep, status rings pulse, a terminal types legitimate commands, and findings are filed as evidence-driven reports. The page earns attention by looking alive with signal, not decoration: lime marks the moments where something is active, safe, or actionable, and the deep dark rest gives those moments room to read as urgent. Density sits deliberately between cramped and airy; 1px rules are the structure, generous 96px rhythm keeps audit narrative scannable, and the only light surface is the paper reporting artifact.",
+    "keyCharacteristics": [
+      "Terminal-first: monospace labels, prompts, and underscored micro-typography carry structure.",
+      "Signal-restricted lime: the accent means active/pending/available, never a flat page fill.",
+      "Sharp 1px rules and 2px corners; no cards-in-cards, no rounded blobs.",
+      "Light paper only inside the finding/report artifact.",
+      "Interaction trust: hover shifts and highlights, nothing bounces."
+    ],
+    "rules": [
+      { "name": "The One Cluster Rule", "body": "Lime appears only as accent on ~10% of any viewport — status marks, arrows, and CTAs. Never as a background fill; its rarity is the reason it reads as signal.", "section": "colors" },
+      { "name": "The Evidence-Light Rule", "body": "Light surfaces are reserved for the actual reporting artifact (the paper finding block). Interface chrome stays dark so the report always reads as the object being produced.", "section": "colors" },
+      { "name": "The Measure Rule", "body": "Paragraphs never exceed ~65ch; long-form stays single-column and readable.", "section": "typography" },
+      { "name": "The Mono-Means-Machine Rule", "body": "Monospace is reserved for labels, code, data, and meters — interface structure, not body copy.", "section": "typography" },
+      { "name": "The Flat-By-Default Rule", "body": "No shadows at rest; emphasis arrives as fill, border color, or a 1px rule. A glow only ever appears as a soft key-frame accent, never as resting elevation.", "section": "elevation" },
+      { "name": "The Hard-Edge Rule", "body": "Interactive and structural geometry is square (2px). Pills mean status. No rounded-rectangle blobs, no nested cards.", "section": "shapes" }
+    ],
+    "dos": [
+      "Do keep lime to signal and CTA accents; a section should stay legible without it.",
+      "Do separate sections and list rows with 1px Rule Line borders and 96px rhythm.",
+      "Do state interactive affordance as fill, border-color, and arrow micro-shift — never bounce or elastic easing.",
+      "Do use JetBrains Mono for labels, prompts, and data, and body faces for paragraphs.",
+      "Do reserve light paper for the reporting artifact; keep all chrome dark.",
+      "Do respect prefers-reduced-motion."
+    ],
+    "donts": [
+      "Don't use Inter, Space Grotesk, Instrument Sans/Serif, or other detector-flagged monoculture faces.",
+      "Don't add colored glow shadows, gradient text, or glass-morphism decoration.",
+      "Don't wrap content in nested cards or rounded-blob containers.",
+      "Don't animate layout properties (padding/width/height); animate background, transform, and opacity only.",
+      "Don't publish or imply client/contest detail that a responsible-disclosure process has not cleared."
+    ]
+  }
+}
