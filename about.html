@@ -19,6 +19,7 @@
   <link crossorigin href="https://fonts.gstatic.com" rel="preconnect">
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;600;700&family=Schibsted+Grotesk:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
+  <script>try{var t=localStorage.getItem('gift.theme');if(t!=='light'&&t!=='dark'){t=matchMedia('(prefers-color-scheme: light)').matches?'light':'dark';}document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
 </head>
 <body>
   <div class="grain" aria-hidden="true"></div>
@@ -33,6 +34,7 @@
         <a href="about.html">About</a>
       </div>
       <a class="contact-top" href="index.html#contact">Get in touch <b>↓</b></a>
+      <button class="theme-toggle" type="button" aria-label="Toggle colour theme"><svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg><svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79z"/></svg></button>
       <button class="menu-toggle" type="button" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
     </div>
   </nav>
@@ -87,6 +89,15 @@
     </section>
   </main>
 
+  <section class="appearance shell" aria-labelledby="appearance-label">
+    <span class="appearance-label" id="appearance-label">Appearance</span>
+    <div class="theme-seg" role="group" aria-label="Colour theme">
+      <button type="button" data-theme="light">Light</button>
+      <button type="button" data-theme="dark">Dark</button>
+      <button type="button" data-theme="system">System</button>
+    </div>
+  </section>
+
   <footer class="shell foot">
     <a class="brand" href="index.html">GIFT<i>.</i></a>
     <span>© 2026 Gift · Built with ❤️</span>
@@ -99,5 +110,6 @@
   </footer>
 
   <script src="site.js"></script>
+  <script src="theme.js"></script>
 </body>
 </html>
