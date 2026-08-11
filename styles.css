@@ -80,15 +80,15 @@
       .navlinks{display:none}
       .menu-toggle{display:block}
       .nav{position:sticky;top:0;z-index:60}
-      .mobile-menu{display:block;position:absolute;top:76px;left:0;right:0;background:rgba(13,18,15,.97);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);box-shadow:0 22px 44px rgba(0,0,0,.45);padding:10px 24px 22px;opacity:0;transform:translateY(-14px);transition:opacity .28s var(--ease),transform .32s var(--ease),visibility 0s linear .32s}
-      .mobile-menu.open{opacity:1;transform:translateY(0);transition:opacity .28s var(--ease),transform .32s var(--ease);visibility:visible}
-      .mobile-menu a{display:block;padding:16px 0;border-bottom:1px solid var(--line);font:600 16px/1.2 var(--sans);color:var(--text);opacity:0;transform:translateY(10px);transition:opacity .3s var(--ease),transform .3s var(--ease),color .18s var(--ease)}
-      .mobile-menu.open a{opacity:1;transform:translateY(0)}
-      .mobile-menu.open a:nth-child(1){transition-delay:.05s}
-      .mobile-menu.open a:nth-child(2){transition-delay:.09s}
-      .mobile-menu.open a:nth-child(3){transition-delay:.13s}
-      .mobile-menu.open a:nth-child(4){transition-delay:.17s}
-      .mobile-menu.open a:nth-child(5){transition-delay:.21s}
+      .mobile-menu{display:block;position:fixed;top:76px;right:0;bottom:0;width:min(320px,86vw);background:rgba(13,18,15,.97);backdrop-filter:blur(12px);border-left:1px solid var(--line);box-shadow:-24px 0 48px rgba(0,0,0,.45);padding:20px 28px 32px;visibility:hidden;transform:translateX(102%);transition:transform .36s var(--ease),visibility 0s linear .36s;z-index:55}
+      .mobile-menu.open{visibility:visible;transform:translateX(0);transition:transform .36s var(--ease)}
+      .mobile-menu a{display:block;padding:18px 0;border-bottom:1px solid var(--line);font:600 17px/1.25 var(--sans);color:var(--text);opacity:0;transform:translateX(26px);transition:opacity .3s var(--ease),transform .34s var(--ease),color .18s var(--ease)}
+      .mobile-menu.open a{opacity:1;transform:translateX(0)}
+      .mobile-menu.open a:nth-child(1){transition-delay:.1s}
+      .mobile-menu.open a:nth-child(2){transition-delay:.15s}
+      .mobile-menu.open a:nth-child(3){transition-delay:.2s}
+      .mobile-menu.open a:nth-child(4){transition-delay:.25s}
+      .mobile-menu.open a:nth-child(5){transition-delay:.3s}
       .mobile-menu a:hover{color:var(--lime)}
       .mobile-menu a:last-child{border-bottom:0;color:var(--text-2);font:500 13px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;margin-top:10px}
     }
@@ -345,8 +345,9 @@
       .reveal .stagger>*{opacity:1;transform:none;transition:none}
       .intro{display:none}
       .hero .entrance,.nav{opacity:1;animation:none}
-      .mobile-menu,.mobile-menu.open,.mobile-menu.open a{opacity:1;transform:none;transition:none;visibility:visible}
-      .mobile-menu a{opacity:1;transform:none;transition:none}
+      .mobile-menu{opacity:1;transform:none;transition:none;visibility:hidden}
+      .mobile-menu.open{opacity:1;transform:none;transition:none;visibility:visible}
+      .mobile-menu a,.mobile-menu.open a{opacity:1;transform:none;transition:none}
       .tty .tty-caret{animation:none}
       .button,.button.primary,.button.quiet{transition:none}
     }
