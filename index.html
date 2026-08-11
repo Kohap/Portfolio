@@ -7,19 +7,19 @@
   <meta name="description" content="Independent Web3 security research across EVM and Solana: smart contract review, fork-based PoCs, and AI-assisted audit workflows.">
   <meta property="og:title" content="Gift | Web3 Security Researcher">
   <meta property="og:description" content="Security that holds up under pressure.">
-  <meta property="og:image" content="https://kohap.github.io/Portfolio/og.jpg">
+  <meta property="og:image" content="https://www.0xgift.site/og.jpg">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://kohap.github.io/Portfolio/">
+  <meta property="og:url" content="https://www.0xgift.site/">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Gift | Web3 Security Researcher">
   <meta name="twitter:description" content="Security that holds up under pressure.">
-  <meta name="twitter:image" content="https://kohap.github.io/Portfolio/og.jpg">
+  <meta name="twitter:image" content="https://www.0xgift.site/og.jpg">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23101613'/%3E%3Ctext x='16' y='23' text-anchor='middle' font-family='Georgia,serif' font-size='20' fill='%23c5f246'%3EG%3C/text%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link crossorigin href="https://fonts.gstatic.com" rel="preconnect">
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;600;700&family=Schibsted+Grotesk:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"Gift","url":"https://kohap.github.io/Portfolio/","jobTitle":"Web3 Security Researcher","email":"mailto:kohape0@gmail.com","sameAs":["https://github.com/Kohap","https://x.com/Giftox2","https://t.me/git0x"]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"Gift","url":"https://www.0xgift.site/","jobTitle":"Web3 Security Researcher","email":"mailto:kohape0@gmail.com","sameAs":["https://github.com/Kohap","https://x.com/Giftox2","https://t.me/git0x"]}</script>
   <script>try{var t=localStorage.getItem('gift.theme');if(t!=='light'&&t!=='dark'){t=matchMedia('(prefers-color-scheme: light)').matches?'light':'dark';}document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
 </head>
 <body>
@@ -32,6 +32,7 @@
         <a href="#capabilities">Capabilities</a>
         <a href="#work">Work</a>
         <a href="research.html">Research</a>
+        <a href="method.html">Method</a>
         <a href="about.html">About</a>
       </div>
       <a class="contact-top" href="#contact">Get in touch <b>↓</b></a>
@@ -43,6 +44,7 @@
     <a href="#capabilities">Capabilities</a>
     <a href="#work">Work</a>
     <a href="research.html">Research</a>
+    <a href="method.html">Method</a>
     <a href="about.html">About</a>
     <a href="#contact">Get in touch</a>
   </div>
@@ -183,7 +185,34 @@
       <div class="email-row">
         <a class="email-link" href="mailto:kohape0@gmail.com">kohape0@gmail.com</a>
         <button class="copy-email" type="button">Copy email</button>
+        <a class="copy-email book-call" href="https://cal.com/kohape-dy9kev" target="_blank" rel="noreferrer">Book a call ↗</a>
       </div>
+
+      <form class="review-form" id="review-form" aria-label="Start a review">
+        <div class="rf-head">
+          <span class="rf-title">Start a review</span>
+          <span class="rf-hint">Compose a message — your email client opens pre-filled.</span>
+        </div>
+        <div class="rf-grid">
+          <div class="rf-field">
+            <label for="rf-name">Name</label>
+            <input id="rf-name" name="name" type="text" autocomplete="name" placeholder="Who should I know is reaching out?">
+          </div>
+          <div class="rf-field">
+            <label for="rf-subject">Subject</label>
+            <input id="rf-subject" name="subject" type="text" value="Security review inquiry" maxlength="120">
+          </div>
+          <div class="rf-field rf-field-full">
+            <label for="rf-context">Context</label>
+            <textarea id="rf-context" name="context" rows="5" placeholder="Repository or protocol, the flows or systems in scope, and the risk context team so I know what to prioritize. No need to share exploit detail — that stays private."></textarea>
+          </div>
+        </div>
+        <div class="rf-actions">
+          <button class="button primary rf-submit" type="submit">Compose email <b>↗</b></button>
+          <span class="rf-done" aria-live="polite"></span>
+        </div>
+      </form>
+
       <p class="contact-label">Elsewhere</p>
       <div class="socials" aria-label="Contact Gift">
         <a class="social" href="mailto:kohape0@gmail.com" aria-label="Email Gift" title="Email"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="1"/><path d="m2 6 10 7L22 6"/></svg></a>
@@ -213,6 +242,8 @@
     <div>
       <a href="privacy.html">Privacy</a>
       <a href="terms.html">Terms</a>
+      <a href="research.html">Research</a>
+      <a href="method.html">Method</a>
       <a href="https://kohap-errorlens.vercel.app/#home" target="_blank" rel="noreferrer">ErrorLens</a>
       <a href="https://github.com/Kohap" target="_blank" rel="noreferrer">GitHub</a>
     </div>

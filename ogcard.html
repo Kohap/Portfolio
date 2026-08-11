@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;600;700&family=Schibsted+Grotesk:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+  body{overflow:hidden}
+  .grain{display:none}
+  .intro,.nav,.entrance{animation:none!important;opacity:1!important;transform:none!important}
+  .og-hero{padding:56px 48px 0;min-height:630px}
+  .og-hero .hero-grid{margin-top:34px}
+  .og-hero .eyebrow b{animation:none}
+  .og-hero .signal{min-height:290px}
+  .og-hero .rings .sweep{animation:none;opacity:.6}
+  .og-hero .tty{opacity:1}
+  @media (min-width:980px){.og-hero .hero-grid{grid-template-columns:1.2fr .8fr;gap:60px}}
+  @media (prefers-reduced-motion:reduce){.og-hero .rings .sweep{animation:none}}
+</style>
+</head>
+<body>
+  <main class="og-hero shell">
+    <div class="hero-grid">
+      <div>
+        <p class="eyebrow t1"><b></b>Independent Web3 security researcher</p>
+        <h1>Security that holds up under pressure.</h1>
+        <p class="lede">Turn meaningful risk into evidence developers can act on — EVM and Solana.</p>
+      </div>
+      <div class="signal" role="img" aria-label="Active security review signal">
+        <div class="signal-top"><span>Review status</span><b>ACTIVE</b></div>
+        <div class="rings"><span class="ring"></span><span class="ring"></span><span class="ring"></span><span class="sweep"></span><strong class="rings-num"><small>SCANNING</small></strong></div>
+        <div class="tty" aria-hidden="true"><span class="tty-prompt">$</span> <span>forge test --fork latest</span><span class="tty-caret"></span></div>
+        <div class="signal-bottom"><span>Threat model</span><span>Control flow</span><span>Testing</span></div>
+      </div>
+    </div>
+    <div class="hero-foot" style="margin-top:44px"><span id="avail-badge">Available for audit contests &amp; collaboration</span><span>Based remotely · Working globally</span></div>
+  </main>
+</body>
+</html>

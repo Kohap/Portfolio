@@ -3,16 +3,16 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Privacy Policy | Gift</title>
-  <meta name="description" content="Privacy policy for Gift's Web3 security research portfolio — what data is collected, stored, and shared.">
-  <meta property="og:title" content="Privacy Policy | Gift">
-  <meta property="og:description" content="What data this portfolio collects and how it is handled.">
+  <title>How I Run a Review | Gift</title>
+  <meta name="description" content="How I approach Web3 security work: evidence discipline, threat modeling, fork-based validation, and developer-ready reporting.">
+  <meta property="og:title" content="How I Run a Review | Gift">
+  <meta property="og:description" content="Evidence outranks claims.">
   <meta property="og:image" content="https://www.0xgift.site/og.jpg">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://www.0xgift.site/privacy.html">
+  <meta property="og:url" content="https://www.0xgift.site/method.html">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Privacy Policy | Gift">
-  <meta name="twitter:description" content="What data this portfolio collects and how it is handled.">
+  <meta name="twitter:title" content="How I Run a Review | Gift">
+  <meta name="twitter:description" content="Evidence outranks claims.">
   <meta name="twitter:image" content="https://www.0xgift.site/og.jpg">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23101613'/%3E%3Ctext x='16' y='23' text-anchor='middle' font-family='Georgia,serif' font-size='20' fill='%23c5f246'%3EG%3C/text%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -50,68 +50,54 @@
 
   <main>
     <section class="page-hero shell">
-      <p class="kicker entrance t1">Legal</p>
-      <h1 class="entrance t2">Privacy Policy.</h1>
-      <p class="lede entrance t3">This portfolio is a security-research log, not a data platform. It is built to minimize what is collected, stored, and shared.</p>
-      <div class="legal-meta entrance t3"><span>Last updated · Aug 10, 2026</span><span>Applies to · Portfolio site</span></div>
+      <nav class="cross entrance t1" aria-label="Breadcrumb"><a href="index.html">← Back to portfolio</a><span>/</span><span>How I work</span></nav>
+      <p class="kicker entrance t2">Method</p>
+      <h1 class="entrance t3">How I run a security review.</h1>
+      <p class="lede entrance t4">A review is a test of a claim: that this system keeps its promises. My job is to check which promises hold under pressure.</p>
     </section>
 
-    <div class="shell legal">
-      <nav class="toc" aria-label="Privacy policy sections">
-        <a href="#overview">Overview</a>
-        <a href="#data-collected">What I collect</a>
-        <a href="#data-use">How it is used</a>
-        <a href="#sharing">Sharing</a>
-        <a href="#cookies">Cookies &amp; analytics</a>
-        <a href="#security">Security</a>
-        <a href="#your-rights">Your rights</a>
-        <a href="#contact">Contact</a>
-      </nav>
+    <section class="section shell reveal" id="essay">
+      <article class="essay">
+        <p class="essay-lead">Evidence outranks claims. That single rule shapes every decision I make about how to review a protocol — what to read first, what to test, what to write down, and what to keep private.</p>
+        <p>Most security work is a tight loop: understand the system, trace the risky paths, test what can actually break, and write down what a developer can act on. The order is deliberate. Reading for bugs before understanding intent produces noise; knowing the threat model first produces findings that survive being questioned.</p>
+      </article>
+    </section>
 
-      <div class="legal-block" id="overview">
-        <h2>Overview</h2>
-        <p>This site exists to present security work, capabilities, and a way to initiate contact. It does not sell data, run advertising, or build profiles of visitors.</p>
+    <section class="section section-alt shell reveal" id="steps">
+      <div class="heading">
+        <p class="kicker">The loop</p>
+        <h2>Four passes, each with a deliverable.</h2>
       </div>
+      <div class="method-grid stagger">
+        <article><small>01</small><h3>Understand the system</h3><p>Map roles, assets, trust boundaries, and intended invariants before reading for bugs. The deliverable is a threat model — not a list of files.</p></article>
+        <article><small>02</small><h3>Trace the attack surface</h3><p>Follow the flows that move value or change state. Test the assumptions that break in production the moment they are assumed.</p></article>
+        <article><small>03</small><h3>Validate with evidence</h3><p>Credible findings get a proof of concept — fork-based on authorized testnets or local forks, never against production.</p></article>
+        <article><small>04</small><h3>Report to be acted on</h3><p>Severity, impact, reproduction, remediation, and verification in one structured format the fixing team can use.</p></article>
+      </div>
+    </section>
 
-      <div class="legal-block" id="data-collected">
-        <h2>What I collect</h2>
-        <p>In ordinary use, this site stores:</p>
-        <ul>
-          <li>Hosting access logs (IP address, browser type, requested pages) — held by the hosting provider, not by me.</li>
-        </ul>
-        <p>If you send an email or message through the listed channels, you voluntarily provide whatever content you include in that message. Only what is needed to respond is kept.</p>
+    <section class="section shell reveal" id="privacy">
+      <div class="heading">
+        <p class="kicker">Privacy as a feature</p>
+        <h2>Nothing goes public until disclosure terms permit it.</h2>
       </div>
+      <div class="essay">
+        <p>Private findings stay private. Active exploit paths, private reports, and sensitive protocol details are not published before a responsible-disclosure process is complete — and a severity shown reflects what was validated, not the worst case that can be imagined.</p>
+        <p>Authorized testing only, always. Production is never assumed, and the evidence is shared with the team that has to act on it.</p>
+      </div>
+    </section>
 
-      <div class="legal-block" id="data-use">
-        <h2>How it is used</h2>
-        <p>Non-identifying and access-level data is used only to keep the site up, detect abuse, and understand that content is reachable. Messages you send are used solely to reply to the inquiry.</p>
+    <section class="section shell reveal" id="start">
+      <div class="heading">
+        <p class="kicker">Start a review</p>
+        <h2>Bring the context that makes testing count.</h2>
       </div>
-
-      <div class="legal-block" id="sharing">
-        <h2>Sharing</h2>
-        <p>No personal data is sold, rented, or traded. Data is shared only where legally required or to protect against abuse of the site.</p>
+      <div class="ready-grid stagger">
+        <article class="ready-item"><small>01</small><h3>Scope</h3><p>Share the repository, program list, and the exact systems or flows that need attention.</p></article>
+        <article class="ready-item"><small>02</small><h3>Risk context</h3><p>Point to trusted roles, asset movement, integrations, and assumptions that cannot fail.</p></article>
+        <article class="ready-item"><small>03</small><h3>Environment</h3><p>Provide authorized local or fork-based testing details. Production testing is never assumed.</p></article>
       </div>
-
-      <div class="legal-block" id="cookies">
-        <h2>Cookies &amp; analytics</h2>
-        <p>This site does not use advertising cookies, tracking pixels, or third-party ad analytics. Where enabled, the hosting provider's aggregate web analytics (page views, referrers, general geography) is used to confirm the site is reachable and understand that content is used; it does not build profiles or track individuals. Links to Cal.com for booking are operated by Cal.com and have their own policy. The contact form composes an email on your device — nothing you type is stored by this site.</p>
-      </div>
-
-      <div class="legal-block" id="security">
-        <h2>Security</h2>
-        <p>Published findings are redacted or withheld until disclosure terms permit. Evidence for private research is never published here.</p>
-      </div>
-
-      <div class="legal-block" id="your-rights">
-        <h2>Your rights</h2>
-        <p>You can ask to see or remove data you have sent through the contact channels at any time. Where the law grants additional rights, they are honored.</p>
-      </div>
-
-      <div class="legal-block" id="contact">
-        <h2>Contact</h2>
-        <p>For questions or requests about this policy, reach out via the contact options on the main page.</p>
-      </div>
-    </div>
+    </section>
   </main>
 
   <section class="appearance shell" aria-labelledby="appearance-label">

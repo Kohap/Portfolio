@@ -180,3 +180,20 @@ var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
         });
       });
     }
+
+    /* Review compose form — opens the email client pre-filled, no backend */
+    var reviewForm = document.getElementById('review-form');
+    if (reviewForm) {
+      reviewForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var name = (document.getElementById('rf-name').value || '').trim();
+        var subject = (document.getElementById('rf-subject').value || '').trim() || 'Security review inquiry';
+        var context = (document.getElementById('rf-context').value || '').trim();
+        var body = 'Hi Gift,' + (name ? ' — ' + name + ' here.' : '') + '\n\n' + context + '\n\nScope and risk context:\n';
+        var mailto = 'mailto:' + EMAIL + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+        var done = document.querySelector('.rf-done');
+        if (done) { done.textContent = 'Opening email…'; }
+        window.location.href = mailto;
+        setTimeout(function () { if (done) { done.textContent = ''; } }, 4000);
+      });
+    }
