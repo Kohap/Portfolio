@@ -11,12 +11,6 @@ var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     }
 
     var revealEls = document.querySelectorAll('.reveal');
-    function staggerChildren(el) {
-      el.querySelectorAll('.stagger > *').forEach(function (child, i) {
-        child.style.transitionDelay = Math.min(i * 0.06, 0.36) + 's';
-      });
-    }
-    revealEls.forEach(staggerChildren);
     if ('IntersectionObserver' in window) {
       var ro = new IntersectionObserver(function (entries) {
         entries.forEach(function (entry) {
@@ -63,14 +57,10 @@ var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
       ttyText.textContent = 'forge test --fork latest';
     }
 
-    /* Active nav link — on load, then on click */
-    var navLinks = document.querySelectorAll('.navlinks a, .mobile-menu a');
-    var currentPath = (window.location.pathname.split('/').pop() || 'index.html').split('#')[0].split('?')[0] || 'index.html';
-    navLinks.forEach(function (a) {
-      var page = (a.getAttribute('href') || '').split('#')[0].split('?')[0];
-      if (page && page === currentPath) a.classList.add('is-active');
+    /* Active nav link — only on click */
+    document.querySelectorAll('.navlinks a, .mobile-menu a').forEach(function (a) {
       a.addEventListener('click', function () {
-        navLinks.forEach(function (x) { x.classList.remove('is-active'); });
+        document.querySelectorAll('.navlinks a, .mobile-menu a').forEach(function (x) { x.classList.remove('is-active'); });
         a.classList.add('is-active');
       });
     });
@@ -81,60 +71,25 @@ var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     var menuToggle = document.querySelector('.menu-toggle');
     var mobileMenu = document.querySelector('.mobile-menu');
     if (menuToggle && mobileMenu) {
-      var menuOpen = false;
-      var lastFocus = null;
-      var setMenu = function (open) {
-        menuOpen = open;
-        mobileMenu.classList.toggle('open', open);
+      menuToggle.addEventListener('click', function () {
+        var open = mobileMenu.classList.toggle('open');
         menuToggle.classList.toggle('open', open);
         menuToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-        mobileMenu.setAttribute('aria-hidden', open ? 'false' : 'true');
-        document.body.classList.toggle('menu-open', open);
-        var main = document.querySelector('main');
-        if (main && 'inert' in main) main.inert = open;
-        if (open) {
-          lastFocus = document.activeElement;
-          var first = mobileMenu.querySelector('a');
-          if (first) first.focus();
-        } else if (lastFocus) {
-          lastFocus.focus();
-        }
-      };
-      menuToggle.addEventListener('click', function () {
-        setMenu(!mobileMenu.classList.contains('open'));
       });
       mobileMenu.querySelectorAll('a').forEach(function (a) {
-        a.addEventListener('click', function () { setMenu(false); });
+        a.addEventListener('click', function () {
+          mobileMenu.classList.remove('open');
+          menuToggle.classList.remove('open');
+          menuToggle.setAttribute('aria-expanded', 'false');
+        });
       });
       document.addEventListener('click', function (e) {
-        if (menuOpen && !menuToggle.contains(e.target) && !mobileMenu.contains(e.target)) {
-          setMenu(false);
+        if (!menuToggle.contains(e.target) && !mobileMenu.contains(e.target)) {
+          mobileMenu.classList.remove('open');
+          menuToggle.classList.remove('open');
+          menuToggle.setAttribute('aria-expanded', 'false');
         }
       });
-      document.addEventListener('keydown', function (e) {
-        if (e.key === 'Escape') setMenu(false);
-        if (e.key === 'Tab' && menuOpen && mobileMenu.classList.contains('open')) {
-          var focusables = mobileMenu.querySelectorAll('a[href], button:not([disabled])');
-          if (!focusables.length) return;
-          var first = focusables[0];
-          var last = focusables[focusables.length - 1];
-          if (e.shiftKey) {
-            if (document.activeElement === first || !mobileMenu.contains(document.activeElement)) {
-              e.preventDefault();
-              last.focus();
-            }
-          } else {
-            if (document.activeElement === last || !mobileMenu.contains(document.activeElement)) {
-              e.preventDefault();
-              first.focus();
-            }
-          }
-        }
-      });
-      var mq = window.matchMedia('(min-width:641px)');
-      var onMqChange = function () { if (mq.matches) setMenu(false); };
-      if (mq.addEventListener) mq.addEventListener('change', onMqChange);
-      else if (mq.addListener) mq.addListener(onMqChange);
     }
 
     /* Interactive report builder */
@@ -166,7 +121,6 @@ var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     var copyReport = document.querySelector('.copy-report');
     var reportDone = document.getElementById('report-done');
     var activeSev = 'high';
-    if (excerptTag && sevData[activeSev]) excerptTag.textContent = sevData[activeSev].tag;
 
     sevBtns.forEach(function (btn) {
       btn.addEventListener('click', function () {
@@ -182,31 +136,12 @@ var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
       });
     });
 
-    function writeClipboard(text, done, fail) {
-      if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(text).then(done, fail);
-      } else if (document.execCommand) {
-        var ta = document.createElement('textarea');
-        ta.value = text;
-        ta.setAttribute('readonly', '');
-        ta.style.position = 'fixed';
-        ta.style.opacity = '0';
-        document.body.appendChild(ta);
-        ta.select();
-        try { document.execCommand('copy') ? done() : fail(); }
-        catch (err) { fail(); }
-        document.body.removeChild(ta);
-      } else {
-        fail();
-      }
-    }
-
     if (copyReport) {
       copyReport.addEventListener('click', function () {
-        writeClipboard(sevData[activeSev].report, function () {
+        navigator.clipboard.writeText(sevData[activeSev].report).then(function () {
           reportDone.textContent = 'Copied';
           setTimeout(function () { reportDone.textContent = ''; }, 1600);
-        }, function () {
+        }).catch(function () {
           reportDone.textContent = 'Copy failed';
         });
       });
@@ -217,12 +152,8 @@ var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     if (availBadge) {
       var dataUrl = 'availability.json?t=' + Date.now();
       fetch(dataUrl, { cache: 'no-store' }).then(function (r) { return r.json(); }).then(function (data) {
-        if (data && data.status === 'open' && typeof data.label === 'string') {
-          var dot = document.createElement('b');
-          dot.className = 'avail-dot';
-          availBadge.textContent = '';
-          availBadge.appendChild(dot);
-          availBadge.appendChild(document.createTextNode(data.label));
+        if (data && data.status === 'open') {
+          availBadge.innerHTML = '<b class="avail-dot"></b>' + data.label;
           availBadge.style.color = 'var(--lime)';
         }
       }).catch(function () {});
@@ -236,10 +167,10 @@ var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     if (copyEmail) {
       copyEmail.addEventListener('click', function () {
         var btn = this;
-        writeClipboard(EMAIL, function () {
+        navigator.clipboard.writeText(EMAIL).then(function () {
           btn.textContent = 'Copied';
           setTimeout(function () { btn.textContent = 'Copy email'; }, 1600);
-        }, function () {
+        }).catch(function () {
           btn.textContent = 'Email above';
         });
       });

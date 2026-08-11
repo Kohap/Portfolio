@@ -1,0 +1,7 @@
+# security.txt for 0xgift.site
+Canonical: https://www.0xgift.site/.well-known/security.txt
+Contact: mailto:kohape0@gmail.com
+Expires: 2027-08-11T00:00:00.000Z
+Encryption: https://www.0xgift.site/terms.html
+Policy: https://www.0xgift.site/terms.html
+Preferred-Languages: en
