@@ -318,9 +318,25 @@
 
     /* TOOLS */
     .tools{border-top:1px solid var(--line);padding:64px 0}
-    .tool-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
-    .tool-row span{padding:10px 14px;border:1px solid var(--line-2);color:var(--text-2);font:500 13px/1 var(--mono);transition:border-color .18s var(--ease),color .18s var(--ease)}
-    @media(hover:hover){.tool-row span:hover{border-color:var(--lime);color:var(--lime)}}
+    .tool-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-top:32px}
+    .tool-card{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:30px 14px;border:1px solid var(--line-2);background:var(--surface);color:var(--text-2);transition:border-color .18s var(--ease),color .18s var(--ease),transform .18s var(--ease)}
+    .tool-card span{font:700 11px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;white-space:nowrap}
+    .tool-card .tool-mark{width:38px;height:38px;overflow:visible}
+    .tool-card:nth-child(1) .tool-mark{animation:tool-float 5.5s var(--ease) infinite}
+    .tool-card:nth-child(2) .tool-mark{animation:tool-spin 14s linear infinite}
+    .tool-card:nth-child(3) .tool-mark{animation:tool-wave 5s var(--ease) infinite}
+    .tool-card:nth-child(4) .tool-mark{animation:tool-scan 4.5s ease-in-out infinite}
+    .tool-card:nth-child(5) .tool-mark path:last-child{stroke-dasharray:18 6;animation:tool-flow 3s linear infinite}
+    .tool-card:nth-child(6) .tool-mark{animation:tool-sway 6s var(--ease) infinite}
+    @keyframes tool-float{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+    @keyframes tool-spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+    @keyframes tool-wave{0%,100%{transform:translateY(0)}30%{transform:translateY(-3px)}70%{transform:translateY(2px)}}
+    @keyframes tool-scan{0%,100%{transform:rotate(-8deg)}50%{transform:rotate(8deg)}}
+    @keyframes tool-flow{from{stroke-dashoffset:24}to{stroke-dashoffset:0}}
+    @keyframes tool-sway{0%,100%{transform:translateX(0)}50%{transform:translateX(4px)}}
+    @media(hover:hover){.tool-card:hover{border-color:var(--lime);color:var(--lime);transform:translateY(-2px)}}
+    @media(hover:hover){.tool-card:hover .tool-mark,.tool-card:hover .tool-mark *{animation:none;transform:none;stroke-dashoffset:0}}
+    @media(hover:hover){.tool-card:nth-child(5):hover .tool-mark path{animation:none;stroke-dasharray:none}}
 
     /* REACH / CONTACT */
     .reach{border-top:1px solid var(--line);padding:112px 0 96px}
@@ -409,5 +425,6 @@
       .mobile-menu.open{opacity:1;transform:none;transition:none;visibility:visible}
       .mobile-menu a,.mobile-menu.open a,.mobile-menu .theme-toggle,.mobile-menu.open .theme-toggle{opacity:1;transform:none;transition:none}
       .tty .tty-caret{animation:none}
+      .tool-card .tool-mark,.tool-card .tool-mark *{animation:none;stroke-dasharray:none}
       .button,.button.primary,.button.quiet{transition:none}
     }
