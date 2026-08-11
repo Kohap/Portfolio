@@ -44,7 +44,10 @@
   document.querySelectorAll('.theme-toggle').forEach(function (b) { b.addEventListener('click', onThemeToggleClick); });
   document.querySelectorAll('.theme-seg button').forEach(function (b) { b.addEventListener('click', onSegClick); });
 
-  window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', function () {
+  var mql = window.matchMedia('(prefers-color-scheme: light)');
+  function onSystemChange() {
     if (!stored()) apply(resolve(), false);
-  });
+  }
+  if (mql.addEventListener) mql.addEventListener('change', onSystemChange);
+  else if (mql.addListener) mql.addListener(onSystemChange);
 })();

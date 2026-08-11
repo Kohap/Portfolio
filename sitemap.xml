@@ -1,31 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://kohap.github.io/Portfolio/</loc>
+    <loc>https://www.0xgift.site/</loc>
     <lastmod>2026-08-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://kohap.github.io/Portfolio/research.html</loc>
+    <loc>https://www.0xgift.site/research.html</loc>
     <lastmod>2026-08-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://kohap.github.io/Portfolio/about.html</loc>
+    <loc>https://www.0xgift.site/about.html</loc>
     <lastmod>2026-08-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://kohap.github.io/Portfolio/privacy.html</loc>
+    <loc>https://www.0xgift.site/method.html</loc>
+    <lastmod>2026-08-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.0xgift.site/privacy.html</loc>
     <lastmod>2026-08-10</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.2</priority>
   </url>
   <url>
-    <loc>https://kohap.github.io/Portfolio/terms.html</loc>
+    <loc>https://www.0xgift.site/terms.html</loc>
     <lastmod>2026-08-10</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.2</priority>

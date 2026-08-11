@@ -119,6 +119,9 @@
       .mobile-menu.open a:nth-child(3){transition-delay:.22s}
       .mobile-menu.open a:nth-child(4){transition-delay:.27s}
       .mobile-menu.open a:nth-child(5){transition-delay:.32s}
+      .mobile-menu.open a:nth-child(7){transition-delay:.42s}
+      .mobile-menu.open .theme-toggle{transition-delay:.42s;opacity:1;transform:translateX(0)}
+      .mobile-menu .theme-toggle{opacity:0;transform:translateX(30px);transition:opacity .36s var(--ease),transform .36s var(--ease),border-color .18s var(--ease),color .18s var(--ease)}
       .mobile-menu a:hover{color:var(--lime)}
       .mobile-menu a:last-child{margin:30px 0 auto;border-bottom:0;color:var(--text-2);font:500 13px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase}
       .mobile-menu .theme-toggle{width:auto;height:40px;margin:32px 0 -8px;align-self:flex-start;padding:0 14px;display:inline-flex;align-items:center;justify-content:center}
@@ -163,7 +166,7 @@
     .rings .ring:nth-child(2){inset:16%}
     .rings .ring:nth-child(3){inset:34%;border-color:var(--ring-3)}
     .rings .sweep{position:absolute;inset:0;border-radius:50%;background:conic-gradient(from 0deg,rgba(197,242,70,0),rgba(197,242,70,.3) 80deg,rgba(197,242,70,0) 150deg);opacity:.5;animation:sweep 7s linear infinite;pointer-events:none}
-    .rings.paused .sweep{animation-play-state:paused}
+    .signal.paused .sweep{animation-play-state:paused}
     @keyframes sweep{to{transform:rotate(1turn)}}
     .rings-num{position:relative;z-index:1;font:700 clamp(40px,5vw,58px)/1.02 var(--display);color:var(--text)}
     .rings-num small{display:block;margin-top:8px;color:var(--text-3);font:700 9px/1 var(--mono);letter-spacing:.14em;text-align:center}
@@ -404,7 +407,7 @@
       .hero .entrance,.nav{opacity:1;animation:none}
       .mobile-menu{opacity:1;transform:none;transition:none;visibility:hidden}
       .mobile-menu.open{opacity:1;transform:none;transition:none;visibility:visible}
-      .mobile-menu a,.mobile-menu.open a{opacity:1;transform:none;transition:none}
+      .mobile-menu a,.mobile-menu.open a,.mobile-menu .theme-toggle,.mobile-menu.open .theme-toggle{opacity:1;transform:none;transition:none}
       .tty .tty-caret{animation:none}
       .button,.button.primary,.button.quiet{transition:none}
     }
