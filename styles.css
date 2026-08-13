@@ -150,8 +150,6 @@
 
     /* HERO */
     .hero{padding:96px 0 0}
-    .eyebrow{display:flex;align-items:center;gap:10px;color:var(--text-3);font:700 11px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase}
-    .eyebrow b{width:8px;height:8px;border-radius:99px;background:var(--lime)}
     .hero-grid{display:grid;grid-template-columns:1fr;gap:56px;align-items:center;margin-top:32px}
     @media(min-width:980px){.hero-grid{grid-template-columns:1.15fr .85fr;gap:72px}}
     h1{max-width:760px;margin-top:24px;font:700 clamp(46px,7vw,84px)/1.04 var(--display);letter-spacing:-.02em}
@@ -428,7 +426,6 @@
     .js .reveal.in-view .stagger>*{opacity:1;transform:none}
     @media (prefers-reduced-motion:reduce){
       html{scroll-behavior:auto}
-      .eyebrow b{animation:none}
       .rings .sweep{animation:none;opacity:.25}
       .js .reveal{opacity:1;transform:none;transition:none}
       .js .reveal .stagger>*{opacity:1;transform:none;transition:none}
