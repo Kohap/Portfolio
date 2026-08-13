@@ -23,11 +23,11 @@ colors:
   finding-chip: "#d7d3c7"
 typography:
   display:
-    fontFamily: "Bricolage Grotesque, Schibsted Grotesk, sans-serif"
-    fontWeight: 700
+    fontFamily: "Gambarino, Switzer, sans-serif"
+    fontWeight: 400
     letterSpacing: "-0.02em"
   body:
-    fontFamily: "Schibsted Grotesk, -apple-system, sans-serif"
+    fontFamily: "Switzer, -apple-system, sans-serif"
     fontWeight: 400
     lineHeight: 1.6
   label:
@@ -139,11 +139,11 @@ A near-monochrome dark field with a single high-voltage accent. Text hierarchy i
 
 ## Typography
 
-**Display Font:** Bricolage Grotesque (fallback: Schibsted Grotesk, system sans)
-**Body Font:** Schibsted Grotesk (fallback: -apple-system, system sans)
-**Label/Mono Font:** JetBrains Mono (fallback: ui-monospace, monospace)
+**Display Font:** Gambarino, a single-weight serif (fallback: Switzer, system sans). Self-hosted from Fontshare; all display weights render at Gambarino's native cut (no faux-bold synthesis).
+**Body Font:** Switzer (fallback: -apple-system, system sans). Self-hosted from Fontshare.
+**Label/Mono Font:** JetBrains Mono (fallback: ui-monospace, monospace). Self-hosted from Fontshare.
 
-**Character:** A characterful grotesque display paired with an open, quiet body face; the mono voice supplies the technical/diagnostic personality in labels, prompts, and meters. The display carries the craft, the body carries the reading, the mono carries the machine.
+**Character:** A characterful serif display paired with an open, quiet grotesque body face; the mono voice supplies the technical/diagnostic personality in labels, prompts, and meters — reserved for actual data (status, tickers, code, report fields), not decoration. The display carries the craft (an editorial "evidence" register that pairs with the paper finding block), the body carries the reading, the mono carries the machine.
 
 ### Hierarchy
 - **Display** (700/600, clamp(46px→84px) hero item, 1.04–1.02): h1, intro brand, reach h2; tight tracking (-.02em). Section headers: 600, clamp(30px→46px), 1.08.
@@ -183,8 +183,8 @@ Sharp and squared. Buttons, tags, copy controls, and the finding chips share a n
 
 ### Buttons
 - **Shape:** 2px radius; upright type via the mono label voice.
-- **Primary:** Signal Lime fill, Ink text (#c5f246 / #0e120c), 16px 22px padding. Hover: Lime Bright (#d6f867) with a 1px lift (`translateY(-1px)`). Signals the single action per screen.
-- **Quiet:** transparent fill, 1px Rule Line Strong border, Ghost Text; hover swaps border and text to Signal Lime. Used for secondary links (GitHub, project links).
+- **Primary:** Signal Lime fill, Ink text (#c5f246 / #0e120c), 16px 22px padding. Hover: Lime Bright (#d6f867), color/fill only — buttons never move on hover. Signals the single action per screen.
+- **Quiet / Text link:** No outlined button paired next to a primary in the same action row. Secondary actions render as a text link (Muted Text, 1px underline, Lime arrow) that swaps to full-contrast text and Lime underline on hover; the arrow nudges 2px on hover as the only motion.
 
 ### Tags / Chips
 - **Style:** transparent fill, 1px Rule Line Strong border, Muted Text, 6px 10px padding, 2px radius, mono 11px. Hover (in tool rows) turns border/text lime.
@@ -196,7 +196,10 @@ Sharp and squared. Buttons, tags, copy controls, and the finding chips share a n
 - Paper background; severity chips are transparent with Finding Chip borders, active state flips to Ink fill with Lime text. Copy button is Ink fill, Lime text, and echoes the "copied" success inline via a mono label rather than a toast.
 
 ### Navigation
-- Sticky top bar: Panel Black at 0.86 opacity with backdrop blur, 1px Rule Line bottom border, display-face brand mark with a lime period, mono 13px links in Muted Text → Ghost on hover, mobile hides links and keeps the CTA.
+- Sticky top bar: Panel Black at 0.86 opacity with backdrop blur, 1px Rule Line bottom border, display-face brand mark with a lime period, 13px sans links in Muted Text → full-contrast on hover, mobile hides links and keeps the CTA. Active link reads via a colour + weight shift only — no underline bar or dot bolted beneath it.
+
+### Theme Toggle
+- Custom aperture mark (a half-filled circle that rotates 180° between themes), not a stock sun/moon icon. Square 38px control, 1px Rule Line Strong border, hover swaps border/icon to Signal Lime.
 
 ### Status Signal (signature component)
 - Inset surface panel with three concentric ring borders (Lime Wash, hardening to 50% on the inner ring), a rotating conic sweep 7s, a live ticker (HIGH/CRITICAL/MEDIUM/SCANNING), a typing terminal prompt (`$ forge test --fork latest`), and a mono top/bottom status bar. Pauses when scrolled out of view.

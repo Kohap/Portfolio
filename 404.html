@@ -5,17 +5,18 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="color-scheme" content="light dark">
 <title>404 — Gift</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;600;700&family=Schibsted+Grotesk:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23101613'/%3E%3Ctext x='16' y='23' text-anchor='middle' font-family='Georgia,serif' font-size='20' fill='%23c5f246'%3EG%3C/text%3E%3C/svg%3E">
 <script src="theme-init.js"></script>
 <style>
+  @font-face{font-family:'Gambarino';src:url('fonts/Gambarino-Regular.woff2') format('woff2');font-weight:400 700;font-style:normal;font-display:swap}
+  @font-face{font-family:'Switzer';src:url('fonts/Switzer-Regular.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}
+  @font-face{font-family:'Switzer';src:url('fonts/Switzer-Bold.woff2') format('woff2');font-weight:700;font-style:normal;font-display:swap}
+  @font-face{font-family:'JetBrains Mono';src:url('fonts/JetBrainsMono-Bold.woff2') format('woff2');font-weight:700;font-style:normal;font-display:swap}
   :root{
     --bg:#0d120f; --line:#262e29; --line-2:#343e37; --text:#edf0ea;
     --text-2:#a8b2aa; --text-3:#78837b; --lime:#c5f246; --lime-ink:#0e120c;
-    --sans:'Schibsted Grotesk',-apple-system,BlinkMacSystemFont,sans-serif;
-    --display:'Bricolage Grotesque',var(--sans);
+    --sans:'Switzer',-apple-system,BlinkMacSystemFont,sans-serif;
+    --display:'Gambarino',var(--sans);
     --mono:'JetBrains Mono',ui-monospace,monospace;
   }
   :root[data-theme="light"]{
@@ -23,10 +24,11 @@
     --text-2:#4c554c; --text-3:#80897f; --lime:#4d6a02; --lime-ink:#f2f0e9;
   }
   body{transition:background-color .3s,color .3s}
-  .theme-toggle .moon{display:none}
-  .theme-toggle svg{width:15px;height:15px}
-  :root[data-theme="light"] .theme-toggle .sun{display:none}
-  :root[data-theme="light"] .theme-toggle .moon{display:block}
+  .theme-toggle svg{width:16px;height:16px}
+  .theme-toggle .t-fill{fill:currentColor}
+  .theme-toggle .t-ring{fill:none;stroke:currentColor;stroke-width:1.8}
+  .theme-toggle .ctl{transition:transform .35s}
+  :root[data-theme="light"] .theme-toggle .ctl{transform:rotate(180deg)}
   .theme-toggle:hover{border-color:var(--lime);color:var(--lime)}
   *{box-sizing:border-box;margin:0}
   ::selection{background:var(--lime);color:var(--lime-ink)}
@@ -52,7 +54,7 @@
 </style>
 </head>
 <body>
-  <button class="theme-toggle" type="button" aria-label="Toggle colour theme" style="position:fixed;top:20px;right:20px;display:grid;place-items:center;width:38px;height:38px;background:none;border:1px solid var(--line-2);color:var(--text-2);cursor:pointer"><svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg><svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79z"/></svg></button>
+  <button class="theme-toggle" type="button" aria-label="Toggle colour theme" style="position:fixed;top:20px;right:20px;display:grid;place-items:center;width:38px;height:38px;background:none;border:1px solid var(--line-2);color:var(--text-2);cursor:pointer"><svg class="ctl" viewBox="0 0 24 24" aria-hidden="true"><circle class="t-ring" cx="12" cy="12" r="8.5"/><path class="t-fill" d="M12 3.5a8.5 8.5 0 0 1 0 17z"/></svg></button>
   <main class="box">
     <p class="brand">GIFT<i>.</i></p>
     <div class="code">404</div>

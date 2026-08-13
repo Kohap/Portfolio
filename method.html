@@ -16,9 +16,6 @@
   <meta name="twitter:description" content="Evidence outranks claims.">
   <meta name="twitter:image" content="https://www.0xgift.site/og.jpg">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23101613'/%3E%3Ctext x='16' y='23' text-anchor='middle' font-family='Georgia,serif' font-size='20' fill='%23c5f246'%3EG%3C/text%3E%3C/svg%3E">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link crossorigin href="https://fonts.gstatic.com" rel="preconnect">
-  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;600;700&family=Schibsted+Grotesk:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
   <script src="theme-init.js"></script>
 </head>
@@ -36,7 +33,7 @@
         <a href="about.html">About</a>
       </div>
       <a class="contact-top" href="index.html#contact">Get in touch <b>↓</b></a>
-      <button class="theme-toggle" type="button" aria-label="Toggle colour theme"><svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg><svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79z"/></svg></button>
+      <button class="theme-toggle" type="button" aria-label="Toggle colour theme"><svg class="ctl" viewBox="0 0 24 24" aria-hidden="true"><circle class="t-ring" cx="12" cy="12" r="8.5"/><path class="t-fill" d="M12 3.5a8.5 8.5 0 0 1 0 17z"/></svg></button>
       <button class="menu-toggle" type="button" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
     </div>
   </nav>
@@ -46,7 +43,7 @@
     <a href="research.html">Research</a>
     <a href="method.html">Method</a>
     <a href="about.html">About</a>
-    <button class="theme-toggle" type="button" aria-label="Toggle colour theme"><svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg><svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79z"/></svg></button>
+    <button class="theme-toggle" type="button" aria-label="Toggle colour theme"><svg class="ctl" viewBox="0 0 24 24" aria-hidden="true"><circle class="t-ring" cx="12" cy="12" r="8.5"/><path class="t-fill" d="M12 3.5a8.5 8.5 0 0 1 0 17z"/></svg></button>
     <a href="index.html#contact">Get in touch</a>
   </div>
 
@@ -60,7 +57,7 @@
 
     <section class="section shell reveal" id="essay">
       <article class="essay">
-        <p class="essay-lead">Evidence outranks claims. That single rule shapes every decision I make about how to review a protocol — what to read first, what to test, what to write down, and what to keep private.</p>
+        <p class="essay-lead">Evidence outranks claims. That single rule shapes every decision I make about how to review a protocol: what to read first, what to test, what to write down, and what to keep private.</p>
         <p>Most security work is a tight loop: understand the system, trace the risky paths, test what can actually break, and write down what a developer can act on. The order is deliberate. Reading for bugs before understanding intent produces noise; knowing the threat model first produces findings that survive being questioned.</p>
       </article>
     </section>
@@ -71,9 +68,9 @@
         <h2>Four passes, each with a deliverable.</h2>
       </div>
       <div class="method-grid stagger">
-        <article><small>01</small><h3>Understand the system</h3><p>Map roles, assets, trust boundaries, and intended invariants before reading for bugs. The deliverable is a threat model — not a list of files.</p></article>
+        <article><small>01</small><h3>Understand the system</h3><p>Map roles, assets, trust boundaries, and intended invariants before reading for bugs. The deliverable is a threat model, not a list of files.</p></article>
         <article><small>02</small><h3>Trace the attack surface</h3><p>Follow the flows that move value or change state. Test the assumptions that break in production the moment they are assumed.</p></article>
-        <article><small>03</small><h3>Validate with evidence</h3><p>Credible findings get a proof of concept — fork-based on authorized testnets or local forks, never against production.</p></article>
+        <article><small>03</small><h3>Validate with evidence</h3><p>Credible findings get a proof of concept, fork-based on authorized testnets or local forks, never against production.</p></article>
         <article><small>04</small><h3>Report to be acted on</h3><p>Severity, impact, reproduction, remediation, and verification in one structured format the fixing team can use.</p></article>
       </div>
     </section>
@@ -84,7 +81,7 @@
         <h2>Nothing goes public until disclosure terms permit it.</h2>
       </div>
       <div class="essay">
-        <p>Private findings stay private. Active exploit paths, private reports, and sensitive protocol details are not published before a responsible-disclosure process is complete — and a severity shown reflects what was validated, not the worst case that can be imagined.</p>
+        <p>Private findings stay private. Active exploit paths, private reports, and sensitive protocol details are not published before a responsible-disclosure process is complete. A severity shown reflects what was validated, not the worst case that can be imagined.</p>
         <p>Authorized testing only, always. Production is never assumed, and the evidence is shared with the team that has to act on it.</p>
       </div>
     </section>

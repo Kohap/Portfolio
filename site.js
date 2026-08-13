@@ -139,25 +139,25 @@ var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
     /* Interactive report builder */
     var sevData = {
-      low: {
+low: {
         tag: 'Report excerpt · LOW',
-        sev: 'LOW — edge-case risk with limited impact or likelihood, still documented for completeness.',
-        report: 'SEVERITY: LOW\nTITLE: Edge-case risk in non-critical path\nIMPACT: Limited; affects a rarely used branch.\nEVIDENCE: See reproduction steps below.\nREMEDIATION: Guard the affected branch.\nVERIFICATION: Retest after patch.\n— Generated with ErrorLens (illustrative sample)'
+        sev: 'LOW: edge-case risk with limited impact or likelihood, still documented for completeness.',
+        report: 'SEVERITY: LOW\nTITLE: Edge-case risk in non-critical path\nIMPACT: Limited; affects a rarely used branch.\nEVIDENCE: See reproduction steps below.\nREMEDIATION: Guard the affected branch.\nVERIFICATION: Retest after patch.\nGenerated with ErrorLens (illustrative sample)'
       },
       med: {
         tag: 'Report excerpt · MEDIUM',
-        sev: 'MEDIUM — user-facing risk in a non-critical path, validated and impact-confirmed.',
-        report: 'SEVERITY: MEDIUM\nTITLE: User-facing risk in a secondary flow\nIMPACT: Moderate; requires specific user action.\nEVIDENCE: Reproduction steps + test output.\nREMEDIATION: Enforce the missing invariant.\nVERIFICATION: Retest confirms closure.\n— Generated with ErrorLens (illustrative sample)'
+        sev: 'MEDIUM: user-facing risk in a non-critical path, validated and impact-confirmed.',
+        report: 'SEVERITY: MEDIUM\nTITLE: User-facing risk in a secondary flow\nIMPACT: Moderate; requires specific user action.\nEVIDENCE: Reproduction steps + test output.\nREMEDIATION: Enforce the missing invariant.\nVERIFICATION: Retest confirms closure.\nGenerated with ErrorLens (illustrative sample)'
       },
       high: {
         tag: 'Report excerpt · HIGH',
-        sev: 'HIGH — material risk to funds or protocol invariants under realistic conditions, validated by a fork-based PoC.',
-        report: 'SEVERITY: HIGH\nTITLE: Material risk to funds / invariants\nIMPACT: Direct loss under realistic conditions.\nEVIDENCE: Fork-based PoC + test output.\nREMEDIATION: Concrete fix path provided.\nVERIFICATION: Retest notes confirm closure.\n— Generated with ErrorLens (illustrative sample)'
+        sev: 'HIGH: material risk to funds or protocol invariants under realistic conditions, validated by a fork-based PoC.',
+        report: 'SEVERITY: HIGH\nTITLE: Material risk to funds / invariants\nIMPACT: Direct loss under realistic conditions.\nEVIDENCE: Fork-based PoC + test output.\nREMEDIATION: Concrete fix path provided.\nVERIFICATION: Retest notes confirm closure.\nGenerated with ErrorLens (illustrative sample)'
       },
       crit: {
         tag: 'Report excerpt · CRITICAL',
-        sev: 'CRITICAL — direct loss of funds or irreversible protocol breakage; severity confirmed after validation.',
-        report: 'SEVERITY: CRITICAL\nTITLE: Critical loss of funds / breakage\nIMPACT: Direct and irreversible.\nEVIDENCE: Reproduction steps + affected trust boundary.\nREMEDIATION: Block the path immediately, then patch.\nVERIFICATION: Retest before redeploy.\n— Generated with ErrorLens (illustrative sample)'
+        sev: 'CRITICAL: direct loss of funds or irreversible protocol breakage; severity confirmed after validation.',
+        report: 'SEVERITY: CRITICAL\nTITLE: Critical loss of funds / breakage\nIMPACT: Direct and irreversible.\nEVIDENCE: Reproduction steps + affected trust boundary.\nREMEDIATION: Block the path immediately, then patch.\nVERIFICATION: Retest before redeploy.\nGenerated with ErrorLens (illustrative sample)'
       }
     };
     var sevBtns = document.querySelectorAll('.sev');
